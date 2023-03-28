@@ -19,7 +19,6 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-        path: ~/teaching.ss23prse.smartroom.team3
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
