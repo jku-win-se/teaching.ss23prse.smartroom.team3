@@ -2,6 +2,8 @@
 
 <!-- Sidebar -->
 
+
+<!-- Navbar Style -->
 <style>
 body{
   font-size: 62.5% !important;
@@ -81,11 +83,12 @@ text-rendering: optimizeLegibility;
             user-select: none; 
 }
 
-#sidebarav li .indicator{
-  height: 2em;
-  width: 0.5vw;
-  border-radius: 0 0.2vw 0.2vw 0;
-  background-color: rgba(0,0,0,0);
+#sidebar li .indicator{
+  height: 3vw;
+    width: 0.5vw;
+    border-radius: 0 0.2vw 0.2vw 0;
+    background-color: rgba(0,0,0,0);
+    transition: 0.25s linear;
 }
 
 #sidebar li a {
@@ -119,9 +122,8 @@ text-rendering: optimizeLegibility;
   height: 3vw;
   width: 0.5vw;
   border-radius: 0 0.2vw 0.2vw 0;
-  background-color: rgba(0,0,0,0);
   background-color: rgba(255,255,255,255) !important;
-  transition: 0.5s ease-out;
+  transition: 0.25s linear;
 }
 
 #sidebar li.active .icon {
@@ -143,9 +145,9 @@ text-rendering: optimizeLegibility;
   transition: 0.5s ease-out;
 }
 
-#sidebarav li:not(.active):hover .indicator{
-  background-color: rgba(255,255,255,1);
-  transition: 0.5s ease-out;
+#sidebar li:not(.active):hover .indicator{
+  background-color: rgba(255,255,255,255) !important;
+  transition: 0.25s ease-out;
 }
 
 #sidebar li:not(.active):hover .icon {
@@ -153,31 +155,299 @@ text-rendering: optimizeLegibility;
   transition: 0.25s;
 }
 
+</style>
+
+<!-- Main Body Style -->
+<style>
+  #main{
+    position: absolute;
+    top: 0;
+    left: 20%;
+    width: 80%;
+    overflow-x: scroll;
+    height: 100%;
+    background-color: #1A1A1A;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #main *{
+    max-width: 100% !important;
+  }
+
+  #main .topBar{
+    width: auto;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    padding-top: min(5vh, 5vw);
+    padding-left: min(5vh, 5vw);
+    padding-right: min(5vh, 5vw);
+    justify-content: space-between;
+  }
+
+  #main .topBar .title{
+    font-size: max(1.75vw, 16px);
+    padding: 0.5vw 0;
+    right: 0;
+  }
 
 
-/*#sidebar li.active *{
-  filter: drop-shadow(0 0 1rem rgba(255,255,255,0.2));
-}
+  #main .topBar .button{
+    font-size: max(1vw, 8px);
+    right: 0;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    cursor: pointer;
 
-#sidebarav li.active .indicator{
-  height: 2em;
-  width: 0.5vw;
-  border-radius: 0 0.2vw 0.2vw 0;
-  background-color: white;
-}
+    color: black;
+    background-color: #D9D9D9;
+    filter: drop-shadow(0 0 1em rgba(255,255,255,0.3));
 
-#sidebar li.active a {
-  color: #fff;
-  text-decoration: none;
-}
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none;
+        -ms-user-select: none; 
+            user-select: none; 
+  }
 
-#sidebar li.active {
-  background-color: #333;
-}*/
+  #main .topBar .button:hover{
+    filter: drop-shadow(0 0 1em rgba(255,255,255,0.5));
+    transition: 0.7s;
+  }
+
+  #main .topBar .button:hover img{
+    filter: drop-shadow(0 0 1em rgba(255,255,255,0.7)) invert(1);
+  }
+
+  #main .topBar .button:hover{
+    text-decoration: underline;
+    transition: 0.7s;
+  }
+
+  #main .topBar .button:hover p{
+    filter: drop-shadow(0.2em 0.2em 0.2em rgba(0,0,0,0.3));
+    transition: 0.7s;
+  }
+
+
+  #main .topBar .button p{
+   /* padding: 0.25em 0vw 0.25em 0vw;*/
+    margin-right: 1.5em;
+  }
+  
+  #main .topBar .button img{
+    height: max(1.75vw, 14px);
+    filter: invert(1);
+    padding: 0.25em 0 0.25em 0;
+    margin-left: 1.5em;
+  }
+
+  #main .mainBody{
+    width: 100%;
+ 
+  }
+
+  #main .mainBody .mainContainer{
+    width: auto;
+    margin-top: min(5vh, 5vw);
+    margin-left: min(5vh, 5vw);
+    margin-right: min(5vh, 5vw);
+
+    border-radius: 2em;
+    height: 50vw;
+    /*background-color: #171717;*/
+    
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+  }
 
 </style>
 
+<style>
 
+  .controlButton{
+    position: relative;
+  }
+
+/* Switch styling */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  height: 0.5rem;
+  margin: 0.5rem;
+}
+
+/* Hide default checkbox */
+.switch input.toggle {
+  display: none;
+}
+
+.switch *{
+  transition: 0.7s !important;
+}
+
+/* Slider styling */
+.slider {
+  position: relative;
+  flex: 0 0 1rem;
+  height: max(0.85rem, 6px);
+  border-radius: 1rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  min-width: calc(0.85rem * 2.25);
+
+  border: #D9D9D9 solid 0.075rem;
+}
+
+/* Bubble styling */
+.bubble {
+  height: calc(0.8rem * 0.9);
+  width:calc(0.8rem * 0.9);
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  transition: all 0.3s;
+  margin-left: calc(0.8rem * 0.025);
+  margin-right: calc(0.8rem * 0.025);
+}
+
+/* Change slider and bubble color when switched */
+.switch input.toggle:checked + .slider {
+  border: black solid 0.1rem;
+}
+
+.switch input.toggle:checked + .slider .bubble {
+  margin-left: auto;
+  background-color: black;
+
+}
+
+.bottomRow{
+
+}
+
+.controlButton{
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  height: 11.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1vw;
+
+  background-color: #242424;
+}
+
+.controlButton:hover{}
+
+
+.controlButton .upperRow{
+  align-self: flex-start;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.controlButton .upperRow *{
+}
+
+.controlButton .upperRow .settings{
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+}
+
+.controlButton .upperRow .settings:hover{
+  background-color: #D9D9D9;
+}
+
+.controlButton .upperRow .settings:hover img{
+  filter: invert(100%) !important;
+}
+
+.controlButton .upperRow .settings{
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controlButton .upperRow .settings img{
+  height: 2rem;
+}
+ 
+.controlButton .upperRow .icon{
+  height: 2rem;
+  width: 2rem;
+  background-color: #D9D9D9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-top: 0.5rem;
+}
+
+.controlButton .upperRow .icon img{
+  filter: invert(100%);
+}
+
+
+.controlButton:hover{
+  filter: invert(1);
+}
+.controlButton .upperRow img{
+  max-height: 90%;
+  filter: inherit(100%);
+}
+
+
+.controlButton .middleRow{
+  flex: 1 0 auto;
+  text-align: middle;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.controlButton .middleRow .title{
+  width: 70%;
+  margin-right: auto;
+  overflow-wrap: break-word;
+  font-size: 1.2rem;
+}
+
+.controlButton .bottomRow{
+  width: 100%;
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.controlButton .bottomRow .state{
+  font-size: 0.75rem;
+  opacity: 0.25;
+}
+
+.controlButton .bottomRow .switch{
+  height: 0.75rem;
+  margin: auto 0 auto 0;
+}
+
+
+
+</style>
+
+<!-- Navigation -->
 <nav id="sidebar">
   <div class="logo">
     <img src="../assets/Logo.png" alt="Logo">
@@ -189,7 +459,74 @@ text-rendering: optimizeLegibility;
   </ul>
 </nav>
 
+<div id="main">
+  <div class="topBar">
+    <div class="title">Room Overview</div>
+    <div class="button"><img src="../assets/Download.svg" alt="Rooms"><p>Download Rooms</p></div>
+  </div>
+  <div class="mainBody">
+    <div class="mainContainer">
+     
+     
+      <div class="controlButton">
+        <div class="upperRow">
+          <div class="icon">
+            <img src="../assets/Bulb.svg" alt="">
+          </div>
+          <div class="settings">
+            <img src="../assets/Dots.svg" alt="">
+          </div>
+        </div>
+        <div class="middleRow">
+          <div class="title">
+            Blindr Intelligent Light
+          </div>
+        </div>
+        <div class="bottomRow">
+            <div class="state">Unlocked</div>
+            <div class="switch">
+            <label class="">
+              <input type="checkbox" class="toggle">
+              <div class="slider">
+                <div class="bubble"></div>
+              </div>
+            </label>
+            </div>
+        </div>
+      </div>
 
+      <div class="controlButton">
+        <div class="upperRow">
+          <div class="icon">
+            <img src="../assets/Bulb.svg" alt="">
+          </div>
+          <div class="settings">
+            <img src="../assets/Dots.svg" alt="">
+          </div>
+        </div>
+        <div class="middleRow">
+          <div class="title">
+            Blindr Intelligent Light
+          </div>
+        </div>
+        <div class="bottomRow">
+            <div class="state">Unlocked</div>
+            <div class="switch">
+            <label class="">
+              <input type="checkbox" class="toggle">
+              <div class="slider">
+                <div class="bubble"></div>
+              </div>
+            </label>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
 
 
 
