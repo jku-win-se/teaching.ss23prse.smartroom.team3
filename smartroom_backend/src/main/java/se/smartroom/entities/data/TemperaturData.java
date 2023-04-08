@@ -29,6 +29,12 @@ public class TemperaturData extends DataInterface {
         this.cO2value = cO2value;
     }
 
+    public TemperaturData(int id, Date timestamp, Double cO2value) {
+        super(timestamp);
+        this.id = id;
+        this.cO2value = cO2value;
+    }
+
     public Double getcO2value() {
         return cO2value;
     }

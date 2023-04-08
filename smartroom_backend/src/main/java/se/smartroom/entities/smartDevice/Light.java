@@ -20,6 +20,11 @@ public class Light extends SmartDevice {
         super(open);
     }
 
+    public Light(int id, boolean on) {
+        super(on);
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

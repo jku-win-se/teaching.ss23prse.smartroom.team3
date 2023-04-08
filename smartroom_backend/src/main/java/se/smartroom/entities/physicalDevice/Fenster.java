@@ -20,6 +20,11 @@ public class Fenster extends PhysicalDevice {
         super(open);
     }
 
+    public Fenster(int id, boolean open) {
+        super(open);
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

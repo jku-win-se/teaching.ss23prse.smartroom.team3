@@ -29,6 +29,12 @@ public class Co2SensorData extends DataInterface {
         this.temperaturValue = temperaturValue;
     }
 
+    public Co2SensorData(int id, Date timestamp, Double temperaturValue) {
+        super(timestamp);
+        this.id = id;
+        this.temperaturValue = temperaturValue;
+    }
+
     public Double getTemperaturValue() {
         return temperaturValue;
     }

@@ -1,10 +1,14 @@
 package se.smartroom.entities.data;
 
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
 import java.sql.Date;
 import java.util.Objects;
 
 public class DataInterface {
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
     public DataInterface() {

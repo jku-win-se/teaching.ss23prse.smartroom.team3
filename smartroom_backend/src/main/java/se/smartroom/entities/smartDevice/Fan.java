@@ -20,6 +20,11 @@ public class Fan extends SmartDevice {
         super(open);
     }
 
+    public Fan(int id, boolean on) {
+        super(on);
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

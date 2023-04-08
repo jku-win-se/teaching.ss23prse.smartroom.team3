@@ -20,6 +20,11 @@ public class Door extends PhysicalDevice {
         super(open);
     }
 
+    public Door(int id, boolean open) {
+        super(open);
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
