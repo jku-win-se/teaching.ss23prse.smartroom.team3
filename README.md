@@ -1,6 +1,7 @@
 # PR Software Engineering SS 23 Team 3
 ## Thema: Digital Twin of a Smart Room 
 #### App-Name: smartHome
+Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, dessen Raumausstattung wie Türen, Fenster, Beleuchtung und Ventilatoren aus der Ferne gesteuert werden können.
 
 ## Projektteam
 | Matrikelnumer  | Vorname |  Nachname  | E-mail | Github User |
