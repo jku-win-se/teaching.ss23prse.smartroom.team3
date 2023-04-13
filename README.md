@@ -19,7 +19,8 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 
 ## Use Cases
 
-[UC-001.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11224514/UC-001.docx)
+[UC-001.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11224808/UC-001.docx)
+[UC-002.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11224809/UC-002.docx)
 
 
 
