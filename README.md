@@ -17,7 +17,10 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 ## UML-Diagramm
 ![smartHome UML-Diagramm](https://user-images.githubusercontent.com/127204960/231821582-8a64a3c1-eaf0-4a36-a9f3-f394b86f4609.png)
 
-##Use Cases
+## Use Cases
+
+[UC-001.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11224514/UC-001.docx)
+
 
 
 
