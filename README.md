@@ -11,7 +11,7 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 |   | Julian | Fuchs  | julian.fuchs0701@gmail.com | FuchsJulianGit  |
 |   | Manuel | Wiltz  |  | manuelwiltz |
 
-[SmartHome Prototyp]{https://www.figma.com/proto/4ABS1OvW4rhJv6nCqljPL8/PR-SE---SmartHome?node-id=1-7&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A7}
+[SmartHome Prototyp]{ https://www.figma.com/proto/4ABS1OvW4rhJv6nCqljPL8/PR-SE---SmartHome?node-id=1-7&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A7 }.
 
 ### Project Structure
 #### Frontend
