@@ -1,15 +1,14 @@
-## PR Software Engineering SS 23 Team 3
+# PR Software Engineering SS 23 Team 3
 ## Thema: Digital Twin of a Smart Room 
 #### App-Name: smartHome
-Matrikkelnummer	Vorname	Nachname	E-mail	github user
-				
-				
-				
-				![image](https://user-images.githubusercontent.com/127204960/231814917-002dd66a-3a48-453e-88da-68c14f9d9682.png)
 
-
-
-
+## Projektteam
+| Matrikelnumer  | Vorname |  Nachname  | E-mail | Github User |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| K11926495  | Henrique  | Ventura Tuerpe  | henriqueevetu@live.com | henriquevetu  |
+|   | Laura | Bayer  | laurabayer@yahoo.de | laurabayer1 |
+|   | Julian | Fuchs  | julian.fuchs0701@gmail.com | FuchsJulianGit  |
+|   | Manuel | Wiltz  |  | manuelwiltz |
 
 ### Project Structure
 #### Frontend
