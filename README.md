@@ -7,7 +7,7 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 | Matrikelnumer  | Vorname |  Nachname  | E-mail | Github User |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | K11926495  | Henrique  | Ventura Tuerpe  | henriqueevetu@live.com | henriquevetu  |
-|   | Laura | Bayer  | laurabayer@yahoo.de | laurabayer1 |
+| K12006656  | Laura | Bayer  | laurabayer@yahoo.de | laurabayer1 |
 |   | Julian | Fuchs  | julian.fuchs0701@gmail.com | FuchsJulianGit  |
 |   | Manuel | Wiltz  |  | manuelwiltz |
 
