@@ -8,7 +8,7 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | K11926495  | Henrique  | Ventura Tuerpe  | henriqueevetu@live.com | henriquevetu  |
 | K12006656  | Laura | Bayer  | laurabayer@yahoo.de | laurabayer1 |
-|   | Julian | Fuchs  | julian.fuchs0701@gmail.com | FuchsJulianGit  |
+| K12043518  | Julian | Fuchs  | julian.fuchs0701@gmail.com | FuchsJulianGit  |
 |   | Manuel | Wiltz  |  | manuelwiltz |
 
 ## Prototyp
