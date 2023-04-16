@@ -14,33 +14,33 @@ public class TemperaturData extends DataInterface {
     @GeneratedValue
     private int id;
 
-    private Double cO2value;
+    private Double temperaturValue;
 
     public TemperaturData() {
     }
 
-    public TemperaturData(Double cO2value) {
+    public TemperaturData(Double temperaturValue) {
         super();
-        this.cO2value = cO2value;
+        this.temperaturValue = temperaturValue;
     }
 
-    public TemperaturData(Date timestamp, Double cO2value) {
+    public TemperaturData(Date timestamp, Double temperaturValue) {
         super(timestamp);
-        this.cO2value = cO2value;
+        this.temperaturValue = temperaturValue;
     }
 
-    public TemperaturData(int id, Date timestamp, Double cO2value) {
+    public TemperaturData(int id, Date timestamp, Double temperaturValue) {
         super(timestamp);
         this.id = id;
-        this.cO2value = cO2value;
+        this.temperaturValue = temperaturValue;
     }
 
-    public Double getcO2value() {
-        return cO2value;
+    public Double getTemperaturValue() {
+        return temperaturValue;
     }
 
-    public void setcO2value(Double cO2value) {
-        this.cO2value = cO2value;
+    public void setTemperaturValue(Double temperaturValue) {
+        this.temperaturValue = temperaturValue;
     }
 
     public int getId() {
@@ -57,19 +57,19 @@ public class TemperaturData extends DataInterface {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         TemperaturData that = (TemperaturData) o;
-        return id == that.id && Objects.equals(cO2value, that.cO2value);
+        return id == that.id && Objects.equals(temperaturValue, that.temperaturValue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, cO2value);
+        return Objects.hash(super.hashCode(), id, temperaturValue);
     }
 
     @Override
     public String toString() {
-        return "TemperaturData{" +
+        return "Co2SensorData{" +
                 "id=" + id +
-                ", cO2value=" + cO2value +
+                ", temperaturValue=" + temperaturValue +
                 '}';
     }
 }

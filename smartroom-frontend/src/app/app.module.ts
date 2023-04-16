@@ -4,11 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { RoomsComponent } from './rooms/rooms.component';
+import { RoomsComponent } from './room/rooms/rooms.component';
 import { DevicesComponent } from './devices/devices.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { RoomService } from './room.service';
 import { FormsModule } from '@angular/forms';
+import { RoomListComponent } from './room/room-list/room-list.component';
+import { AddRoomComponent } from './room/add-room/add-room.component';
+import { RoomDetailsComponent } from './room/room-details/room-details.component';
+import { UpdateRoomComponent } from './room/update-room/update-room.component';
 
 
 @NgModule({
@@ -16,7 +20,11 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     DashboardComponent,
     RoomsComponent,
-    DevicesComponent
+    DevicesComponent,
+    RoomListComponent,
+    AddRoomComponent,
+    RoomDetailsComponent,
+    UpdateRoomComponent
   ],
   imports: [
     BrowserModule,

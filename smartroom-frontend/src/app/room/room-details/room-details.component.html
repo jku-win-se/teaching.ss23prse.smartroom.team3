@@ -1,0 +1,48 @@
+<div class="flex-column flex-gap">
+
+  <h3>View details for {{room.name}}:</h3>
+
+  <div>
+    <p>Actions:</p>
+    <button type="button" (click)="deleteRoom()">Delete Room</button>
+    <button type="button" (click)="update()">Edit Room</button>
+  </div>
+
+  <div>
+    <h1>{{room.name}}</h1>
+    <h2>{{room.name}} has {{room.size}}m2.</h2>
+  </div>
+
+  <div *ngIf="room.doors.length > 0">
+    <h2>Doors</h2>
+    <h3>This room has {{room.doors.length}} doors.</h3>
+    <div *ngFor="let door of room.doors; let i = index">
+      <p>Door {{i + 1}}, open: {{door.open}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="room.roomWindows.length > 0">
+    <h2>Windows</h2>
+    <h3>This room has {{room.roomWindows.length}} windows.</h3>
+    <div *ngFor="let window of room.roomWindows; let i = index">
+      <p>Window {{i + 1}}, open: {{window.open}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="room.lights.length > 0">
+    <h2>Lights</h2>
+    <h3>This room has {{room.lights.length}} lights.</h3>
+    <div *ngFor="let light of room.lights; let i = index">
+      <p>Light {{i + 1}}, on: {{light.on}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="room.fans.length > 0">
+    <h2>Fans</h2>
+    <h3>This room has {{room.fans.length}} fans.</h3>
+    <div *ngFor="let fan of room.fans; let i = index">
+      <p>Fan {{i + 1}}, on: {{fan.on}}</p>
+    </div>
+  </div>
+
+</div>

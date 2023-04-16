@@ -1,8 +1,8 @@
 package se.smartroom.entities;
 
 import jakarta.persistence.*;
-import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.TemperaturData;
+import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.physicalDevice.Door;
 import se.smartroom.entities.physicalDevice.Fenster;
 import se.smartroom.entities.smartDevice.Fan;
@@ -35,9 +35,9 @@ public class Room {
 
     // Sensor Data of the room
     @OneToMany(cascade = CascadeType.ALL)
-    private List<TemperaturData> temperaturData;
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Co2SensorData> co2SensorData;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<TemperaturData> temperaturData;
 
     public Room() {
     }
@@ -50,7 +50,7 @@ public class Room {
     }
 
     public Room(String name, int size, List<Door> doors, List<Fenster> roomWindows, List<Light> lights,
-                List<Fan> fans, List<TemperaturData> temperaturData, List<Co2SensorData> co2SensorData
+                List<Fan> fans, List<Co2SensorData> co2SensorData, List<TemperaturData> temperaturData
     ) {
         this.name = name;
         this.size = size;
@@ -58,8 +58,8 @@ public class Room {
         this.roomWindows = roomWindows;
         this.lights = lights;
         this.fans = fans;
-        this.temperaturData = temperaturData;
         this.co2SensorData = co2SensorData;
+        this.temperaturData = temperaturData;
     }
 
     public int getId() {
@@ -118,14 +118,6 @@ public class Room {
         this.fans = fans;
     }
 
-    public List<TemperaturData> getTemperaturData() {
-        return temperaturData;
-    }
-
-    public void setTemperaturData(List<TemperaturData> temperaturData) {
-        this.temperaturData = temperaturData;
-    }
-
     public List<Co2SensorData> getCo2SensorData() {
         return co2SensorData;
     }
@@ -134,17 +126,25 @@ public class Room {
         this.co2SensorData = co2SensorData;
     }
 
+    public List<TemperaturData> getTemperaturData() {
+        return temperaturData;
+    }
+
+    public void setTemperaturData(List<TemperaturData> temperaturData) {
+        this.temperaturData = temperaturData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return id == room.id && size == room.size && Objects.equals(name, room.name) && Objects.equals(doors, room.doors) && Objects.equals(roomWindows, room.roomWindows) && Objects.equals(lights, room.lights) && Objects.equals(fans, room.fans) && Objects.equals(temperaturData, room.temperaturData) && Objects.equals(co2SensorData, room.co2SensorData);
+        return id == room.id && size == room.size && Objects.equals(name, room.name) && Objects.equals(doors, room.doors) && Objects.equals(roomWindows, room.roomWindows) && Objects.equals(lights, room.lights) && Objects.equals(fans, room.fans) && Objects.equals(co2SensorData, room.co2SensorData) && Objects.equals(temperaturData, room.temperaturData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, size, doors, roomWindows, lights, fans, temperaturData, co2SensorData);
+        return Objects.hash(id, name, size, doors, roomWindows, lights, fans, co2SensorData, temperaturData);
     }
 
     @Override
@@ -157,8 +157,8 @@ public class Room {
                 ", windows=" + roomWindows +
                 ", lights=" + lights +
                 ", fans=" + fans +
-                ", temperaturData=" + temperaturData +
                 ", co2SensorData=" + co2SensorData +
+                ", temperaturData=" + temperaturData +
                 '}';
     }
 }

@@ -14,33 +14,33 @@ public class Co2SensorData extends DataInterface {
     @GeneratedValue
     private int id;
 
-    private Double temperaturValue;
+    private Double cO2value;
 
     public Co2SensorData() {
     }
 
-    public Co2SensorData(Double temperaturValue) {
+    public Co2SensorData(Double cO2value) {
         super();
-        this.temperaturValue = temperaturValue;
+        this.cO2value = cO2value;
     }
 
-    public Co2SensorData(Date timestamp, Double temperaturValue) {
+    public Co2SensorData(Date timestamp, Double cO2value) {
         super(timestamp);
-        this.temperaturValue = temperaturValue;
+        this.cO2value = cO2value;
     }
 
-    public Co2SensorData(int id, Date timestamp, Double temperaturValue) {
+    public Co2SensorData(int id, Date timestamp, Double cO2value) {
         super(timestamp);
         this.id = id;
-        this.temperaturValue = temperaturValue;
+        this.cO2value = cO2value;
     }
 
-    public Double getTemperaturValue() {
-        return temperaturValue;
+    public Double getcO2value() {
+        return cO2value;
     }
 
-    public void setTemperaturValue(Double temperaturValue) {
-        this.temperaturValue = temperaturValue;
+    public void setcO2value(Double cO2value) {
+        this.cO2value = cO2value;
     }
 
     public int getId() {
@@ -57,19 +57,19 @@ public class Co2SensorData extends DataInterface {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Co2SensorData that = (Co2SensorData) o;
-        return id == that.id && Objects.equals(temperaturValue, that.temperaturValue);
+        return id == that.id && Objects.equals(cO2value, that.cO2value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, temperaturValue);
+        return Objects.hash(super.hashCode(), id, cO2value);
     }
 
     @Override
     public String toString() {
-        return "Co2SensorData{" +
+        return "TemperaturData{" +
                 "id=" + id +
-                ", temperaturValue=" + temperaturValue +
+                ", cO2value=" + cO2value +
                 '}';
     }
 }
