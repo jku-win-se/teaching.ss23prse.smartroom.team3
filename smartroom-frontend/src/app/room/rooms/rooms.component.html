@@ -2,81 +2,131 @@
  
 
   </style>  
-  
-  <div class="roomTab" #roomTab>
-      <div class="editRoom" style="display:none;">
-          <div class="upperRow">
-              <div class="inputField">
-                  <label>Room ID:</label>
-                  <input type="text">
-              </div>
-          </div>
-          
-          <div class="middleRow">
-              <div class="inputField">
-                  <label>Room Size in  m<sup>2</sup>:</label>
-                  <input type="number">
-              </div>
-              <div class="inputField">
-                  <label>Doors:</label>
-                  <input type="number">
-              </div>
-              <!--<div class="inputField">
-                  <label>Windows:</label>
-                  <input type="number">
-              </div>
-              <div class="inputField">
-                  <label>Lights:</label>
-                  <input type="number">
-              </div>
-              <div class="inputField">
-                  <label>Fans:</label>
-                  <input type="number">
-              </div>-->
-          </div>
-         <div class="bottomRow">
-          <div class="button">Delete Room</div>
-          <div class="button">Save Changes</div>
-        </div>
-      </div>
-      <div class="detailsTab" style="display:none;">
-          <div class="title">Living Room     </div>
-          <div class="facts"><div class="left">ID:    </div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Size:  </div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Widows:</div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Doors: </div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Lights:</div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Fans:  </div><div class="right">2</div></div>
-          
-          
-          <div class="button">Close Details</div>
-      </div>
-      <div class="mainTab" >
-          <div class="upperRow">
-          <div class="title">
-              room .name
+
+<div class="flex">
+
+
+<!-- Typescrippy thing to create multiple room instances-->
+  <div *ngFor="let room of rooms; let i = index" class="roomTab" #roomTab>
+    <div class="editRoom hide">
+        <div class="upperRow">
+            <div class="inputField">
+                <label>Room ID:</label>
+                <input class="roomName" type="text" placeholder="{{room.name}}">
             </div>
-          </div>
-          <div class="middleRow">
-          <div class="link">Go to Room Dashboard <div class="icon"><img src="../assets/Arrow.svg" alt=""></div></div>
-          </div>
-          <div class="bottomRow">
-          <div class="roomActionButton roomTabLoadDetails"><!--/*(click)="loadDetails(roomTab)"*/--><div class="innerContainer">Load Details<div class="icon"><img src="../assets/Redirect.svg" alt=""></div></div>
-          </div>
-          
-          <div class="roomActionButton roomTabEditData" ><!--/*(click)="loadDetails(roomTab)"*/--><div class="innerContainer">Edit Data<div class="icon"><img src="../assets/Redirect.svg" alt=""></div></div>
-          </div>
-  
+        </div>
+        
+        <div class="middleRow">
+            <div class="inputField">
+                <label>Room Size in  m<sup>2</sup>:</label>
+                <input class="roomSize" type="number" placeholder="{{room.size}}">
+            </div>
+            <div class="inputField">
+                <label>Doors:</label>
+                <input class="roomDoors" type="number" placeholder="{{room.doors.length}}">
+            </div>
+            <!--<div class="inputField">
+                <label>Windows:</label>
+                <input type="number">
+            </div>
+            <div class="inputField">
+                <label>Lights:</label>
+                <input type="number">
+            </div>
+            <div class="inputField">
+                <label>Fans:</label>
+                <input type="number">
+            </div>-->
+        </div>
+       <div class="bottomRow">
+        <div class="button" (click)="deleteRoom($event, room)">Delete Room</div>
+        <div class="button" (click)="editRoom($event, room)">Save Changes(Close)</div>
       </div>
-      
-      
+    </div>
+    <div class="detailsTab hide">
+        <div class="title">{{ room.name }}</div>
+        <div class="facts"><div class="left">ID:    </div><div class="right">{{ room.id }}</div></div>
+        <div class="facts"><div class="left">Size:  </div><div class="right">{{ room.size }}m<sup>2</sup></div></div>
+        <div class="facts"><div class="left">Widows:</div><div class="right">{{ room.roomWindows.length}}</div></div>
+        <div class="facts"><div class="left">Doors: </div><div class="right">{{ room.doors.length }}</div></div>
+        <div class="facts"><div class="left">Lights:</div><div class="right">{{ room.lights.length }}</div></div>
+        <div class="facts"><div class="left">Fans:  </div><div class="right">{{ room.fans.length }}</div></div>
+        
+        <div class="button" (click)="switchRoomView($event, 'mainTab')">Close Details</div>
+    </div>
+    <div class="mainTab" >
+        <div class="upperRow">
+        <div class="title">
+           {{room.name}}
+          </div>
+        </div>
+        <div class="middleRow">
+        <div class="link">Go to Room Dashboard <div class="icon"><img src="../assets/Arrow.svg" alt=""></div></div>
+        </div>
+        <div class="bottomRow">
+        <div class="roomActionButton roomTabLoadDetails" (click)="switchRoomView($event, 'detailsTab')"><div class="innerContainer">Load Details<div class="icon"><img src="../assets/Redirect.svg" alt=""></div></div>
+        </div>
+        
+        <div class="roomActionButton roomTabEditData" (click)="switchRoomView($event, 'editRoom')"><div class="innerContainer">Edit Data<div class="icon"><img src="../assets/Redirect.svg" alt=""></div></div>
+        </div>
 
+    </div>
+    
+    
+
+    </div>
+</div>
+
+<div class="roomTab" #roomTab>
+  <div class="addNewRoom"  (click)="switchRoomView($event, 'editRoom')">
+    <div class="upperRow">
+      <div class="icon"><img src="../assets/AddComponentRoomsSection.svg" alt=""></div>
+    </div>
+    <div class="middleRow">
+      <div class="title"> <span>Add new</span> <span> Room <div class="icon"><img src="../assets/Arrow.svg" alt=""></div></span></div>
+    </div>
+    <div class="bottomRow">
+      <div class="description">Create a new Room</div>
+    </div>
+</div>
+  <div class="editRoom hide">
+      <div class="upperRow">
+          <div class="inputField">
+              <label>Room ID:</label>
+              <input  class="roomName" type="text" placeholder="Room Name">
+          </div>
       </div>
-  </div>
+      <div class="middleRow">
+          <div class="inputField">
+              <label>Room Size in  m<sup>2</sup>:</label>
+              <input class="roomSize" type="number" placeholder="0">
+          </div>
+          <div class="inputField">
+              <label>Doors:</label>
+              <input class="roomDoors" type="number" placeholder="0">
+          </div>
+          <!--<div class="inputField">
+              <label>Windows:</label>
+              <input type="number">
+          </div>
+          <div class="inputField">
+              <label>Lights:</label>
+              <input type="number">
+          </div>
+          <div class="inputField">
+              <label>Fans:</label>
+              <input type="number">
+          </div>-->
+      </div>
+     <div class="bottomRow">
+      <div class="button" (click)="switchRoomView($event, 'addNewRoom')">Discard Changes</div>
+      <div class="button" (click)="saveNewRoom($event)">Save Changes</div>
+    </div>
+</div>
+</div>
+</div>
 
-
-
-
+<!--
 <div class="flex">
   <div class="roomTab_">
     <div class="upperRow">
@@ -106,3 +156,5 @@
     </div>
   </div>
 </div>
+
+-->
