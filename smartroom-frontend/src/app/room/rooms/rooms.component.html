@@ -1,84 +1,5 @@
-<style>
- 
-
-  </style>  
-  
-  <div class="roomTab" #roomTab>
-      <div class="editRoom" style="display:none;">
-          <div class="upperRow">
-              <div class="inputField">
-                  <label>Room ID:</label>
-                  <input type="text">
-              </div>
-          </div>
-          
-          <div class="middleRow">
-              <div class="inputField">
-                  <label>Room Size in  m<sup>2</sup>:</label>
-                  <input type="number">
-              </div>
-              <div class="inputField">
-                  <label>Doors:</label>
-                  <input type="number">
-              </div>
-              <!--<div class="inputField">
-                  <label>Windows:</label>
-                  <input type="number">
-              </div>
-              <div class="inputField">
-                  <label>Lights:</label>
-                  <input type="number">
-              </div>
-              <div class="inputField">
-                  <label>Fans:</label>
-                  <input type="number">
-              </div>-->
-          </div>
-         <div class="bottomRow">
-          <div class="button">Delete Room</div>
-          <div class="button">Save Changes</div>
-        </div>
-      </div>
-      <div class="detailsTab" style="display:none;">
-          <div class="title">Living Room     </div>
-          <div class="facts"><div class="left">ID:    </div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Size:  </div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Widows:</div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Doors: </div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Lights:</div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Fans:  </div><div class="right">2</div></div>
-          
-          
-          <div class="button">Close Details</div>
-      </div>
-      <div class="mainTab" >
-          <div class="upperRow">
-          <div class="title">
-              room .name
-            </div>
-          </div>
-          <div class="middleRow">
-          <div class="link">Go to Room Dashboard <div class="icon"><img src="../assets/Arrow.svg" alt=""></div></div>
-          </div>
-          <div class="bottomRow">
-          <div class="roomActionButton roomTabLoadDetails"><!--/*(click)="loadDetails(roomTab)"*/--><div class="innerContainer">Load Details<div class="icon"><img src="../assets/Redirect.svg" alt=""></div></div>
-          </div>
-          
-          <div class="roomActionButton roomTabEditData" ><!--/*(click)="loadDetails(roomTab)"*/--><div class="innerContainer">Edit Data<div class="icon"><img src="../assets/Redirect.svg" alt=""></div></div>
-          </div>
-  
-      </div>
-      
-      
-
-      </div>
-  </div>
-
-
-
-
 <div class="flex">
-  <div class="roomTab_">
+  <div class="roomTab">
     <div class="upperRow">
       <a class="title link" [routerLink]="['/add-room']">
         Add Room <img src="../assets/AddComponent.svg" alt="">
@@ -92,7 +13,7 @@
     </div>
   </div>
 
-  <div class="roomTab_">
+  <div class="roomTab">
     <div class="upperRow">
       <a class="title link" [routerLink]="['/room-list']">
         View Rooms <img src="../assets/Arrow.svg" alt="">
