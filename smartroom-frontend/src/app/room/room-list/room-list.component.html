@@ -1,5 +1,4 @@
 <div class="flex container">
-
   <div *ngFor="let room of rooms; let i = index" class="roomTab">
     <div class="upperRow">
       <a class="title link" [routerLink]="['/room-details', room.id]">
@@ -13,5 +12,4 @@
       </a>
     </div>
   </div>
-
 </div>

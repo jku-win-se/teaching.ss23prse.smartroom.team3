@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import se.smartroom.entities.Room;
 import se.smartroom.repositories.RoomRepository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -35,21 +37,17 @@ public class RoomService {
 
     public Room updateRoom(Room room) {
         int id = room.getId();
-        return repository
-                .findById(id)
-                .map(value -> {
-                    value.setName(room.getName());
-                    value.setSize(room.getSize());
-                    value.setDoors(room.getDoors());
-                    value.setRoomWindows(room.getRoomWindows());
-                    value.setLights(room.getLights());
-                    value.setFans(room.getFans());
 
-                    return repository.save(value);
-                })
-                .orElseGet(() -> {
-                    return repository.save(room);
-                });
+        Room existingRoom = repository.findById(id).orElse(room);
+
+        existingRoom.setName(room.getName());
+        existingRoom.setSize(room.getSize());
+        existingRoom.setDoors(room.getDoors());
+        existingRoom.setRoomWindows(room.getRoomWindows());
+        existingRoom.setLights(room.getLights());
+        existingRoom.setFans(room.getFans());
+
+        return repository.save(existingRoom);
     }
 
     /**

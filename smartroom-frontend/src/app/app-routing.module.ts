@@ -8,6 +8,8 @@ import {RoomListComponent} from "./room/room-list/room-list.component";
 import {AddRoomComponent} from "./room/add-room/add-room.component";
 import {RoomDetailsComponent} from "./room/room-details/room-details.component";
 import {UpdateRoomComponent} from "./room/update-room/update-room.component";
+import {RemoteDashboardComponent} from "./remote/remote-dashboard/remote-dashboard.component";
+import {RemoteDetailsComponent} from "./remote/remote-details/remote-details.component";
 
 
 const routes: Routes = [
@@ -17,8 +19,10 @@ const routes: Routes = [
 { path: 'room-list', component: RoomListComponent },
 { path: 'room-details/:id', component: RoomDetailsComponent },
 { path: 'update-room/:id', component: UpdateRoomComponent },
+{ path: 'remote-details/:id', component: RemoteDetailsComponent },
 { path: 'add-room', component: AddRoomComponent },
-{ path: 'devices', component: DevicesComponent }
+{ path: 'devices', component: DevicesComponent },
+{ path: 'remote', component: RemoteDashboardComponent }
 ];
 
 @NgModule({

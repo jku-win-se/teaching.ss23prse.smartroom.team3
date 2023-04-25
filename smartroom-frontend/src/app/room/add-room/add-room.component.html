@@ -26,7 +26,6 @@
         <button type="button" (click)="addDoor()">Add Door</button>
       </div>
 
-
       <h3>New Doors: </h3>
       <div *ngFor="let d of room.doors; let i = index">
         <p>Door {{i + 1}}, open: {{d.open}}</p>
@@ -96,4 +95,3 @@
     <button type="button" label="Save" (click)="saveRoom()">Save Room</button>
   </div>
 </div>
-

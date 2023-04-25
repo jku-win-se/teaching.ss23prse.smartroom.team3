@@ -14,6 +14,7 @@ import { AddRoomComponent } from './room/add-room/add-room.component';
 import { RoomDetailsComponent } from './room/room-details/room-details.component';
 import { UpdateRoomComponent } from './room/update-room/update-room.component';
 import { RemoteDashboardComponent } from './remote/remote-dashboard/remote-dashboard.component';
+import { RemoteDetailsComponent } from './remote/remote-details/remote-details.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RemoteDashboardComponent } from './remote/remote-dashboard/remote-dashb
     AddRoomComponent,
     RoomDetailsComponent,
     UpdateRoomComponent,
-    RemoteDashboardComponent
+    RemoteDashboardComponent,
+    RemoteDetailsComponent
   ],
   imports: [
     BrowserModule,
