@@ -369,18 +369,13 @@ margin: 0;
 
 .flex {
   display: flex;
-  max-width: 100%;
-  height: auto;
-  flex-wrap: wrap;
 }
 
 .roomTab {
   position: relative;
-  position: relative;
   display: flex;
   flex-direction: column;
   width: 20rem;
-  min-width: 20rem;
   height: 22.5rem;
   padding: 1rem 2rem;
   border-radius: 2vw;
@@ -510,55 +505,4 @@ margin: 0;
 
 .roomActionButton:hover::before {
   opacity: 1;
-}
-
-
-.roomTab .addNewRoom{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.roomTab .addNewRoom .upperRow{
-  margin-top: 1.6rem;
-}
-.roomTab .addNewRoom .upperRow .icon{
-  margin-top: 16px;
-  margin-bottom: 1.6rem;
-  width: 4rem;
-  height: 4.5rem;
-}
-
-.roomTab .addNewRoom .upperRow .icon img{
-  height: 100%;
-}
-
-.roomTab .addNewRoom .middleRow .title{
-  height: 100%;
-  font-size: 1.6rem;
-  max-width: 8ch;
-}
-
-.roomTab .addNewRoom .middleRow .title span{
-  display: flex;
-}
-
-.roomTab .addNewRoom .middleRow .title .icon{
-  height: 2rem;
-  display: flex;
-  align-items: center;
-}
-
-.roomTab .addNewRoom .middleRow .title .icon img{
-  height: 100%;
-}
-
-.roomTab .addNewRoom .bottomRow{
-  margin-top: auto;
-  margin-bottom: 1rem;
-  opacity: 0.5;
-}
-
-.hide{
-  display: none !important;
 }

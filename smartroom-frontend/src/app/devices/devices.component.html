@@ -109,6 +109,7 @@
     }
 
     .roomTab .mainTab .bottomRow .roomActionButton * {
+      border: red solid 1px !important;
       -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
@@ -351,148 +352,9 @@
       margin-top: auto;
     }
 
-    .hide{
-      display: none !important;
-    }
-
-    .roomTab .addNewRoom{
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .roomTab .addNewRoom .upperRow{
-      margin-top: 1.6rem;
-    }
-    .roomTab .addNewRoom .upperRow .icon{
-      margin-top: 16px;
-      margin-bottom: 1.6rem;
-      width: 4rem;
-      height: 4.5rem;
-    }
-
-    .roomTab .addNewRoom .upperRow .icon img{
-      height: 100%;
-    }
-
-    .roomTab .addNewRoom .middleRow .title{
-      height: 100%;
-      font-size: 1.6rem;
-      max-width: 8ch;
-    }
-
-    .roomTab .addNewRoom .middleRow .title span{
-      display: flex;
-    }
-
-    .roomTab .addNewRoom .middleRow .title .icon{
-      height: 2rem;
-      display: flex;
-      align-items: center;
-    }
-
-    .roomTab .addNewRoom .middleRow .title .icon img{
-      height: 100%;
-    }
-
-    .roomTab .addNewRoom .bottomRow{
-      margin-top: auto;
-      margin-bottom: 1rem;
-      opacity: 0.5;
-    }
-
-
 
     </style>  
     
-
-    <div class="roomTab">
-      <div class="addNewRoom">
-        <div class="upperRow">
-          <div class="icon"><img src="../assets/AddComponentRoomsSection.svg" alt=""></div>
-        </div>
-        <div class="middleRow">
-          <div class="title"> <span>Add new</span> <span> Room <div class="icon"><img src="../assets/Arrow.svg" alt=""></div></span></div>
-        </div>
-        <div class="bottomRow">
-          <div class="description">Create a new Room</div>
-        </div>
-    </div>
-
-
-
-      <div class="editRoom hide">
-          <div class="upperRow">
-              <div class="inputField">
-                  <label>Room ID:</label>
-                  <input type="text">
-              </div>
-          </div>
-          
-          <div class="middleRow">
-              <div class="inputField">
-                  <label>Room Size in  m<sup>2</sup>:</label>
-                  <input type="number">
-              </div>
-              <div class="inputField">
-                  <label>Doors:</label>
-                  <input type="number">
-              </div>
-              <!--<div class="inputField">
-                  <label>Windows:</label>
-                  <input type="number">
-              </div>
-              <div class="inputField">
-                  <label>Lights:</label>
-                  <input type="number">
-              </div>
-              <div class="inputField">
-                  <label>Fans:</label>
-                  <input type="number">
-              </div>-->
-          </div>
-         <div class="bottomRow">
-          <div class="button">Delete Room</div>
-          <div class="button">Save Changes</div>
-        </div>
-      </div>
-      <div class="detailsTab hide">
-          <div class="title">Living Room     </div>
-          <div class="facts"><div class="left">ID:    </div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Size:  </div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Widows:</div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Doors: </div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Lights:</div><div class="right">2</div></div>
-          <div class="facts"><div class="left">Fans:  </div><div class="right">2</div></div>
-          
-          
-          <div class="button">Close Details</div>
-      </div>
-      <div class="mainTab hide">
-          <div class="upperRow">
-          <div class="title">
-              room .name
-            </div>
-          </div>
-          <div class="middleRow">
-          <div class="link">Go to Room Dashboard <div class="icon"><img src="../assets/Arrow.svg" alt=""></div></div>
-          </div>
-          <div class="bottomRow">
-          <div class="roomActionButton"><div class="innerContainer">Load Details<div class="icon"><img src="../assets/Redirect.svg" alt=""></div></div>
-          </div>
-          
-          <div class="roomActionButton"><div class="innerContainer">Edit Data<div class="icon"><img src="../assets/Redirect.svg" alt=""></div></div>
-          </div>
-  
-      </div>
-      
-      
-
-      </div>
-  </div>
-
-
-<!--
     <div class="roomTab">
         <div class="editRoom">
             <div class="upperRow">
@@ -522,7 +384,7 @@
                 <div class="inputField">
                     <label>Fans:</label>
                     <input type="number">
-                </div>--><!--
+                </div>-->
             </div>
            <div class="bottomRow">
             <div class="button">Delete Room</div>
@@ -562,4 +424,4 @@
         
 
         </div>
-    </div>-->
+    </div>
