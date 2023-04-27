@@ -4,25 +4,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.util.Objects;
-
 @Entity
-public class Door extends PhysicalDevice {
+public class Door {
 
     @Id
     @GeneratedValue
     private int id;
 
+    private boolean open;
+
     public Door() {
     }
 
     public Door(boolean open) {
-        super(open);
+        this.open = open;
     }
 
     public Door(int id, boolean open) {
-        super(open);
         this.id = id;
+        this.open = open;
     }
 
     public int getId() {
@@ -33,25 +33,11 @@ public class Door extends PhysicalDevice {
         this.id = id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Door door = (Door) o;
-        return id == door.id;
+    public boolean isOpen() {
+        return open;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id);
-    }
-
-    @Override
-    public String toString() {
-        return "Door{" +
-                "id=" + id +
-                "open=" + super.isOpen() +
-                '}';
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 }

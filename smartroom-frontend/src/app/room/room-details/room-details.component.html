@@ -33,7 +33,7 @@
     <h2>Lights</h2>
     <h3>This room has {{room.lights.length}} lights.</h3>
     <div *ngFor="let light of room.lights; let i = index">
-      <p>Light {{i + 1}}, on: {{light.on}}</p>
+      <p>Light {{i + 1}}, on: {{light.isOn}}</p>
     </div>
   </div>
 
@@ -41,7 +41,7 @@
     <h2>Fans</h2>
     <h3>This room has {{room.fans.length}} fans.</h3>
     <div *ngFor="let fan of room.fans; let i = index">
-      <p>Fan {{i + 1}}, on: {{fan.on}}</p>
+      <p>Fan {{i + 1}}, on: {{fan.isOn}}</p>
     </div>
   </div>
 

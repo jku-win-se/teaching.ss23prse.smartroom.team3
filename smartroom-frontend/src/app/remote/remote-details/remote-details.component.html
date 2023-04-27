@@ -59,9 +59,9 @@
         <div class="middleRow">
           <div class="icon"><img src="../assets/Bulb.svg" alt=""></div>
           <div class="container">
-            <h3 class="status">Status: {{ light.on ? 'on' : 'off' }}</h3>
+            <h3 class="status">Status: {{ light.isOn ? 'on' : 'off' }}</h3>
             <label class="switch">
-              <input type="checkbox" [(ngModel)]="light.on" [value]="light.on" (change)="updateRoom()">
+              <input type="checkbox" [(ngModel)]="light.isOn" [value]="light.isOn" (change)="updateRoom()">
               <span class="slider round"></span>
             </label>
           </div>
@@ -82,9 +82,9 @@
         <div class="middleRow">
           <div class="icon"><img src="../assets/Fan.svg" alt=""></div>
           <div class="container">
-            <h3 class="status">Status: {{ fan.on ? 'on' : 'off' }}</h3>
+            <h3 class="status">Status: {{ fan.isOn ? 'on' : 'off' }}</h3>
             <label class="switch">
-              <input type="checkbox" [(ngModel)]="fan.on" [value]="fan.on" (change)="updateRoom()">
+              <input type="checkbox" [(ngModel)]="fan.isOn" [value]="fan.isOn" (change)="updateRoom()">
               <span class="slider round"></span>
             </label>
           </div>

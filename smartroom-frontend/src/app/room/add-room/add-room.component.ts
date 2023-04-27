@@ -59,7 +59,7 @@ export class AddRoomComponent {
   addLight() {
     this.room.lights.push({
       id: this.light.id,
-      on: this.light.on
+      isOn: this.light.isOn
     });
     this.light = emptyLight;
   }
@@ -67,7 +67,7 @@ export class AddRoomComponent {
   addFan() {
     this.room.fans.push({
       id: this.fan.id,
-      on: this.fan.on
+      isOn: this.fan.isOn
     });
     this.fan = emptyFan;
   }

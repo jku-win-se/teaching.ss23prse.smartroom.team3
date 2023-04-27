@@ -72,10 +72,10 @@
       <div class="flex-column flex-gap">
         <label for="name">Add new Light</label>
         <div>
-          <label>On</label><input type="radio" [(ngModel)]="light.on" [value]="true">
+          <label>On</label><input type="radio" [(ngModel)]="light.isOn" [value]="true">
         </div>
         <div>
-          <label>Off</label><input type="radio" [(ngModel)]="light.on" [value]="false">
+          <label>Off</label><input type="radio" [(ngModel)]="light.isOn" [value]="false">
         </div>
         <button type="button" (click)="addLight()">Add Light</button>
       </div>
@@ -83,12 +83,12 @@
       <div *ngIf="room.lights.length > 0">
         <h3>Update Lights: </h3>
         <div *ngFor="let l of room.lights; let i = index">
-          <p>Light {{i + 1}}, on: {{l.on}}</p>
+          <p>Light {{i + 1}}, on: {{l.isOn}}</p>
           <div>
-            <label>On</label><input type="radio" [(ngModel)]="room.lights[i].on" [value]="true">
+            <label>On</label><input type="radio" [(ngModel)]="room.lights[i].isOn" [value]="true">
           </div>
           <div>
-            <label>Off</label><input type="radio" [(ngModel)]="room.lights[i].on" [value]="false">
+            <label>Off</label><input type="radio" [(ngModel)]="room.lights[i].isOn" [value]="false">
           </div>
         </div>
       </div>
@@ -99,10 +99,10 @@
       <div class="flex-column flex-gap">
         <label for="name">Add new Fan</label>
         <div>
-          <label>On</label><input type="radio" [(ngModel)]="fan.on" [value]="true">
+          <label>On</label><input type="radio" [(ngModel)]="fan.isOn" [value]="true">
         </div>
         <div>
-          <label>Off</label><input type="radio" [(ngModel)]="fan.on" [value]="false">
+          <label>Off</label><input type="radio" [(ngModel)]="fan.isOn" [value]="false">
         </div>
         <button type="button" (click)="addFan()">Add Fan</button>
       </div>
@@ -111,12 +111,12 @@
       <div *ngIf="room.fans.length > 0">
         <h3>Update Fans: </h3>
         <div *ngFor="let f of room.fans; let i = index">
-          <p>Fan {{i + 1}}, on: {{f.on}}</p>
+          <p>Fan {{i + 1}}, on: {{f.isOn}}</p>
           <div>
-            <label>On</label><input type="radio" [(ngModel)]="room.fans[i].on" [value]="true">
+            <label>On</label><input type="radio" [(ngModel)]="room.fans[i].isOn" [value]="true">
           </div>
           <div>
-            <label>Off</label><input type="radio" [(ngModel)]="room.fans[i].on" [value]="false">
+            <label>Off</label><input type="radio" [(ngModel)]="room.fans[i].isOn" [value]="false">
           </div>
         </div>
       </div>
