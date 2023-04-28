@@ -13,6 +13,8 @@ import { RoomListComponent } from './room/room-list/room-list.component';
 import { AddRoomComponent } from './room/add-room/add-room.component';
 import { RoomDetailsComponent } from './room/room-details/room-details.component';
 import { UpdateRoomComponent } from './room/update-room/update-room.component';
+import { RemoteDashboardComponent } from './remote/remote-dashboard/remote-dashboard.component';
+import { RemoteDetailsComponent } from './remote/remote-details/remote-details.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { UpdateRoomComponent } from './room/update-room/update-room.component';
     RoomListComponent,
     AddRoomComponent,
     RoomDetailsComponent,
-    UpdateRoomComponent
+    UpdateRoomComponent,
+    RemoteDashboardComponent,
+    RemoteDetailsComponent
   ],
   imports: [
     BrowserModule,

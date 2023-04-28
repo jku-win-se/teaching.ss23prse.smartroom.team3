@@ -4,25 +4,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.util.Objects;
-
 @Entity
-public class Light extends SmartDevice {
+public class Light {
 
     @Id
     @GeneratedValue
     private int id;
 
+    private boolean isOn;
+
     public Light() {
     }
 
-    public Light(boolean open) {
-        super(open);
+    public Light(boolean isOn) {
+        this.isOn = isOn;
     }
 
-    public Light(int id, boolean on) {
-        super(on);
+    public Light(int id, boolean isOn) {
         this.id = id;
+        this.isOn = isOn;
     }
 
     public int getId() {
@@ -33,25 +33,11 @@ public class Light extends SmartDevice {
         this.id = id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Light light = (Light) o;
-        return id == light.id;
+    public boolean isIsOn() {
+        return isOn;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id);
-    }
-
-    @Override
-    public String toString() {
-        return "Light{" +
-                "id=" + id +
-                "on=" + super.isOn() +
-                '}';
+    public void setIsOn(boolean on) {
+        this.isOn = on;
     }
 }

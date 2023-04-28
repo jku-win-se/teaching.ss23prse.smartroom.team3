@@ -26,7 +26,6 @@
         <button type="button" (click)="addDoor()">Add Door</button>
       </div>
 
-
       <h3>New Doors: </h3>
       <div *ngFor="let d of room.doors; let i = index">
         <p>Door {{i + 1}}, open: {{d.open}}</p>
@@ -58,10 +57,10 @@
       <div class="flex-column flex-gap">
         <label for="name">Lights</label>
         <div>
-          <label>On</label><input type="radio" [(ngModel)]="light.on" [value]="true">
+          <label>On</label><input type="radio" [(ngModel)]="light.isOn" [value]="true">
         </div>
         <div>
-          <label>Off</label><input type="radio" [(ngModel)]="light.on" [value]="false">
+          <label>Off</label><input type="radio" [(ngModel)]="light.isOn" [value]="false">
         </div>
         <button type="button" (click)="addLight()">Add Light</button>
       </div>
@@ -69,7 +68,7 @@
 
       <h3>New Lights: </h3>
       <div *ngFor="let l of room.lights; let i = index">
-        <p>Light {{i + 1}}, on: {{l.on}}</p>
+        <p>Light {{i + 1}}, on: {{l.isOn}}</p>
       </div>
     </div>
 
@@ -78,10 +77,10 @@
       <div class="flex-column flex-gap">
         <label for="name">Fan status</label>
         <div>
-          <label>On</label><input type="radio" [(ngModel)]="fan.on" [value]="true">
+          <label>On</label><input type="radio" [(ngModel)]="fan.isOn" [value]="true">
         </div>
         <div>
-          <label>Off</label><input type="radio" [(ngModel)]="fan.on" [value]="false">
+          <label>Off</label><input type="radio" [(ngModel)]="fan.isOn" [value]="false">
         </div>
         <button type="button" (click)="addFan()">Add Fan</button>
       </div>
@@ -89,11 +88,10 @@
 
       <h3>New Fans: </h3>
       <div *ngFor="let f of room.fans; let i = index">
-        <p>Fan {{i + 1}}, on: {{f.on}}</p>
+        <p>Fan {{i + 1}}, on: {{f.isOn}}</p>
       </div>
     </div>
 
     <button type="button" label="Save" (click)="saveRoom()">Save Room</button>
   </div>
 </div>
-

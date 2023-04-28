@@ -12,12 +12,12 @@ export type Door = {
 
   export type Light = {
     id: number;
-    on: boolean;
+    isOn: boolean;
   }
 
   export type Fan = {
     id: number;
-    on: boolean;
+    isOn: boolean;
   }
 
   export type TemperaturData = {
@@ -75,10 +75,10 @@ export const emptyWindow: Window = {
 
 export const emptyLight: Light = {
   id: 0,
-  on: true
+  isOn: true
 }
 
 export const emptyFan: Fan = {
   id: 0,
-  on: true
+  isOn: true
 }
