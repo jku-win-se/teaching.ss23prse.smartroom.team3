@@ -62,7 +62,7 @@ public class RoomController {
 
         String headerKey = "Content-Disposition";
         // set the name of the files that will be dowload, which will also have a date stamp
-        String headerValue = "attachment; filename=users_" + currentDateTime + ".csv";
+        String headerValue = "attachment; filename=rooms_" + currentDateTime + ".csv";
         response.setHeader(headerKey, headerValue);
 
         List<Room> listRooms = roomService.getRooms();
@@ -74,7 +74,6 @@ public class RoomController {
         for (Room rooms : listRooms) {
             csvWriter.write(rooms, nameMapping);
         }
-
         csvWriter.close();
 
     }

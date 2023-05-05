@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav id="sidebar">
+<nav id="sidebar" >
   <div class="logo">
     <img src="../assets/Logo.png" alt="Logo">
   </div>
@@ -30,8 +30,10 @@
 <div id="main">
   <div class="topBar">
     <div class="title">Room Overview</div>
-    <div class="button"><img src="../assets/Download.svg" alt="Rooms">
-      <p>Download Rooms</p></div>
+    <li routerLinkActive="active" routerLink="/rooms/export">
+    <div class="button"><img src="../assets/Download.svg" alt="/rooms/export">
+      <a href="http://localhost:8080/rooms/export">Download Rooms</a></div>
+    </li>
   </div>
   <div class="mainBody">
     <div class="mainContainer">
