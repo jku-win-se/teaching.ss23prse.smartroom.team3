@@ -40,4 +40,12 @@ public class Fenster {
     public void setOpen(boolean open) {
         this.open = open;
     }
+
+    @Override
+    public String toString() {
+        return "Fenster{" +
+                "id=" + id +
+                ", open=" + open +
+                '}';
+    }
 }

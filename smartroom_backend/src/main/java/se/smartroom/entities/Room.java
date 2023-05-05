@@ -8,6 +8,7 @@ import se.smartroom.entities.physicalDevice.Fenster;
 import se.smartroom.entities.smartDevice.Fan;
 import se.smartroom.entities.smartDevice.Light;
 
+import javax.management.monitor.StringMonitorMBean;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;

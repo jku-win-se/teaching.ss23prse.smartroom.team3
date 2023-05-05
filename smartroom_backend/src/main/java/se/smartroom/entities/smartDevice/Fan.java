@@ -40,4 +40,12 @@ public class Fan {
     public void setIsOn(boolean on) {
         this.isOn = on;
     }
+
+    @Override
+    public String toString() {
+        return "Fan{" +
+                "id=" + id +
+                ", isOn=" + isOn +
+                '}';
+    }
 }

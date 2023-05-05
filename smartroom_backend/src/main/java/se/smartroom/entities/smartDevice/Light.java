@@ -40,4 +40,12 @@ public class Light {
     public void setIsOn(boolean on) {
         this.isOn = on;
     }
+
+    @Override
+    public String toString() {
+        return "Light{" +
+                "id=" + id +
+                ", isOn=" + isOn +
+                '}';
+    }
 }
