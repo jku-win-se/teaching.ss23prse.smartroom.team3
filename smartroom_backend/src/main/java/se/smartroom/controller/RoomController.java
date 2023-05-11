@@ -67,8 +67,8 @@ public class RoomController {
 
         List<Room> listRooms = roomService.getRooms();
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        String[] csvHeader = {"Room Name", "Room Size", "Doors", "Windows", "Lights","Fans","co2SensorData","temperaturData"};
-        String[] nameMapping = {"name", "size", "doors", "roomWindows", "lights","fans","co2SensorData","temperaturData"};
+        String[] csvHeader = {"Room ID","Room Name", "Room Size", "Doors", "Windows", "Lights","Fans","co2SensorData","temperaturData"};
+        String[] nameMapping = {"id","name", "size", "doors", "roomWindows", "lights","fans","co2SensorData","temperaturData"};
         csvWriter.writeHeader(csvHeader);
 
         for (Room rooms : listRooms) {

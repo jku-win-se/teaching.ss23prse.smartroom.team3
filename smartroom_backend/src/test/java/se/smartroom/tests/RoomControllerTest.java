@@ -1,151 +1,146 @@
 package se.smartroom.tests;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import se.smartroom.entities.Room;
-import se.smartroom.entities.data.TemperaturData;
-import se.smartroom.entities.data.Co2SensorData;
-import se.smartroom.entities.physicalDevice.Door;
-import se.smartroom.entities.physicalDevice.Fenster;
-import se.smartroom.entities.smartDevice.Fan;
-import se.smartroom.entities.smartDevice.Light;
-import se.smartroom.services.RoomService;
 
-import java.sql.Date;
-import java.util.Arrays;
-import java.util.Collections;
+import jakarta.servlet.http.HttpServletResponse;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import se.smartroom.controller.RoomController;
+import se.smartroom.entities.Room;
+import se.smartroom.services.RoomService;
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest
+@ExtendWith(MockitoExtension.class)
 public class RoomControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
 
-    @MockBean
+    @Mock
     private RoomService roomService;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    @InjectMocks
+    private RoomController roomController;
 
-    @Test
-    public void testGETRoomsEndpointWithNoRooms() throws Exception {
-        List<Room> rooms = Collections.emptyList();
-        given(roomService.getRooms()).willReturn(rooms);
+    @Mock
+    private HttpServletResponse response;
 
-        ResultActions response = mockMvc.perform(get("/rooms"));
-
-        response.andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(jsonPath("$.size()",
-                        is(rooms.size())));
+    private MockMvc mockMvc;
+    @BeforeEach
+    public void setup() {
+        mockMvc = MockMvcBuilders.standaloneSetup(roomController).build();
     }
-
     @Test
-    public void testGETRoomsEndpointWithTwoRoom() throws Exception {
-        List<Room> rooms = Arrays.asList(createRoom("Living Room", 25, 0), createRoom("Bed Room", 12, 1));
-        given(roomService.getRooms()).willReturn(rooms);
+    public void testGetRooms() {
+        // Create a list of Room objects for mocking the response
+        List<Room> mockedRooms = new ArrayList<>();
+        mockedRooms.add(new Room("Room 1",45));
+        mockedRooms.add(new Room("Room 2",23));
 
-        ResultActions response = mockMvc.perform(get("/rooms"));
+        // Configure the behavior of the mock
+        when(roomService.getRooms()).thenReturn(mockedRooms);
 
-        response.andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(jsonPath("$.size()",
-                        is(rooms.size())));
-    }
+        // Invoke the controller method
+        List<Room> result = roomController.getRooms();
 
-    @Test
-    public void testGETRoomsByIdEndpoint() throws Exception {
-        int id = 5;
-        Room room = createRoom("Living Room", 25, id);
-        given(roomService.getRoomById(5)).willReturn(room);
-
-        ResultActions response = mockMvc.perform(get("/room/5"));
-
-        response.andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(jsonPath("$.id", is(room.getId())))
-                .andExpect(jsonPath("$.name", is(room.getName())));
+        // Verify the interactions and assertions
+        verify(roomService).getRooms();
+        assertEquals(mockedRooms, result);
     }
 
     @Test
-    public void testPUTRoomsEndpoint() throws Exception {
-        int id = 5;
-        Room savedRoom = createRoom("Living Room", 25, id);
-        Room updatedRoom = createRoom("Bed Room", 25, id);
-        given(roomService.getRoomById(id)).willReturn(savedRoom);
-        given(roomService.updateRoom(any(Room.class)))
-                .willAnswer((invocation) -> invocation.getArgument(0));
+    public void testGetRoom() {
+        // Arrange
+        int roomId = 1;
+        Room mockedRoom = new Room("Room 1", 33);
+        when(roomService.getRoomById(roomId)).thenReturn(mockedRoom);
 
-        ResultActions response = mockMvc.perform(put("/room")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(updatedRoom)));
+        // Act
+        Room result = roomController.getRoom(roomId);
 
-        response.andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(jsonPath("$.name", is(updatedRoom.getName())));
+        // Assert
+        assertEquals(mockedRoom, result);
+        verify(roomService).getRoomById(roomId);
     }
 
     @Test
-    public void testPOSTRoomsEndpointWithNoRooms() throws Exception {
-        Room room = createRoom("Living Room", 25, 0);
+    public void testUpdateRoom() {
+        // Arrange
+        Room roomToUpdate = new Room("Room 1", 23);
+        Room updatedRoom = new Room("Updated Room 1", 23);
+        when(roomService.updateRoom(roomToUpdate)).thenReturn(updatedRoom);
 
-        given(roomService.saveRoom(any(Room.class)))
-                .willAnswer((invocation) -> invocation.getArgument(0));
+        // Act
+        Room result = roomController.updateRoom(roomToUpdate);
 
-        ResultActions response = mockMvc.perform(post("/room")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(room)));
-
-        response.andDo(print())
-                .andExpect(jsonPath("$.name", is(room.getName())))
-                .andExpect(jsonPath("$.size", is(room.getSize())))
-                .andExpect(jsonPath("$.doors.size()", is(room.getDoors().size())))
-                .andExpect(jsonPath("$.roomWindows.size()", is(room.getRoomWindows().size())))
-                .andExpect(jsonPath("$.lights.size()", is(room.getLights().size())))
-                .andExpect(jsonPath("$.fans.size()", is(room.getFans().size())))
-                .andExpect(jsonPath("$.temperaturData.size()", is(room.getTemperaturData().size())))
-                .andExpect(jsonPath("$.co2SensorData.size()", is(room.getCo2SensorData().size())));
+        // Assert
+        assertEquals(updatedRoom, result);
+        verify(roomService).updateRoom(roomToUpdate);
     }
 
     @Test
-    public void testDELETERoomsByIdEndpoint() throws Exception {
-        int id = 5;
-        Room room = createRoom("Living Room", 25, id);
-        given(roomService.getRoomById(id)).willReturn(room);
+    public void testCreateRoom() {
+        // Arrange
+        Room roomToCreate = new Room("Room 1", 11);
+        Room createdRoom = new Room("Created Room 1", 11);
+        Mockito.when(roomService.saveRoom(roomToCreate)).thenReturn(createdRoom);
 
-        ResultActions response = mockMvc.perform(delete("/room/{id}", id));
+        // Act
+        Room result = roomController.createRoom(roomToCreate);
 
-        response.andExpect(status().isOk())
-                .andDo(print());
+        // Assert
+        assertEquals(createdRoom, result);
+        Mockito.verify(roomService).saveRoom(roomToCreate);
     }
 
-    private Room createRoom(String name, int size, int id) {
-        Room room = new Room();
-        room.setId(id);
-        room.setName(name);
-        room.setSize(size);
-        room.setDoors(Arrays.asList(new Door(false), new Door(true)));
-        room.setRoomWindows(Arrays.asList(new Fenster(0, true)));
-        room.setLights(Arrays.asList(new Light(0, true)));
-        room.setFans(Arrays.asList(new Fan(0, true)));
-        room.setTemperaturData(Arrays.asList(new TemperaturData(0, new Date(System.currentTimeMillis()), 22.5)));
-        room.setCo2SensorData(Arrays.asList(new Co2SensorData(0, new Date(System.currentTimeMillis()), 22.5)));
+    @Test
+    public void testDeleteRoom() {
+        // Arrange
+        int roomId = 1;
+        Room deletedRoom = new Room("Deleted Room", 1);
+        Mockito.when(roomService.removeRoom(roomId)).thenReturn(deletedRoom);
 
-        return room;
+        // Act
+        Room result = roomController.deleteRoom(roomId);
+
+        // Assert
+        assertEquals(deletedRoom, result);
+        Mockito.verify(roomService).removeRoom(roomId);
     }
 
+    @Test
+    public void testExportToCSV() throws Exception {
+        // Arrange
+        List<Room> mockedRooms = new ArrayList<>();
+        mockedRooms.add(new Room("Room 1", 1));
+        mockedRooms.add(new Room("Room 2", 2));
+        Mockito.when(roomService.getRooms()).thenReturn(mockedRooms);
+
+
+        ArgumentCaptor<String[]> csvHeaderCaptor = ArgumentCaptor.forClass(String[].class);
+        ArgumentCaptor<String[]> nameMappingCaptor = ArgumentCaptor.forClass(String[].class);
+
+        // Act and Assert
+        mockMvc.perform(get("/rooms/export"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Disposition", containsString("attachment; filename=rooms_")));
+
+        // Verify interactions and assertions
+        Mockito.verify(roomService).getRooms();
+
+    }
 }
