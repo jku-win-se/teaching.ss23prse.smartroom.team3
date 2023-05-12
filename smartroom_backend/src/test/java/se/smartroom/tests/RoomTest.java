@@ -1,0 +1,122 @@
+package se.smartroom.tests;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import se.smartroom.entities.Room;
+import se.smartroom.entities.data.Co2SensorData;
+import se.smartroom.entities.data.TemperaturData;
+import se.smartroom.entities.physicalDevice.Door;
+import se.smartroom.entities.physicalDevice.Fenster;
+import se.smartroom.entities.smartDevice.Fan;
+import se.smartroom.entities.smartDevice.Light;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(MockitoExtension.class)
+public class RoomTest {
+    @Test
+    public void testCo2SensorDataMethods() {
+        // Create an instance of DataContainer
+        Room dataContainer = new Room();
+
+        // Create sample lists of Co2SensorData objects
+        List<Co2SensorData> expectedCo2SensorData = new ArrayList<>();
+        expectedCo2SensorData.add(new Co2SensorData(1.23));
+        expectedCo2SensorData.add(new Co2SensorData(4.56));
+
+        // Set the sample lists using setCo2SensorData()
+        dataContainer.setCo2SensorData(expectedCo2SensorData);
+
+        // Retrieve the lists using getCo2SensorData()
+        List<Co2SensorData> actualCo2SensorData = dataContainer.getCo2SensorData();
+
+        // Assert that the retrieved lists match the expected lists
+        assertEquals(expectedCo2SensorData, actualCo2SensorData);
+    }
+
+    @Test
+    public void testTemperaturDataMethods() {
+        // Create an instance of DataContainer
+        Room dataContainer = new Room();
+
+        // Create sample lists of TemperaturData objects
+        List<TemperaturData> expectedTemperaturData = new ArrayList<>();
+        expectedTemperaturData.add(new TemperaturData(12.34));
+        expectedTemperaturData.add(new TemperaturData(56.78));
+
+        // Set the sample lists using setTemperaturData()
+        dataContainer.setTemperaturData(expectedTemperaturData);
+
+        // Retrieve the lists using getTemperaturData()
+        List<TemperaturData> actualTemperaturData = dataContainer.getTemperaturData();
+
+        // Assert that the retrieved lists match the expected lists
+        assertEquals(expectedTemperaturData, actualTemperaturData);
+    }
+
+    @Test
+    public void testToString() {
+        // Create an instance of Room
+        Room room = new Room();
+        room.setId(1);
+        room.setName("Living Room");
+        room.setSize(20);
+
+        List<Door> doors = new ArrayList<>();
+        doors.add(new Door(true));
+        List<Fenster> windows = new ArrayList<>();
+        windows.add(new Fenster(true));
+        List<Light> lights = new ArrayList<>();
+        lights.add(new Light(true));
+        List<Fan> fans = new ArrayList<>();
+        fans.add(new Fan(true));
+        windows.add(new Fenster(true));
+        List<Co2SensorData> co2SensorData = new ArrayList<>();
+        co2SensorData.add(new Co2SensorData(1.23));
+        co2SensorData.add(new Co2SensorData(4.56));
+
+        List<TemperaturData> temperaturData = new ArrayList<>();
+        temperaturData.add(new TemperaturData(12.34));
+        temperaturData.add(new TemperaturData(56.78));
+
+        room.setDoors(doors);
+        room.setRoomWindows(windows);
+        room.setFans(fans);
+        room.setLights(lights);
+        room.setCo2SensorData(co2SensorData);
+        room.setTemperaturData(temperaturData);
+
+        // Invoke the toString() method
+        String result = room.toString();
+
+        // Define the expected string representation
+        String expectedString = "Room{" +
+                "id=1, " +
+                "name='Living Room', " +
+                "size=20, " +
+                "doors="+ doors.toString()+", " +
+                "windows=" + windows.toString()+", " +
+                "lights=" + lights.toString()+", " +
+                "fans=" + fans.toString()+", " +
+                "co2SensorData=" + co2SensorData.toString() + ", " +
+                "temperaturData=" + temperaturData.toString() +
+                "}";
+
+        // Assert that the returned string matches the expected string
+        assertEquals(expectedString, result);
+
+        //hash methode testing
+        int expectedHashCode = Objects.hash(room.getId(), room.getName(), room.getSize(), room.getDoors(),
+                room.getRoomWindows(), room.getLights(), room.getFans(), room.getCo2SensorData(), room.getTemperaturData());
+
+        // Invoke the hashCode() method
+        int result2 = room.hashCode();
+
+        assertEquals(expectedHashCode,result2);
+    }
+}

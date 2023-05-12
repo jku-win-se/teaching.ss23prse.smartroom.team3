@@ -29,10 +29,14 @@
 
 <div id="main">
   <div class="topBar">
-    <div class="title">Room Overview</div>
+    <div class="centered-title">Room Overview</div>
     <li routerLinkActive="active" routerLink="/rooms/export">
-    <div class="button"><img src="../assets/Download.svg" alt="/rooms/export">
-      <a href="http://localhost:8080/rooms/export">Download Rooms</a></div>
+      <div class="button">
+        <a href="http://localhost:8080/rooms/export" class="link">
+          <img src="../assets/Download.svg" alt="/rooms/export">
+          <span class="button-text">Download Rooms</span>
+        </a>
+      </div>
     </li>
   </div>
   <div class="mainBody">
