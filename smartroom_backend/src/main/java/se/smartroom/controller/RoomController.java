@@ -53,6 +53,9 @@ public class RoomController {
         return roomService.removeRoom(id);
     }
 
+    @PutMapping("room/{id}/addValues")
+    public Room addValues(@PathVariable int id) { return roomService.addValues(id);}
+
 
     @GetMapping("/rooms/export")
     public void exportToCSV(HttpServletResponse response) throws IOException {

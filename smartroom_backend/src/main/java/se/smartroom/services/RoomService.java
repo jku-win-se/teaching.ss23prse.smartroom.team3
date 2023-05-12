@@ -3,6 +3,8 @@ package se.smartroom.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.smartroom.entities.Room;
+import se.smartroom.entities.data.Co2SensorData;
+import se.smartroom.entities.data.TemperaturData;
 import se.smartroom.repositories.RoomRepository;
 
 import java.util.ArrayList;
@@ -50,7 +52,16 @@ public class RoomService {
         return repository.save(existingRoom);
     }
 
+    public Room addValues(int id) {
+        Room room = repository.findById(id).orElse(null);
+        System.out.println("TEST");
+        System.out.println(room);
 
+        room.getCo2SensorData().add(new Co2SensorData(Math.random())); // TODO: Bereich checken
+        room.getTemperaturData().add(new TemperaturData(Math.random()));
+        return updateRoom(room);
+        //TODO: wo sind numberOfPeople?
+    }
 
     /**
      * Returns a list of all rooms

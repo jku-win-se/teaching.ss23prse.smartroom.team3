@@ -47,4 +47,11 @@ export class RoomDetailsComponent {
       this.router.navigate(['update-room/', this.id]);
   }
 
+  public addValues() {
+    this.roomService.addValues(this.id).subscribe((room) => {
+      this.router.navigate(['dashboard'])
+    });
+  }
+
+
 }

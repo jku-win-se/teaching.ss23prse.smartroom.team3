@@ -33,4 +33,9 @@ export class RoomService {
   public updateRoom(room: Room): Observable<Room> {
     return this.http.put<Room>(this.baseurl + 'room', room);
   }
+
+  public addValues(id: number): Observable<Room> {
+    return this.http.put<Room>(this.baseurl + 'room/' + id + '/addValues', null);
+  }
+
 }
