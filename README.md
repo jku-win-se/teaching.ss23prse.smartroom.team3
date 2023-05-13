@@ -13,7 +13,7 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 
 ## Projekdokumentation 
 
-[Project_Documentation_Team03.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11469425/Project_Documentation_Team03.docx)
+[Project_Documentation_Team03.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11469428/Project_Documentation_Team03.docx)
 
 
 ## Prototyp
@@ -26,18 +26,12 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 ![SmartHome - ERD](https://user-images.githubusercontent.com/127204960/231849737-aa34717e-7c87-4c80-a875-79d1e49e9fa2.jpeg)
 
 
-## Use Cases
-
-[UC-001.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11224808/UC-001.docx)
-
-[UC-002.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11224809/UC-002.docx)
-
-
-
-
 ### Project Structure
 #### Frontend
 Angular CLI app
 
 #### Backend
-Java Spring boot Server with MariaDB
+Java Spring boot Server mit MariaDB
+
+#### Quality Tools
+Jacoco and SonarQube
