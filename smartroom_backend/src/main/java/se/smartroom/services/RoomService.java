@@ -5,11 +5,16 @@ import org.springframework.stereotype.Service;
 import se.smartroom.entities.Room;
 import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.TemperaturData;
+import se.smartroom.entities.people.PeopleData;
 import se.smartroom.repositories.RoomRepository;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class RoomService {
@@ -57,10 +62,17 @@ public class RoomService {
         System.out.println("TEST");
         System.out.println(room);
 
-        room.getCo2SensorData().add(new Co2SensorData(Math.random())); // TODO: Bereich checken
-        room.getTemperaturData().add(new TemperaturData(Math.random()));
+        Random random = new Random();
+        int minValue = 10;
+        int maxValue = 25;
+
+        Timestamp randomTimestamp = new Timestamp(System.currentTimeMillis());
+
+        room.getCo2SensorData().add(new Co2SensorData(Math.random()));
+        room.getTemperaturData().add(new TemperaturData(random.nextDouble(maxValue - minValue + 1) + minValue));
+        room.getPeopleData().add(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1)));
+
         return updateRoom(room);
-        //TODO: wo sind numberOfPeople?
     }
 
     /**

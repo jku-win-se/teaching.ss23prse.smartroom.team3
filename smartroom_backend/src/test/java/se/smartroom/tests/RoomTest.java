@@ -6,6 +6,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import se.smartroom.entities.Room;
 import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.TemperaturData;
+import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Door;
 import se.smartroom.entities.physicalDevice.Fenster;
 import se.smartroom.entities.smartDevice.Fan;
@@ -84,12 +85,15 @@ public class RoomTest {
         temperaturData.add(new TemperaturData(12.34));
         temperaturData.add(new TemperaturData(56.78));
 
+        List<PeopleData> peopleData = new ArrayList<>();
+
         room.setDoors(doors);
         room.setRoomWindows(windows);
         room.setFans(fans);
         room.setLights(lights);
         room.setCo2SensorData(co2SensorData);
         room.setTemperaturData(temperaturData);
+        room.setPeopleData(peopleData);
 
         // Invoke the toString() method
         String result = room.toString();
@@ -100,11 +104,12 @@ public class RoomTest {
                 "name='Living Room', " +
                 "size=20, " +
                 "doors="+ doors.toString()+", " +
-                "windows=" + windows.toString()+", " +
+                "roomWindows=" + windows.toString()+", " +
                 "lights=" + lights.toString()+", " +
                 "fans=" + fans.toString()+", " +
                 "co2SensorData=" + co2SensorData.toString() + ", " +
-                "temperaturData=" + temperaturData.toString() +
+                "temperaturData=" + temperaturData.toString() + ", " +
+                "peopleData=" + "[]" +
                 "}";
 
         // Assert that the returned string matches the expected string
@@ -112,7 +117,7 @@ public class RoomTest {
 
         //hash methode testing
         int expectedHashCode = Objects.hash(room.getId(), room.getName(), room.getSize(), room.getDoors(),
-                room.getRoomWindows(), room.getLights(), room.getFans(), room.getCo2SensorData(), room.getTemperaturData());
+                room.getRoomWindows(), room.getLights(), room.getFans(), room.getCo2SensorData(), room.getTemperaturData(), room.getPeopleData());
 
         // Invoke the hashCode() method
         int result2 = room.hashCode();
