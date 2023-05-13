@@ -76,7 +76,12 @@
 			<version>2.4.0</version>
 		</dependency>
 
-
+		<!-- https://mvnrepository.com/artifact/org.sonarsource.sonar-packaging-maven-plugin/sonar-packaging-maven-plugin -->
+		<dependency>
+			<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+			<artifactId>sonar-packaging-maven-plugin</artifactId>
+			<version>1.21.0.505</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -94,6 +99,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+
 
 			<plugin>
 				<groupId>org.jacoco</groupId>
