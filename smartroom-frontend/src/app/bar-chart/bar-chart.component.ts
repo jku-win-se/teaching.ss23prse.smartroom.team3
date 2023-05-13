@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, SimpleChange	 } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange, Output, EventEmitter	 } from '@angular/core';
 //import Chart from 'chart.js/auto';
 import Chart, { ChartDataset } from 'chart.js/auto';
 import {Room, Fan, Light, Window, Door} from "../entities/entity";
+import { RoomDetailsComponent } from '../room/room-details/room-details.component';
 
 
 interface DataPoint {
@@ -71,7 +72,10 @@ export class BarChartComponent {
     ]
   };
 
-//  @Input() data: Room = {} as Room;
+ //@Input()  data_test!: any;
+ @Input()  room_data!: any;
+
+
 
   public chart: any;
   public readonly yAxisMin = 0;
@@ -79,7 +83,7 @@ export class BarChartComponent {
   public readonly yStep = 1;
 
   ngOnInit(): void {
-    console.log('OnInit - data:', this.data);
+    console.log('OnInit - data:', this.room_data);
 
     //light/fan/window/door.
     this.createChart();
@@ -90,7 +94,7 @@ export class BarChartComponent {
   constructor(){
   }
 
-
+/*
   ngOnChanges(changes: { [propName: string]: SimpleChange }) {
     if (changes['data']) {
       const change = changes['data'];
@@ -103,7 +107,7 @@ export class BarChartComponent {
       console.log(`'data' property changed. Current value: ${currentValue}, Previous value: ${previousValue}. First change? ${isFirstChange}`);
   
     }
-  }
+  }*/
 
 
 
@@ -311,7 +315,7 @@ export class BarChartComponent {
             display: true,
             title: {
               display: true,
-              text: 'Value',
+              text: '',
               color: 'White',
               font: {
                 family: "HelveticaNeueExtended",

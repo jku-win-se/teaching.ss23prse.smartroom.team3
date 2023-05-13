@@ -11,12 +11,13 @@
 
   <div>
     <h1>{{room.name}}</h1>
-    <h2>{{room.name}} has {{room.size}}m2.</h2>
+    <h2>{{room.name}} has {{room.size}}m<sup>2</sup>.</h2>
   </div>
 
-<!--<app-bar-chart [data]='room'></app-bar-chart>-->
+<app-bar-chart [room_data]='room'></app-bar-chart>
+<app-line-chart [room_data_line]='room'></app-line-chart>
 
-<app-bar-chart></app-bar-chart>
+
   <div *ngIf="room.doors.length > 0">
     <h2>Doors</h2>
     <h3>This room has {{room.doors.length}} doors.</h3>
