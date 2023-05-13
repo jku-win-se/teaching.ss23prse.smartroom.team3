@@ -11,6 +11,10 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 | K12105433  | Julian | Fuchs  | julian.fuchs0701@gmail.com | FuchsJulianGit  |
 | K12043518  | Manuel | Wiltz  | manuelwiltz@gmail.com | manuelwiltz |
 
+##Projekdokumentation 
+[Project_Documentation_Team03.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11469425/Project_Documentation_Team03.docx)
+
+
 ## Prototyp
 [SmartHome Prototyp](https://www.figma.com/proto/4ABS1OvW4rhJv6nCqljPL8/PR-SE---SmartHome?node-id=1-7&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A7)
 
