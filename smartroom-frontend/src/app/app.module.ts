@@ -17,6 +17,7 @@ import { RemoteDashboardComponent } from './remote/remote-dashboard/remote-dashb
 import { RemoteDetailsComponent } from './remote/remote-details/remote-details.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { AddValuesComponent } from './room/add-values/add-values.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { AddValuesComponent } from './room/add-values/add-values.component';
     RemoteDashboardComponent,
     RemoteDetailsComponent,
     LineChartComponent,
-    AddValuesComponent
+    AddValuesComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,

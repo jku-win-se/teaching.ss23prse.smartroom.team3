@@ -74,14 +74,7 @@ export class LineChartComponent {
             
             fill: false,
             /*data: [
-              { x: '2022-05-10', y: 22 },
-              { x: '2022-05-11', y: 25 },
-              { x: '2022-05-12', y: 24 },
-              { x: '2022-05-13', y: 23 },
-              { x: '2022-05-14', y: 25 },
-              { x: '2022-05-15', y: 27 },
-              { x: '2022-05-16', y: 26 },
-              { x: '2022-05-17', y: 24 },
+              { x: '2022-05-10', y: 22 }
             ],*/
             data: this.temperatureData,
             borderWidth: 2,
@@ -105,6 +98,7 @@ export class LineChartComponent {
             color: 'white',
           },
           legend: {
+            display: false,
             labels: {
               color: 'White',
               padding: 10,
