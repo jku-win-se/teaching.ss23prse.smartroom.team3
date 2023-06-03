@@ -1,6 +1,7 @@
 package se.smartroom.entities;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import se.smartroom.entities.data.TemperaturData;
 import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.people.PeopleData;
@@ -101,6 +102,7 @@ public class Room {
         this.doors = doors;
     }
 
+    @Transactional
     public List<Fenster> getRoomWindows() {
         return roomWindows;
     }
