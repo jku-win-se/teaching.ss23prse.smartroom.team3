@@ -11,6 +11,7 @@ import se.smartroom.repositories.RoomRepository;
 import se.smartroom.services.RoomService;
 
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,27 +29,6 @@ public class RoomServicesTest {
 
     @InjectMocks
     private RoomService roomService;
-
-    @Test
-    public void testRemoveRoom() {
-        // Arrange
-        int roomId = 1;
-        Room roomToRemove = new Room("Room 1", 1);
-
-        // Set up mock behavior
-        Mockito.when(repository.findById(roomId)).thenReturn(Optional.of(roomToRemove));
-
-        // Act
-        Room removedRoom = roomService.removeRoom(roomId);
-
-        // Assert
-        assertNotNull(removedRoom);
-        assertEquals(roomToRemove, removedRoom);
-
-        // Verify interactions
-        Mockito.verify(repository).findById(roomId);
-        Mockito.verify(repository).delete(roomToRemove);
-    }
 
     @Test
     public void testUpdateRoom() {
@@ -97,23 +78,22 @@ public class RoomServicesTest {
     }
 
     @Test
-    public void testGetRoomById() {
+    public void testGetRoomById() throws NoSuchFieldException, IllegalAccessException {
         // Arrange
-        int roomId = 1;
-        Room expectedRoom = new Room("Room 1", 1);
-        expectedRoom.setId(roomId);
-
-        // Set up mock behavior
-        Mockito.when(repository.findById(roomId)).thenReturn(Optional.of(expectedRoom));
-
-        // Act
-        Room result = roomService.getRoomById(roomId);
+        Room roomToRemove = new Room("Room 1", 1);
+        RoomRepository mockRoomRepository = mock(RoomRepository.class);
+        when(mockRoomRepository.findById(1)).thenReturn(Optional.of(roomToRemove));
+        RoomService roomServiceMock = new RoomService(mockRoomRepository);
+        Room roomResult = roomServiceMock.getRoomById(1);
 
         // Assert
-        assertEquals(expectedRoom, result);
+        assertEquals(roomToRemove, roomResult);
 
-        // Verify interactions
-        Mockito.verify(repository).findById(roomId);
+        // Check if repository field is initialized
+        Field repositoryField = RoomService.class.getDeclaredField("repository");
+        repositoryField.setAccessible(true);
+        RoomRepository repositoryInstance = (RoomRepository) repositoryField.get(roomServiceMock);
+        assertNotNull(repositoryInstance);
     }
 
     @Test

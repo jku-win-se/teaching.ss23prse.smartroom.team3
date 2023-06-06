@@ -11,6 +11,7 @@ import se.smartroom.entities.physicalDevice.Door;
 import se.smartroom.entities.physicalDevice.Fenster;
 import se.smartroom.entities.smartDevice.Fan;
 import se.smartroom.entities.smartDevice.Light;
+import se.smartroom.repositories.RoomRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class RoomTest {
     @Test
     public void testCo2SensorDataMethods() {
         // Create an instance of DataContainer
-        Room dataContainer = new Room();
+        Room dataContainer = new Room(RoomRepository.class);
 
         // Create sample lists of Co2SensorData objects
         List<Co2SensorData> expectedCo2SensorData = new ArrayList<>();
@@ -43,7 +44,7 @@ public class RoomTest {
     @Test
     public void testTemperaturDataMethods() {
         // Create an instance of DataContainer
-        Room dataContainer = new Room();
+        Room dataContainer = new Room(RoomRepository.class);
 
         // Create sample lists of TemperaturData objects
         List<TemperaturData> expectedTemperaturData = new ArrayList<>();
@@ -63,7 +64,7 @@ public class RoomTest {
     @Test
     public void testToString() {
         // Create an instance of Room
-        Room room = new Room();
+        Room room = new Room(RoomRepository.class);
         room.setId(1);
         room.setName("Living Room");
         room.setSize(20);

@@ -9,6 +9,7 @@ import se.smartroom.entities.physicalDevice.Door;
 import se.smartroom.entities.physicalDevice.Fenster;
 import se.smartroom.entities.smartDevice.Fan;
 import se.smartroom.entities.smartDevice.Light;
+import se.smartroom.repositories.RoomRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +45,7 @@ public class Room {
     @OneToMany(cascade = CascadeType.ALL)
     private List<PeopleData> peopleData;
 
-    public Room() {
+    public Room(Class<RoomRepository> roomRepositoryClass) {
     }
 
     public Room(String name, int size) {
