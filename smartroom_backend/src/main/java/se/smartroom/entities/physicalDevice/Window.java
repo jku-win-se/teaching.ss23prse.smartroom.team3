@@ -5,24 +5,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class Fenster {
-
+public class Window extends PhysicalDevice {
     @Id
     @GeneratedValue
     private int id;
 
-    private boolean open;
-
-    public Fenster() {
+    public Window() {
     }
 
-    public Fenster(boolean open) {
-        this.open = open;
+    public Window(boolean open) {
+        super(open);
     }
 
-    public Fenster(int id, boolean open) {
+    public Window(int id, boolean open) {
+        super(open);
         this.id = id;
-        this.open = open;
     }
 
     public int getId() {
@@ -33,19 +30,11 @@ public class Fenster {
         this.id = id;
     }
 
-    public boolean isOpen() {
-        return open;
-    }
-
-    public void setOpen(boolean open) {
-        this.open = open;
-    }
-
     @Override
     public String toString() {
-        return "Fenster{" +
+        return "Window{" +
                 "id=" + id +
-                ", open=" + open +
+                ", open=" + isOpen() +
                 '}';
     }
 }

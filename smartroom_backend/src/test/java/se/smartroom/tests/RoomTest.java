@@ -8,7 +8,7 @@ import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.TemperaturData;
 import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Door;
-import se.smartroom.entities.physicalDevice.Fenster;
+import se.smartroom.entities.physicalDevice.Window;
 import se.smartroom.entities.smartDevice.Fan;
 import se.smartroom.entities.smartDevice.Light;
 import se.smartroom.repositories.RoomRepository;
@@ -71,13 +71,13 @@ public class RoomTest {
 
         List<Door> doors = new ArrayList<>();
         doors.add(new Door(true));
-        List<Fenster> windows = new ArrayList<>();
-        windows.add(new Fenster(true));
+        List<Window> windows = new ArrayList<>();
+        windows.add(new Window(true));
         List<Light> lights = new ArrayList<>();
         lights.add(new Light(true));
         List<Fan> fans = new ArrayList<>();
         fans.add(new Fan(true));
-        windows.add(new Fenster(true));
+        windows.add(new Window(true));
         List<Co2SensorData> co2SensorData = new ArrayList<>();
         co2SensorData.add(new Co2SensorData(1.23));
         co2SensorData.add(new Co2SensorData(4.56));

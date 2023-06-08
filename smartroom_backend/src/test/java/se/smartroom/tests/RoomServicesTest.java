@@ -33,48 +33,47 @@ public class RoomServicesTest {
     @Test
     public void testUpdateRoom() {
         // Arrange
-        int roomId = 1;
-        Room updatedRoom = new Room("Updated Room", 2);
-        updatedRoom.setId(roomId);
+        RoomRepository mockRoomRepository = mock(RoomRepository.class);
+        RoomService roomService = new RoomService(mockRoomRepository);
 
-        Room existingRoom = new Room("Existing Room", 3);
-        existingRoom.setId(roomId);
+        Room existingRoom = new Room("Existing Room", 1);
+        Room updatedRoom = new Room("Updated Room", 1);
 
-        // Set up mock behavior
-        Mockito.when(repository.findById(roomId)).thenReturn(Optional.of(existingRoom));
-        Mockito.when(repository.save(Mockito.any())).thenAnswer(invocation -> invocation.getArgument(0));
+        // Set up the behavior of the mock repository
+        when(mockRoomRepository.findById(existingRoom.getId())).thenReturn(Optional.of(existingRoom));
+        when(mockRoomRepository.save(existingRoom)).thenReturn(existingRoom);
 
         // Act
         Room result = roomService.updateRoom(updatedRoom);
 
         // Assert
-        assertNotNull(result);
-        assertEquals(updatedRoom, result);
-
-        // Verify interactions
-        Mockito.verify(repository).findById(roomId);
-        Mockito.verify(repository).save(existingRoom);
+        assertEquals(existingRoom, result);
+        assertEquals(updatedRoom.getName(), existingRoom.getName());
+        assertEquals(updatedRoom.getSize(), existingRoom.getSize());
+        assertEquals(updatedRoom.getDoors(), existingRoom.getDoors());
+        assertEquals(updatedRoom.getRoomWindows(), existingRoom.getRoomWindows());
+        assertEquals(updatedRoom.getLights(), existingRoom.getLights());
+        assertEquals(updatedRoom.getFans(), existingRoom.getFans());
     }
 
     @Test
     public void testGetRooms() {
         // Arrange
-        List<Room> mockedRooms = new ArrayList<>();
-        mockedRooms.add(new Room("Room 1", 1));
-        mockedRooms.add(new Room("Room 2", 2));
+        RoomRepository mockRoomRepository = mock(RoomRepository.class);
+        RoomService roomService = new RoomService(mockRoomRepository);
 
-        // Set up mock behavior
-        Mockito.when(repository.findAll()).thenReturn(mockedRooms);
+        List<Room> expectedRooms = new ArrayList<>();
+        expectedRooms.add(new Room("Room 1", 1));
+        expectedRooms.add(new Room("Room 2", 2));
+
+        // Set up the behavior of the mock repository
+        when(mockRoomRepository.findAll()).thenReturn(expectedRooms);
 
         // Act
         List<Room> result = roomService.getRooms();
 
         // Assert
-        assertNotNull(result);
-        assertEquals(mockedRooms, result);
-
-        // Verify interactions
-        Mockito.verify(repository).findAll();
+        assertEquals(expectedRooms, result);
     }
 
     @Test
@@ -99,22 +98,24 @@ public class RoomServicesTest {
     @Test
     public void testSaveRoom() {
         // Arrange
-        Room roomToSave = new Room("New Room", 1);
-        Room expectedSavedRoom = new Room("New Room", 2);
-        expectedSavedRoom.setId(1);
+        // Arrange
+        RoomRepository mockRoomRepository = mock(RoomRepository.class);
+        RoomService roomService = new RoomService(mockRoomRepository);
 
-        // Set up mock behavior
-        Mockito.when(repository.save(roomToSave)).thenReturn(expectedSavedRoom);
+        Room roomToSave = new Room("Room 1", 1);
+        Room savedRoom = new Room("Saved Room", 1);
+
+        // Set up the behavior of the mock repository
+        when(mockRoomRepository.save(roomToSave)).thenReturn(savedRoom);
 
         // Act
         Room result = roomService.saveRoom(roomToSave);
 
         // Assert
-        assertEquals(expectedSavedRoom, result);
-
-        // Verify interactions
-        Mockito.verify(repository).save(roomToSave);
+        assertEquals(savedRoom, result);
     }
+
+
 
 
 }

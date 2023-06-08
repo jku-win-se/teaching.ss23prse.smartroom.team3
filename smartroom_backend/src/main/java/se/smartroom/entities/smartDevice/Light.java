@@ -5,24 +5,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class Light {
-
+public class Light extends SmartDevice {
     @Id
     @GeneratedValue
     private int id;
 
-    private boolean isOn;
-
     public Light() {
     }
 
-    public Light(boolean isOn) {
-        this.isOn = isOn;
+    public Light(boolean on) {
+        super(on);
     }
 
-    public Light(int id, boolean isOn) {
+    public Light(int id, boolean on) {
+        super(on);
         this.id = id;
-        this.isOn = isOn;
     }
 
     public int getId() {
@@ -33,19 +30,11 @@ public class Light {
         this.id = id;
     }
 
-    public boolean isIsOn() {
-        return isOn;
-    }
-
-    public void setIsOn(boolean on) {
-        this.isOn = on;
-    }
-
     @Override
     public String toString() {
         return "Light{" +
                 "id=" + id +
-                ", isOn=" + isOn +
+                ", on=" + isOn() +
                 '}';
     }
 }

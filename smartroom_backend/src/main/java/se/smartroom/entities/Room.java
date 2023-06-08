@@ -6,7 +6,7 @@ import se.smartroom.entities.data.TemperaturData;
 import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Door;
-import se.smartroom.entities.physicalDevice.Fenster;
+import se.smartroom.entities.physicalDevice.Window;
 import se.smartroom.entities.smartDevice.Fan;
 import se.smartroom.entities.smartDevice.Light;
 import se.smartroom.repositories.RoomRepository;
@@ -28,7 +28,7 @@ public class Room {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Door> doors;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Fenster> roomWindows;
+    private List<Window> roomWindows;
 
     // Smart devices of the room
     @OneToMany(cascade = CascadeType.ALL)
@@ -56,7 +56,7 @@ public class Room {
         );
     }
 
-    public Room(String name, int size, List<Door> doors, List<Fenster> roomWindows, List<Light> lights,
+    public Room(String name, int size, List<Door> doors, List<Window> roomWindows, List<Light> lights,
                 List<Fan> fans, List<Co2SensorData> co2SensorData, List<TemperaturData> temperaturData,
                 List<PeopleData> peopleData
     ) {
@@ -69,6 +69,10 @@ public class Room {
         this.co2SensorData = co2SensorData;
         this.temperaturData = temperaturData;
         this.peopleData = peopleData;
+    }
+
+    public Room() {
+
     }
 
     public int getId() {
@@ -104,11 +108,11 @@ public class Room {
     }
 
     @Transactional
-    public List<Fenster> getRoomWindows() {
+    public List<Window> getRoomWindows() {
         return roomWindows;
     }
 
-    public void setRoomWindows(List<Fenster> fensters) {
+    public void setRoomWindows(List<Window> fensters) {
         this.roomWindows = fensters;
     }
 

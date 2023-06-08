@@ -3,7 +3,6 @@ package se.smartroom.entities.physicalDevice;
 import java.util.Objects;
 
 public class PhysicalDevice {
-
     private boolean open;
 
     public PhysicalDevice() {

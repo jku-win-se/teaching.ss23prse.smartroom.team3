@@ -9,7 +9,7 @@ import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.TemperaturData;
 import se.smartroom.entities.environment.EnvironmentData;
 import se.smartroom.entities.people.PeopleData;
-import se.smartroom.entities.physicalDevice.Fenster;
+import se.smartroom.entities.physicalDevice.Window;
 import se.smartroom.repositories.EnvironmentDataRepository;
 import se.smartroom.repositories.RoomRepository;
 
@@ -82,7 +82,7 @@ public class RoomService {
         Timestamp randomTimestamp = new Timestamp(System.currentTimeMillis());
 
         room.getCo2SensorData().add(new Co2SensorData(Math.random()));
-        room.getTemperaturData().add(new TemperaturData(random.nextDouble(maxValue - minValue + 1) + minValue));
+        room.getTemperaturData().add(new TemperaturData(random.nextDouble(maxValue - minValue + 1.0) + minValue));
         room.getPeopleData().add(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1)));
 
         return updateRoom(room);
@@ -104,7 +104,7 @@ public class RoomService {
             List<Room> updatedRooms = rooms.stream().map(room -> {
                 int numOpenWindows = 0;
                 if (!room.getRoomWindows().isEmpty()) {
-                    numOpenWindows = room.getRoomWindows().stream().filter(Fenster::isOpen).toList().size();
+                    numOpenWindows = room.getRoomWindows().stream().filter(Window::isOpen).toList().size();
                 }
                 int numPeople = 0;
                 if (room.getPeopleData().size() > 0) {

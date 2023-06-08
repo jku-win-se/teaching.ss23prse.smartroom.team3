@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.smartroom.entities.physicalDevice.Door;
-import se.smartroom.entities.physicalDevice.Fenster;
+import se.smartroom.entities.physicalDevice.Window;
 import se.smartroom.entities.physicalDevice.PhysicalDevice;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -104,7 +104,7 @@ public class EntityPhysicalDeviceTest {
     @Test
     public void testConstructorAndGettersSetters3() {
         // Create an instance of Door using the constructor
-        Fenster window = new Fenster(true);
+        Window window = new Window(true);
 
         // Assert that the isOpen method returns the expected value
         assertTrue(window.isOpen());
@@ -119,16 +119,16 @@ public class EntityPhysicalDeviceTest {
     @Test
     public void testToString3() {
         // Create an instance of Door
-        Fenster window = new Fenster(1, true);
+        Window window = new Window(1, true);
 
         // Assert that the toString method returns the expected string representation
-        assertEquals("Fenster{id=1, open=true}", window.toString());
+        assertEquals("Window{id=1, open=true}", window.toString());
     }
 
     @Test
     public void testGetIdAndSetId2() {
         // Create an instance of MyClass
-        Fenster window = new Fenster(1, true);
+        Window window = new Window(1, true);
 
         // Set a value for the ID using the setId() method
         int expectedId = 123;
