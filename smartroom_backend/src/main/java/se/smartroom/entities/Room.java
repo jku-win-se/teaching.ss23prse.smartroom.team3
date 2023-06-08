@@ -2,7 +2,7 @@ package se.smartroom.entities;
 
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import se.smartroom.entities.data.TemperaturData;
+import se.smartroom.entities.data.TemperatureData;
 import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Door;
@@ -40,7 +40,7 @@ public class Room {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Co2SensorData> co2SensorData;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<TemperaturData> temperaturData;
+    private List<TemperatureData> temperaturData;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<PeopleData> peopleData;
@@ -57,7 +57,7 @@ public class Room {
     }
 
     public Room(String name, int size, List<Door> doors, List<Window> roomWindows, List<Light> lights,
-                List<Fan> fans, List<Co2SensorData> co2SensorData, List<TemperaturData> temperaturData,
+                List<Fan> fans, List<Co2SensorData> co2SensorData, List<TemperatureData> temperaturData,
                 List<PeopleData> peopleData
     ) {
         this.name = name;
@@ -140,11 +140,11 @@ public class Room {
         this.co2SensorData = co2SensorData;
     }
 
-    public List<TemperaturData> getTemperaturData() {
+    public List<TemperatureData> getTemperaturData() {
         return temperaturData;
     }
 
-    public void setTemperaturData(List<TemperaturData> temperaturData) {
+    public void setTemperaturData(List<TemperatureData> temperaturData) {
         this.temperaturData = temperaturData;
     }
 

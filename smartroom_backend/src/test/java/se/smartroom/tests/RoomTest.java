@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.smartroom.entities.Room;
 import se.smartroom.entities.data.Co2SensorData;
-import se.smartroom.entities.data.TemperaturData;
+import se.smartroom.entities.data.TemperatureData;
 import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Door;
 import se.smartroom.entities.physicalDevice.Window;
@@ -47,15 +47,15 @@ public class RoomTest {
         Room dataContainer = new Room(RoomRepository.class);
 
         // Create sample lists of TemperaturData objects
-        List<TemperaturData> expectedTemperaturData = new ArrayList<>();
-        expectedTemperaturData.add(new TemperaturData(12.34));
-        expectedTemperaturData.add(new TemperaturData(56.78));
+        List<TemperatureData> expectedTemperaturData = new ArrayList<>();
+        expectedTemperaturData.add(new TemperatureData(12.34));
+        expectedTemperaturData.add(new TemperatureData(56.78));
 
         // Set the sample lists using setTemperaturData()
         dataContainer.setTemperaturData(expectedTemperaturData);
 
         // Retrieve the lists using getTemperaturData()
-        List<TemperaturData> actualTemperaturData = dataContainer.getTemperaturData();
+        List<TemperatureData> actualTemperaturData = dataContainer.getTemperaturData();
 
         // Assert that the retrieved lists match the expected lists
         assertEquals(expectedTemperaturData, actualTemperaturData);
@@ -82,9 +82,9 @@ public class RoomTest {
         co2SensorData.add(new Co2SensorData(1.23));
         co2SensorData.add(new Co2SensorData(4.56));
 
-        List<TemperaturData> temperaturData = new ArrayList<>();
-        temperaturData.add(new TemperaturData(12.34));
-        temperaturData.add(new TemperaturData(56.78));
+        List<TemperatureData> temperaturData = new ArrayList<>();
+        temperaturData.add(new TemperatureData(12.34));
+        temperaturData.add(new TemperatureData(56.78));
 
         List<PeopleData> peopleData = new ArrayList<>();
 

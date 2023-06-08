@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-public class TemperaturData extends DataInterface {
+public class TemperatureData extends DataInterface {
 
     @Id
     @GeneratedValue
@@ -16,30 +16,30 @@ public class TemperaturData extends DataInterface {
 
     private Double temperaturValue;
 
-    public TemperaturData() {
+    public TemperatureData() {
     }
 
-    public TemperaturData(Double temperaturValue) {
+    public TemperatureData(Double temperaturValue) {
         super();
         this.temperaturValue = temperaturValue;
     }
 
-    public TemperaturData(Date timestamp, Double temperaturValue) {
+    public TemperatureData(Date timestamp, Double temperaturValue) {
         super(timestamp);
         this.temperaturValue = temperaturValue;
     }
 
-    public TemperaturData(int id, Date timestamp, Double temperaturValue) {
+    public TemperatureData(int id, Date timestamp, Double temperaturValue) {
         super(timestamp);
         this.id = id;
         this.temperaturValue = temperaturValue;
     }
 
-    public Double getTemperaturValue() {
+    public Double getTemperatureValue() {
         return temperaturValue;
     }
 
-    public void setTemperaturValue(Double temperaturValue) {
+    public void setTemperatureValue(Double temperaturValue) {
         this.temperaturValue = temperaturValue;
     }
 
@@ -56,7 +56,7 @@ public class TemperaturData extends DataInterface {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        TemperaturData that = (TemperaturData) o;
+        TemperatureData that = (TemperatureData) o;
         return id == that.id && Objects.equals(temperaturValue, that.temperaturValue);
     }
 

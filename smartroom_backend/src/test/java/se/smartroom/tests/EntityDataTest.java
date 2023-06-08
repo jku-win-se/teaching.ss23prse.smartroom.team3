@@ -4,7 +4,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.DataInterface;
-import se.smartroom.entities.data.TemperaturData;
+import se.smartroom.entities.data.TemperatureData;
 import org.junit.jupiter.api.Test;
 import java.sql.Date;
 
@@ -151,36 +151,36 @@ public class EntityDataTest {
         Double temperaturValue = 25.0;
 
         //Constructor with one parameter
-        TemperaturData temperaturData = new TemperaturData(temperaturValue);
+        TemperatureData temperaturData = new TemperatureData(temperaturValue);
 
         assertNotNull(temperaturData.getTimestamp());
 
         // Assert that the specific fields are set correctly
-        assertEquals(temperaturValue, temperaturData.getTemperaturValue());
+        assertEquals(temperaturValue, temperaturData.getTemperatureValue());
 
         //Constructor with two parameters
-        TemperaturData temperaturData1 = new TemperaturData(timestamp, temperaturValue);
+        TemperatureData temperaturData1 = new TemperatureData(timestamp, temperaturValue);
         assertNotNull(temperaturData1.getTimestamp());
         // Assert that the inherited fields are set correctly
         assertEquals(timestamp, temperaturData1.getTimestamp());
 
         // Assert that the specific field is set correctly
-        assertEquals(temperaturValue, temperaturData1.getTemperaturValue());
+        assertEquals(temperaturValue, temperaturData1.getTemperatureValue());
 
         //Constructor with three parameters
-        TemperaturData temperaturData2 = new TemperaturData(id, timestamp, temperaturValue);
+        TemperatureData temperaturData2 = new TemperatureData(id, timestamp, temperaturValue);
         // Assert that the superclass constructor is called
         assertNotNull(temperaturData2.getTimestamp());
 
         // Assert that the specific fields are set correctly
         assertEquals(id, temperaturData2.getId());
-        assertEquals(temperaturValue, temperaturData2.getTemperaturValue());
+        assertEquals(temperaturValue, temperaturData2.getTemperatureValue());
     }
 
     @Test
     public void testSetters3() {
         // Create an instance of TemperaturData using the default constructor
-        TemperaturData temperaturData = new TemperaturData();
+        TemperatureData temperaturData = new TemperatureData();
 
         // Create a Date object to use in the test
         Date timestamp = new Date(System.currentTimeMillis());
@@ -190,19 +190,19 @@ public class EntityDataTest {
         temperaturData.setTimestamp(timestamp);
 
         // Set the specific field using the setter method from TemperaturData
-        temperaturData.setTemperaturValue(temperaturValue);
+        temperaturData.setTemperatureValue(temperaturValue);
 
         // Assert that the inherited field is set correctly
         assertEquals(timestamp, temperaturData.getTimestamp());
 
         // Assert that the specific field is set correctly
-        assertEquals(temperaturValue, temperaturData.getTemperaturValue());
+        assertEquals(temperaturValue, temperaturData.getTemperatureValue());
     }
 
     @Test
     public void testToString3() {
         // Create an instance of TemperaturData using the default constructor
-        TemperaturData temperaturData = new TemperaturData();
+        TemperatureData temperaturData = new TemperatureData();
 
         // Assert that the toString method doesn't return null
         assertNotNull(temperaturData.toString());
@@ -213,8 +213,8 @@ public class EntityDataTest {
         // Create two instances of TemperaturData with the same values
         Date timestamp = new Date(System.currentTimeMillis());
         Double temperaturValue = 25.0;
-        TemperaturData temperaturData1 = new TemperaturData(timestamp, temperaturValue);
-        TemperaturData temperaturData2 = new TemperaturData(timestamp, temperaturValue);
+        TemperatureData temperaturData1 = new TemperatureData(timestamp, temperaturValue);
+        TemperatureData temperaturData2 = new TemperatureData(timestamp, temperaturValue);
 
         // Assert that the objects are considered equal and have the same hash code
         assertEquals(temperaturData1, temperaturData2);
