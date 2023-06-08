@@ -12,11 +12,11 @@ public class SmartDevice {
         this.on = on;
     }
 
-    protected boolean isOn() {
+    public boolean isOn() {
         return on;
     }
 
-    protected void setOn(boolean on) {
+    public void setOn(boolean on) {
         this.on = on;
     }
 

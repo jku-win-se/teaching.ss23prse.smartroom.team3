@@ -14,33 +14,33 @@ public class TemperatureData extends DataInterface {
     @GeneratedValue
     private int id;
 
-    private Double temperaturValue;
+    private Double temperatureValue;
 
     public TemperatureData() {
     }
 
-    public TemperatureData(Double temperaturValue) {
+    public TemperatureData(Double temperatureValue) {
         super();
-        this.temperaturValue = temperaturValue;
+        this.temperatureValue = temperatureValue;
     }
 
-    public TemperatureData(Date timestamp, Double temperaturValue) {
+    public TemperatureData(Date timestamp, Double temperatureValue) {
         super(timestamp);
-        this.temperaturValue = temperaturValue;
+        this.temperatureValue = temperatureValue;
     }
 
-    public TemperatureData(int id, Date timestamp, Double temperaturValue) {
+    public TemperatureData(int id, Date timestamp, Double temperatureValue) {
         super(timestamp);
         this.id = id;
-        this.temperaturValue = temperaturValue;
+        this.temperatureValue = temperatureValue;
     }
 
     public Double getTemperatureValue() {
-        return temperaturValue;
+        return temperatureValue;
     }
 
     public void setTemperatureValue(Double temperaturValue) {
-        this.temperaturValue = temperaturValue;
+        this.temperatureValue = temperaturValue;
     }
 
     public int getId() {
@@ -57,19 +57,19 @@ public class TemperatureData extends DataInterface {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         TemperatureData that = (TemperatureData) o;
-        return id == that.id && Objects.equals(temperaturValue, that.temperaturValue);
+        return id == that.id && Objects.equals(temperatureValue, that.temperatureValue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, temperaturValue);
+        return Objects.hash(super.hashCode(), id, temperatureValue);
     }
 
     @Override
     public String toString() {
         return "Co2SensorData{" +
                 "id=" + id +
-                ", temperaturValue=" + temperaturValue +
+                ", temperaturValue=" + temperatureValue +
                 '}';
     }
 }

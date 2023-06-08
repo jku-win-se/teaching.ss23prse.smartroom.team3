@@ -144,7 +144,7 @@ public class Room {
         return temperatureData;
     }
 
-    public void setTemperaturData(List<TemperatureData> temperatureData) {
+    public void setTemperatureData(List<TemperatureData> temperatureData) {
         this.temperatureData = temperatureData;
     }
 

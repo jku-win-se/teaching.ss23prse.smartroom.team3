@@ -148,33 +148,33 @@ public class EntityDataTest {
         // Create a Date object to use in the test
         Date timestamp = new Date(System.currentTimeMillis());
         int id = 1;
-        Double temperaturValue = 25.0;
+        Double temperatureValue = 25.0;
 
         //Constructor with one parameter
-        TemperatureData temperaturData = new TemperatureData(temperaturValue);
+        TemperatureData temperatureData = new TemperatureData(temperatureValue);
 
-        assertNotNull(temperaturData.getTimestamp());
+        assertNotNull(temperatureData.getTimestamp());
 
         // Assert that the specific fields are set correctly
-        assertEquals(temperaturValue, temperaturData.getTemperatureValue());
+        assertEquals(temperatureValue, temperatureData.getTemperatureValue());
 
         //Constructor with two parameters
-        TemperatureData temperaturData1 = new TemperatureData(timestamp, temperaturValue);
-        assertNotNull(temperaturData1.getTimestamp());
+        TemperatureData temperatureData1 = new TemperatureData(timestamp, temperatureValue);
+        assertNotNull(temperatureData1.getTimestamp());
         // Assert that the inherited fields are set correctly
-        assertEquals(timestamp, temperaturData1.getTimestamp());
+        assertEquals(timestamp, temperatureData1.getTimestamp());
 
         // Assert that the specific field is set correctly
-        assertEquals(temperaturValue, temperaturData1.getTemperatureValue());
+        assertEquals(temperatureValue, temperatureData1.getTemperatureValue());
 
         //Constructor with three parameters
-        TemperatureData temperaturData2 = new TemperatureData(id, timestamp, temperaturValue);
+        TemperatureData temperaturData2 = new TemperatureData(id, timestamp, temperatureValue);
         // Assert that the superclass constructor is called
         assertNotNull(temperaturData2.getTimestamp());
 
         // Assert that the specific fields are set correctly
         assertEquals(id, temperaturData2.getId());
-        assertEquals(temperaturValue, temperaturData2.getTemperatureValue());
+        assertEquals(temperatureValue, temperaturData2.getTemperatureValue());
     }
 
     @Test

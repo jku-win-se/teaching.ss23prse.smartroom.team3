@@ -72,7 +72,6 @@ public class RoomService {
 
     public Room addValues(int id) {
         Room room = repository.findById(id).orElse(null);
-        System.out.println("TEST");
         System.out.println(room);
 
         Random random = new Random();
@@ -145,7 +144,7 @@ public class RoomService {
 
                 List<TemperatureData> roomsTempData = room.getTemperatureData();
                 roomsTempData.add(newTemperaturData);
-                room.setTemperaturData(roomsTempData);
+                room.setTemperatureData(roomsTempData);
 
                 List<Co2SensorData> roomsC02Data = room.getCo2SensorData();
                 roomsC02Data.add(co2SensorData);

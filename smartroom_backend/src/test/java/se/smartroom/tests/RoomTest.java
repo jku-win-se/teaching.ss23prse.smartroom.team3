@@ -14,13 +14,73 @@ import se.smartroom.entities.smartDevice.Light;
 import se.smartroom.repositories.RoomRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class RoomTest {
+
+
+    @Test
+    public void testConstructorWithParameters() {
+        // Arrange
+        String expectedName = "Room 1";
+        int expectedSize = 100;
+        Door door = new Door();
+        Window window = new Window();
+        Light light = new Light();
+        Fan fan = new Fan();
+        Co2SensorData co2SensorData = new Co2SensorData();
+        TemperatureData temperatureData = new TemperatureData();
+        PeopleData peopleData = new PeopleData();
+
+        // Act
+        Room room = new Room(expectedName, expectedSize,
+                Collections.singletonList(door),
+                Collections.singletonList(window),
+                Collections.singletonList(light),
+                Collections.singletonList(fan),
+                Collections.singletonList(co2SensorData),
+                Collections.singletonList(temperatureData),
+                Collections.singletonList(peopleData)
+        );
+
+        // Assert
+        assertEquals(expectedName, room.getName());
+        assertEquals(expectedSize, room.getSize());
+        assertEquals(Collections.singletonList(door), room.getDoors());
+        assertEquals(Collections.singletonList(window), room.getRoomWindows());
+        assertEquals(Collections.singletonList(light), room.getLights());
+        assertEquals(Collections.singletonList(fan), room.getFans());
+        assertEquals(Collections.singletonList(co2SensorData), room.getCo2SensorData());
+        assertEquals(Collections.singletonList(temperatureData), room.getTemperatureData());
+        assertEquals(Collections.singletonList(peopleData), room.getPeopleData());
+    }
+
+    @Test
+    public void testConstructorWithoutParameters() {
+        // Arrange
+        String expectedName = "Room 1";
+        int expectedSize = 100;
+
+        // Act
+        Room room = new Room(expectedName, expectedSize);
+
+        // Assert
+        assertEquals(expectedName, room.getName());
+        assertEquals(expectedSize, room.getSize());
+        assertEquals(Collections.emptyList(), room.getDoors());
+        assertEquals(Collections.emptyList(), room.getRoomWindows());
+        assertEquals(Collections.emptyList(), room.getLights());
+        assertEquals(Collections.emptyList(), room.getFans());
+        assertEquals(Collections.emptyList(), room.getCo2SensorData());
+        assertEquals(Collections.emptyList(), room.getTemperatureData());
+        assertEquals(Collections.emptyList(), room.getPeopleData());
+    }
     @Test
     public void testCo2SensorDataMethods() {
         // Create an instance of DataContainer
@@ -52,7 +112,7 @@ public class RoomTest {
         expectedTemperaturData.add(new TemperatureData(56.78));
 
         // Set the sample lists using setTemperaturData()
-        dataContainer.setTemperaturData(expectedTemperaturData);
+        dataContainer.setTemperatureData(expectedTemperaturData);
 
         // Retrieve the lists using getTemperaturData()
         List<TemperatureData> actualTemperaturData = dataContainer.getTemperatureData();
@@ -93,7 +153,7 @@ public class RoomTest {
         room.setFans(fans);
         room.setLights(lights);
         room.setCo2SensorData(co2SensorData);
-        room.setTemperaturData(temperaturData);
+        room.setTemperatureData(temperaturData);
         room.setPeopleData(peopleData);
 
         // Invoke the toString() method
@@ -124,5 +184,45 @@ public class RoomTest {
         int result2 = room.hashCode();
 
         assertEquals(expectedHashCode,result2);
+    }
+
+    @Test
+    public void testEquals() {
+        // Arrange
+        Room room1 = new Room("Room 1", 100,
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList()
+        );
+
+        Room room2 = new Room("Room 1", 100,
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList()
+        );
+
+        Room room3 = new Room("Room 2", 200,
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                Collections.emptyList()
+        );
+
+        // Act & Assert
+        assertEquals(room1, room2); // The two instances should be considered equal
+        assertEquals(room2, room1); // The order of comparison should not matter
+        assertNotEquals(room1, room3); // The two instances should not be considered equal
+        assertNotEquals(room3, room1); // The order of comparison should not matter
     }
 }

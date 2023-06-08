@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.smartroom.entities.Room;
 import se.smartroom.repositories.RoomRepository;
@@ -15,12 +16,13 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class RoomServicesTest {
@@ -113,6 +115,35 @@ public class RoomServicesTest {
 
         // Assert
         assertEquals(savedRoom, result);
+    }
+
+    @Test
+    public void testRemoveRoom_ExistingRoom_ReturnsRoom() {
+        // Arrange
+        int roomId = 1;
+        Room room = new Room("Room 1", 100);
+
+        when(repository.findById(roomId)).thenReturn(Optional.of(room));
+
+        // Act
+        Room removedRoom = roomService.removeRoom(roomId);
+
+        // Assert
+        assertEquals(room, removedRoom);
+    }
+
+    @Test
+    public void testRemoveRoom_NonExistingRoom_ReturnsNull() {
+        // Arrange
+        int roomId = 1;
+
+        when(repository.findById(roomId)).thenReturn(Optional.empty());
+
+        // Act
+        Room removedRoom = roomService.removeRoom(roomId);
+
+        // Assert
+        assertNull(removedRoom);
     }
 
 
