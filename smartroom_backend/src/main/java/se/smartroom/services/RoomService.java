@@ -82,7 +82,7 @@ public class RoomService {
         Timestamp randomTimestamp = new Timestamp(System.currentTimeMillis());
 
         room.getCo2SensorData().add(new Co2SensorData(Math.random()));
-        room.getTemperaturData().add(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue));
+        room.getTemperatureData().add(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue));
         room.getPeopleData().add(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1)));
 
         return updateRoom(room);
@@ -128,7 +128,7 @@ public class RoomService {
                 if (numOpenWindows > 0) {
                     temperatureAdjustment -= 1.0;
                 }
-                if (numPeople > 0 && environmentData.getOutsideTemperature() > room.getTemperaturData().get(0).getTemperatureValue()) {
+                if (numPeople > 0 && environmentData.getOutsideTemperature() > room.getTemperatureData().get(0).getTemperatureValue()) {
                     temperatureAdjustment += 1.0;
                 }
 
@@ -143,7 +143,7 @@ public class RoomService {
                 co2SensorData.setcO2value(newCo2Value);
                 co2SensorData.setTimestamp(timestamp);
 
-                List<TemperatureData> roomsTempData = room.getTemperaturData();
+                List<TemperatureData> roomsTempData = room.getTemperatureData();
                 roomsTempData.add(newTemperaturData);
                 room.setTemperaturData(roomsTempData);
 

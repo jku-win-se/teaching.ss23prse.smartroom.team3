@@ -55,7 +55,7 @@ public class RoomTest {
         dataContainer.setTemperaturData(expectedTemperaturData);
 
         // Retrieve the lists using getTemperaturData()
-        List<TemperatureData> actualTemperaturData = dataContainer.getTemperaturData();
+        List<TemperatureData> actualTemperaturData = dataContainer.getTemperatureData();
 
         // Assert that the retrieved lists match the expected lists
         assertEquals(expectedTemperaturData, actualTemperaturData);
@@ -118,7 +118,7 @@ public class RoomTest {
 
         //hash methode testing
         int expectedHashCode = Objects.hash(room.getId(), room.getName(), room.getSize(), room.getDoors(),
-                room.getRoomWindows(), room.getLights(), room.getFans(), room.getCo2SensorData(), room.getTemperaturData(), room.getPeopleData());
+                room.getRoomWindows(), room.getLights(), room.getFans(), room.getCo2SensorData(), room.getTemperatureData(), room.getPeopleData());
 
         // Invoke the hashCode() method
         int result2 = room.hashCode();
