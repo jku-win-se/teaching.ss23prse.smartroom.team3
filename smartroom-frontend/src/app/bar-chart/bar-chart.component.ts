@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChange, Output, EventEmitter	 } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange, Output, EventEmitter } from '@angular/core';
 //import Chart from 'chart.js/auto';
 import Chart, { ChartDataset } from 'chart.js/auto';
 import {Room, Fan, Light, Window, Door} from "../entities/entity";
@@ -19,7 +19,7 @@ interface DataPoint {
 export class BarChartComponent {
   //@Input() data: 
   
-   data: Room = {
+ /*  data: Room = {
     id: 1,
     name: "test",
     size: 345,
@@ -32,24 +32,24 @@ export class BarChartComponent {
       { id: 6, open: true }
     ],
     fans: [
-      { id: 1, isOn: true },
-      { id: 2, isOn: true },
-      { id: 3, isOn: true },
-      { id: 4, isOn: true },
-      { id: 5, isOn: true },
-      { id: 6, isOn: true },
-      { id: 7, isOn: true }
+      { id: 1, on: true },
+      { id: 2, on: true },
+      { id: 3, on: true },
+      { id: 4, on: true },
+      { id: 5, on: true },
+      { id: 6, on: true },
+      { id: 7, on: true }
     ],
     lights: [
-      { id: 5, isOn: true },
-      { id: 4, isOn: true },
-      { id: 1, isOn: true },
-      { id: 2, isOn: true },
-      { id: 3, isOn: true },
-      { id: 6, isOn: true },
-      { id: 7, isOn: true },
-      { id: 8, isOn: true },
-      { id: 9, isOn: true }
+      { id: 5, on: true },
+      { id: 4, on: true },
+      { id: 1, on: true },
+      { id: 2, on: true },
+      { id: 3, on: true },
+      { id: 6, on: true },
+      { id: 7, on: true },
+      { id: 8, on: true },
+      { id: 9, on: true }
     ],
     roomWindows: [
       { id: 1, open: true },
@@ -70,12 +70,12 @@ export class BarChartComponent {
       { timestamp: new Date('2023-05-13'), id: 3, temperaturValue: 0.34226200109755855 },
       { timestamp: new Date('2023-05-13'), id: 5, temperaturValue: 0.17730462355374066 }
     ]
-  };
+  };*/
 
  //@Input()  data_test!: any;
- @Input()  room_data!: any;
+ @Input() room_data!: Room;
 
-
+data = this.room_data;
 
   public chart: any;
   public readonly yAxisMin = 0;
@@ -83,12 +83,20 @@ export class BarChartComponent {
   public readonly yStep = 1;
 
   ngOnInit(): void {
-    console.log('OnInit - data:', this.room_data);
+    console.log('OnInit - data- finally!:', this.room_data);
 
     //light/fan/window/door.
     this.createChart();
     this.processData();
-    //setInterval(() => this.updateChart(), 100000);
+  }
+
+  public updateChartData(){
+    if(this.chart){
+      this.chart.destroy();
+    }
+
+    this.createChart();
+    this.processData();
   }
 
   constructor(){
@@ -108,9 +116,6 @@ export class BarChartComponent {
   
     }
   }*/
-
-
-
   /*createChart(){
      
     const colors = {
@@ -299,7 +304,7 @@ export class BarChartComponent {
             ticks: {
               stepSize: 0.2,
               color: 'White',
-              padding: 10,
+              padding: 0,
               font: {
                 family: "HelveticaNeueExtended",
                 size: 12
@@ -324,7 +329,9 @@ export class BarChartComponent {
               },
               padding: {
                 top: 12,
-                bottom: 12
+                bottom: 12,
+              
+
               }
             }
           }, 
@@ -344,7 +351,9 @@ export class BarChartComponent {
         }
       }
     });
-    this.chart.canvas.parentNode.style.height = "300px";
+    //this.chart.canvas.parentNode.style.height = "500px";
+      this.chart.canvas.parentNode.style.width = "800px";
+      this.updateChart();
   }
   
 
@@ -356,41 +365,41 @@ export class BarChartComponent {
 
   private processData() {
     // Process fan data points
-    this.data.fans.forEach((fan: Fan) => {
+    this.room_data.fans.forEach((fan: Fan) => {
       const existingDataPointIndex = this.fanDataPoints.findIndex(dataPoint => dataPoint.label === "Fan_" + fan.id);
 
       if (existingDataPointIndex !== -1) {
-        this.fanDataPoints[existingDataPointIndex].value = fan.isOn;
+        this.fanDataPoints[existingDataPointIndex].value = fan.on;
 
         const dataset = this.chart.data.datasets[0];
         const labelIndex = this.chart.dataset.labels.indexOf("Fan_"+fan.id);
-        this.chart.dataset.data[labelIndex] = [fan.isOn ? 1:0];
+        this.chart.dataset.data[labelIndex] = [fan.on ? 1:0];
       } else {
-       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.isOn });
-        this.chart.data.datasets[0].data.push([fan.isOn ? 1:0]);
+       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.on });
+        this.chart.data.datasets[0].data.push([fan.on ? 1:0]);
         this.chart.data.labels.push("Fan_"+fan.id);
       }
     });
 
     // Process light data points
-    this.data.lights.forEach((light: Light) => {
+    this.room_data.lights.forEach((light: Light) => {
       const existingDataPointIndex = this.lightDataPoints.findIndex(dataPoint => dataPoint.label === "Light_" + light.id);
 
       if (existingDataPointIndex !== -1) {
-        this.lightDataPoints[existingDataPointIndex].value = light.isOn;
+        this.lightDataPoints[existingDataPointIndex].value = light.on;
 
         const dataset = this.chart.data.datasets[0];
         const labelIndex = this.chart.dataset.labels.indexOf("Light_"+light.id);
-        this.chart.dataset.data[labelIndex] = [light.isOn ? 1:0];
+        this.chart.dataset.data[labelIndex] = [light.on ? 1:0];
       } else {
-       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.isOn });
-        this.chart.data.datasets[0].data.push([light.isOn ? 1:0]);
+       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.on });
+        this.chart.data.datasets[0].data.push([light.on ? 1:0]);
         this.chart.data.labels.push("Light_"+light.id);
       }
     });
 
 
-    this.data.roomWindows.forEach((window: Window) => {
+    this.room_data.roomWindows.forEach((window: Window) => {
       const existingDataPointIndex = this.windowDataPoints.findIndex(dataPoint => dataPoint.label === "Window_" + window.id);
 
       if (existingDataPointIndex !== -1) {
@@ -400,13 +409,13 @@ export class BarChartComponent {
         const labelIndex = this.chart.dataset.labels.indexOf("Window_"+window.id);
         this.chart.dataset.data[labelIndex] = [window.open ? 1:0];
       } else {
-       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.isOn });
+       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.on });
         this.chart.data.datasets[0].data.push([window.open ? 1:0]);
         this.chart.data.labels.push("Window_"+window.id);
       }
     });
 
-    this.data.doors.forEach((door: Door) => {
+    this.room_data.doors.forEach((door: Door) => {
       const existingDataPointIndex = this.doorDataPoints.findIndex(dataPoint => dataPoint.label === "Door_" + door.id);
 
       if (existingDataPointIndex !== -1) {
@@ -416,7 +425,7 @@ export class BarChartComponent {
         const labelIndex = this.chart.dataset.labels.indexOf("Door_"+door.id);
         this.chart.dataset.data[labelIndex] = [door.open ? 1:0];
       } else {
-       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.isOn });
+       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.on });
         this.chart.data.datasets[0].data.push([door.open ? 1:0]);
         this.chart.data.labels.push("Door_"+door.id);
       }
@@ -428,14 +437,9 @@ export class BarChartComponent {
   }
 
 
-  private updateChart() {
+  public updateChart() {
     console.log('Fan Data Points:', this.fanDataPoints);
     console.log('Light Data Points:', this.lightDataPoints);
-
-  
-
-  this.chart.data.datasets[0].data.push('1');
-  this.chart.data.labels.push("Window");
 
     /*if (this.chart.data.datasets[0].data.length > 13) {
       this.chart.data.datasets[0].data.shift();
@@ -443,8 +447,8 @@ export class BarChartComponent {
     }*/
   
     this.chart.update();
+
   }
-  
 
   /*private getRandomTemperature() {
   

@@ -2,6 +2,7 @@ package se.smartroom.services;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import se.smartroom.entities.Room;
@@ -31,8 +32,11 @@ public class RoomService {
     @Autowired
     private EnvironmentDataRepository environmentDataRepository;
 
+    @Value("${body.heat}")
+    public double bodyHeat;
+
     public RoomService(RoomRepository mockRoomRepository) {
-        repository=mockRoomRepository;
+        repository = mockRoomRepository;
     }
 
     /**
@@ -106,9 +110,9 @@ public class RoomService {
                 if (!room.getRoomWindows().isEmpty()) {
                     numOpenWindows = room.getRoomWindows().stream().filter(Window::isOpen).toList().size();
                 }
-                int numPeople = 0;
+                int numPeople = 1;
                 if (room.getPeopleData().size() > 0) {
-                    numPeople = room.getPeopleData().get(room.getPeopleData().size() -1).getCount();
+                    numPeople = room.getPeopleData().get(room.getPeopleData().size() - 1).getCount();
                 }
                 double temperatureAdjustment = 0.0;
 
@@ -125,14 +129,14 @@ public class RoomService {
                 }
                 double newCo2Value = latestCo2Value + co2Adjustment;
 
-                if (numOpenWindows > 0) {
-                    temperatureAdjustment -= 1.0;
-                }
-                if (numPeople > 0 && environmentData.getOutsideTemperature() > room.getTemperaturData().get(0).getTemperatureValue()) {
-                    temperatureAdjustment += 1.0;
-                }
+                double newTemperatureAdjustment = calculateTemperatureChange(numOpenWindows, numPeople, this.bodyHeat, environmentData.getOutsideTemperature(), room.getSize());
 
-                double newTemperature = environmentData.getOutsideTemperature() + temperatureAdjustment;
+                double newTemperature = environmentData.getOutsideTemperature();
+                if (newTemperatureAdjustment > 0) {
+                    newTemperature += newTemperatureAdjustment;
+                } else {
+                    newTemperature -= newTemperatureAdjustment;
+                }
 
                 Date timestamp = new Date(System.currentTimeMillis());
                 TemperatureData newTemperaturData = new TemperatureData();
@@ -157,6 +161,12 @@ public class RoomService {
             repository.saveAll(updatedRooms);
         }
     }
+
+    public static double calculateTemperatureChange(int numOpenWindows, int numPeople, double avgBodyHeat, double outsideTemperature, double roomSize) {
+        double temperatureChange = (numOpenWindows > 0 ? numOpenWindows : 0.1 * numPeople * avgBodyHeat * outsideTemperature) / (100 * roomSize);
+        return Math.min(Math.max(temperatureChange, -1), 1);
+    }
+
 
     /**
      * Returns a list of all rooms

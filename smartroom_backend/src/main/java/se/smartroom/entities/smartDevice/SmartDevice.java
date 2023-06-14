@@ -3,8 +3,11 @@ package se.smartroom.entities.smartDevice;
 import java.util.Objects;
 
 public class SmartDevice {
-    private boolean on;
+    public boolean on;
 
+    public boolean isOn() {
+        return on;
+    }
     public SmartDevice() {
     }
 
@@ -12,9 +15,7 @@ public class SmartDevice {
         this.on = on;
     }
 
-    protected boolean isOn() {
-        return on;
-    }
+
 
     protected void setOn(boolean on) {
         this.on = on;

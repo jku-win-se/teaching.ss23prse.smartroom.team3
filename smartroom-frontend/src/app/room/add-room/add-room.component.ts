@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {
   Door,
   emptyDoor,
@@ -19,6 +19,8 @@ import {Router} from "@angular/router";
   templateUrl: './add-room.component.html',
   styleUrls: ['./add-room.component.scss']
 })
+
+
 export class AddRoomComponent {
 
   public room: Room = emptyRoom;
@@ -29,14 +31,20 @@ export class AddRoomComponent {
   public light: Light = emptyLight;
   public fan: Fan = emptyFan;
 
+  newWindow: any = {};
+
   constructor(private roomService: RoomService, private router: Router) {
   }
+  
+  @Output() roomAdded: EventEmitter<void> = new EventEmitter<void>();
 
 
   saveRoom() {
     console.log(this.room);
     this.roomService.addRoom(this.room).subscribe((room) => {
-      this.router.navigate(['room-list']);
+      this.roomAdded.emit();
+      this.router.navigate(['room-details/' + room.id]);
+     // window.location.reload();
     });
   }
 
@@ -54,12 +62,13 @@ export class AddRoomComponent {
       open: this.window.open
     });
     this.window = emptyWindow;
+    this.newWindow = {}; 
   }
 
   addLight() {
     this.room.lights.push({
       id: this.light.id,
-      isOn: this.light.isOn
+      on: this.light.on
     });
     this.light = emptyLight;
   }
@@ -67,7 +76,7 @@ export class AddRoomComponent {
   addFan() {
     this.room.fans.push({
       id: this.fan.id,
-      isOn: this.fan.isOn
+      on: this.fan.on
     });
     this.fan = emptyFan;
   }

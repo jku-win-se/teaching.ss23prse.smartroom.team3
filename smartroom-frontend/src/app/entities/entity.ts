@@ -12,23 +12,29 @@ export type Door = {
 
   export type Light = {
     id: number;
-    isOn: boolean;
+    on: boolean;
   }
 
   export type Fan = {
     id: number;
-    isOn: boolean;
+    on: boolean;
   }
 
   export type TemperaturData = {
     id: number;
-    cO2value: number;
+    temperatureValue: number;
+    timestamp: Date;
+  }
+
+  export type PeopleData = {
+    id: number;
+    count: number;
     timestamp: Date;
   }
 
   export type Co2SensorData = {
     id: number;
-    temperaturValue: number;
+    cO2value: number;
     timestamp: Date;
   }
 
@@ -39,6 +45,7 @@ export type Door = {
 
     doors: Door[];
     roomWindows: Window[];
+    peopleData: PeopleData[];
 
     lights: Light[];
     fans: Fan[];
@@ -57,6 +64,7 @@ export const emptyRoom: Room = {
   size: 0,
   doors: [],
   roomWindows: [],
+  peopleData: [],
   lights: [],
   fans: [],
   temperaturData: [],
@@ -75,10 +83,10 @@ export const emptyWindow: Window = {
 
 export const emptyLight: Light = {
   id: 0,
-  isOn: true
+  on: true
 }
 
 export const emptyFan: Fan = {
   id: 0,
-  isOn: true
+  on: true
 }

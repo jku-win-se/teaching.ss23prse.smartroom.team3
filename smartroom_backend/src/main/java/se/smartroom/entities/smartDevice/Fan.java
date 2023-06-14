@@ -34,7 +34,7 @@ public class Fan extends SmartDevice {
     public String toString() {
         return "Fan{" +
                 "id=" + id +
-                ", on=" + isOn() +
+                ", on=" + this.isOn() +
                 '}';
     }
 }

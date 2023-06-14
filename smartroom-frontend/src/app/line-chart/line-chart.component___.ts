@@ -91,7 +91,6 @@ export class LineChartComponent {
               family: "HelveticaNeueExtended",
               weight: "bold",
               size: 32,
-           
             },
             position: "top",
             align: "start",  
@@ -101,7 +100,7 @@ export class LineChartComponent {
             display: false,
             labels: {
               color: 'White',
-              padding: 10,
+              padding: 20,
               font: {
                 family: "HelveticaNeueExtended",
                 size: 12

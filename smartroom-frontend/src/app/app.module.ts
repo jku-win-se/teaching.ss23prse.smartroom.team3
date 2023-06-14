@@ -14,9 +14,10 @@ import { AddRoomComponent } from './room/add-room/add-room.component';
 import { RoomDetailsComponent } from './room/room-details/room-details.component';
 import { UpdateRoomComponent } from './room/update-room/update-room.component';
 import { RemoteDashboardComponent } from './remote/remote-dashboard/remote-dashboard.component';
-import { RemoteDetailsComponent } from './remote/remote-details/remote-details.component';
+import { RemoteDetailsComponent } from './remote-details/remote-details.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { AddValuesComponent } from './room/add-values/add-values.component';
+import { Co2LineChartComponent } from './line-chart-co2/line-chart-co2.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 
@@ -33,6 +34,7 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
     RemoteDashboardComponent,
     RemoteDetailsComponent,
     LineChartComponent,
+    Co2LineChartComponent,
     AddValuesComponent,
     BarChartComponent
   ],
