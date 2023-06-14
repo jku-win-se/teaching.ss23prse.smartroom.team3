@@ -14,7 +14,7 @@ public class EntityPhysicalDeviceTest {
 
     //Testing super class
     @Test
-    public void testConstructorAndGettersSetters1() {
+    public void testPhysicalDeviceConstructorAndGettersSetters() {
         // Create an instance of PhysicalDevice using the constructor
         PhysicalDevice physicalDevice = new PhysicalDevice(true);
 
@@ -29,7 +29,7 @@ public class EntityPhysicalDeviceTest {
     }
 
     @Test
-    public void testEqualsAndHashCode1() {
+    public void testPhysicalDeviceEqualsAndHashCode() {
         // Create two instances of PhysicalDevice with the same open state
         PhysicalDevice device1 = new PhysicalDevice(true);
         PhysicalDevice device2 = new PhysicalDevice(true);
@@ -51,7 +51,7 @@ public class EntityPhysicalDeviceTest {
     }
 
     @Test
-    public void testToString1() {
+    public void testPhysicalDeviceToString() {
         // Create an instance of PhysicalDevice
         PhysicalDevice physicalDevice = new PhysicalDevice(true);
 
@@ -61,7 +61,7 @@ public class EntityPhysicalDeviceTest {
 
     //Testing Door.class
     @Test
-    public void testConstructorAndGettersSetters2() {
+    public void testDoorConstructorAndGettersSetters() {
         // Create an instance of Door using the constructor
         Door door = new Door(true);
 
@@ -76,7 +76,7 @@ public class EntityPhysicalDeviceTest {
     }
 
     @Test
-    public void testToString2() {
+    public void testDoorToString() {
         // Create an instance of Door
         Door door = new Door(1, true);
 
@@ -85,7 +85,7 @@ public class EntityPhysicalDeviceTest {
     }
 
     @Test
-    public void testGetIdAndSetId1() {
+    public void testDoorGetIdAndSetId() {
         // Create an instance of MyClass
         Door door = new Door(1, true);
 
@@ -100,9 +100,9 @@ public class EntityPhysicalDeviceTest {
         assertEquals(expectedId, actualId);
     }
 
-    //Testing Fenster.class
+    //Testing Window.class
     @Test
-    public void testConstructorAndGettersSetters3() {
+    public void testWindowConstructor() {
         // Create an instance of Door using the constructor
         Window window = new Window(true);
 
@@ -117,7 +117,7 @@ public class EntityPhysicalDeviceTest {
     }
 
     @Test
-    public void testToString3() {
+    public void testWindowToString() {
         // Create an instance of Door
         Window window = new Window(1, true);
 
@@ -126,7 +126,7 @@ public class EntityPhysicalDeviceTest {
     }
 
     @Test
-    public void testGetIdAndSetId2() {
+    public void testWindowGetIdAndSetId() {
         // Create an instance of MyClass
         Window window = new Window(1, true);
 

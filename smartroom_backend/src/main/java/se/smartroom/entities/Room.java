@@ -6,7 +6,7 @@ import se.smartroom.entities.data.TemperatureData;
 import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Door;
-import se.smartroom.entities.physicalDevice.Window;
+import se.smartroom.entities.physicalDevice.Fenster;
 import se.smartroom.entities.smartDevice.Fan;
 import se.smartroom.entities.smartDevice.Light;
 import se.smartroom.repositories.RoomRepository;
@@ -28,7 +28,7 @@ public class Room {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Door> doors;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Window> roomWindows;
+    private List<Fenster> roomWindows;
 
     // Smart devices of the room
     @OneToMany(cascade = CascadeType.ALL)
@@ -40,7 +40,7 @@ public class Room {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Co2SensorData> co2SensorData;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<TemperatureData> temperaturData;
+    private List<TemperatureData> temperatureData;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<PeopleData> peopleData;
@@ -56,7 +56,7 @@ public class Room {
         );
     }
 
-    public Room(String name, int size, List<Door> doors, List<Window> roomWindows, List<Light> lights,
+    public Room(String name, int size, List<Door> doors, List<Fenster> roomWindows, List<Light> lights,
                 List<Fan> fans, List<Co2SensorData> co2SensorData, List<TemperatureData> temperaturData,
                 List<PeopleData> peopleData
     ) {
@@ -67,12 +67,11 @@ public class Room {
         this.lights = lights;
         this.fans = fans;
         this.co2SensorData = co2SensorData;
-        this.temperaturData = temperaturData;
+        this.temperatureData = temperaturData;
         this.peopleData = peopleData;
     }
 
     public Room() {
-
     }
 
     public int getId() {
@@ -108,11 +107,11 @@ public class Room {
     }
 
     @Transactional
-    public List<Window> getRoomWindows() {
+    public List<Fenster> getRoomWindows() {
         return roomWindows;
     }
 
-    public void setRoomWindows(List<Window> fensters) {
+    public void setRoomWindows(List<Fenster> fensters) {
         this.roomWindows = fensters;
     }
 
@@ -140,12 +139,12 @@ public class Room {
         this.co2SensorData = co2SensorData;
     }
 
-    public List<TemperatureData> getTemperaturData() {
-        return temperaturData;
+    public List<TemperatureData> getTemperatureData() {
+        return temperatureData;
     }
 
-    public void setTemperaturData(List<TemperatureData> temperaturData) {
-        this.temperaturData = temperaturData;
+    public void setTemperatureData(List<TemperatureData> temperatureData) {
+        this.temperatureData = temperatureData;
     }
 
     public List<PeopleData> getPeopleData() {
@@ -161,12 +160,12 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return id == room.id && size == room.size && Objects.equals(name, room.name) && Objects.equals(doors, room.doors) && Objects.equals(roomWindows, room.roomWindows) && Objects.equals(lights, room.lights) && Objects.equals(fans, room.fans) && Objects.equals(co2SensorData, room.co2SensorData) && Objects.equals(temperaturData, room.temperaturData) && Objects.equals(peopleData, room.peopleData);
+        return id == room.id && size == room.size && Objects.equals(name, room.name) && Objects.equals(doors, room.doors) && Objects.equals(roomWindows, room.roomWindows) && Objects.equals(lights, room.lights) && Objects.equals(fans, room.fans) && Objects.equals(co2SensorData, room.co2SensorData) && Objects.equals(temperatureData, room.temperatureData) && Objects.equals(peopleData, room.peopleData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, size, doors, roomWindows, lights, fans, co2SensorData, temperaturData, peopleData);
+        return Objects.hash(id, name, size, doors, roomWindows, lights, fans, co2SensorData, temperatureData, peopleData);
     }
 
     @Override
@@ -180,7 +179,7 @@ public class Room {
                 ", lights=" + lights +
                 ", fans=" + fans +
                 ", co2SensorData=" + co2SensorData +
-                ", temperaturData=" + temperaturData +
+                ", temperaturData=" + temperatureData +
                 ", peopleData=" + peopleData +
                 '}';
     }

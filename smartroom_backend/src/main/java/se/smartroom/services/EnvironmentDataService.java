@@ -8,15 +8,8 @@ import se.smartroom.entities.environment.EnvironmentData;
 import se.smartroom.entities.environment.SEASONSTATUS;
 import se.smartroom.repositories.EnvironmentDataRepository;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,17 +17,6 @@ public class EnvironmentDataService {
 
     @Autowired
     private EnvironmentDataRepository repository;
-
-    @Value("${environment.temp}")
-    public double temp;
-    @Value("${environment.minTemp}")
-    public double minTemp;
-    @Value("${environment.maxTemp}")
-    public double maxTemp;
-    @Value("${environment.time.intervals}")
-    public int intervals;
-    @Value("${environment.time}")
-    public String time;
 
     public EnvironmentData saveEnvironment(EnvironmentData environmentData) {
         return repository.save(environmentData);
@@ -62,11 +44,6 @@ public class EnvironmentDataService {
     public void scheduledIntervalCalculation() {
         EnvironmentData environment;
 
-        LocalTime time = LocalTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-        System.out.println(time.format(formatter));
-
         List<EnvironmentData> environmentDataList = repository.findAll();
         if (environmentDataList.isEmpty()) {
 
@@ -81,8 +58,7 @@ public class EnvironmentDataService {
         }
 
         LocalTime newTimeOfTheDay = LocalTime.parse(environment.getTimeOfTheDay());
-        newTimeOfTheDay = newTimeOfTheDay.plusMinutes(this.intervals);
-
+        newTimeOfTheDay = newTimeOfTheDay.plusMinutes(30);
         environment.setTimeOfTheDay(newTimeOfTheDay.toString());
 
         int hour = newTimeOfTheDay.getHour();

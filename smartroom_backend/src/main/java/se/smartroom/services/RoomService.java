@@ -10,15 +10,13 @@ import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.TemperatureData;
 import se.smartroom.entities.environment.EnvironmentData;
 import se.smartroom.entities.people.PeopleData;
-import se.smartroom.entities.physicalDevice.Window;
+import se.smartroom.entities.physicalDevice.Fenster;
 import se.smartroom.repositories.EnvironmentDataRepository;
 import se.smartroom.repositories.RoomRepository;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -86,7 +84,7 @@ public class RoomService {
         Timestamp randomTimestamp = new Timestamp(System.currentTimeMillis());
 
         room.getCo2SensorData().add(new Co2SensorData(Math.random()));
-        room.getTemperaturData().add(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue));
+        room.getTemperatureData().add(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue));
         room.getPeopleData().add(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1)));
 
         return updateRoom(room);
@@ -108,13 +106,12 @@ public class RoomService {
             List<Room> updatedRooms = rooms.stream().map(room -> {
                 int numOpenWindows = 0;
                 if (!room.getRoomWindows().isEmpty()) {
-                    numOpenWindows = room.getRoomWindows().stream().filter(Window::isOpen).toList().size();
+                    numOpenWindows = room.getRoomWindows().stream().filter(Fenster::isOpen).toList().size();
                 }
                 int numPeople = 1;
                 if (room.getPeopleData().size() > 0) {
                     numPeople = room.getPeopleData().get(room.getPeopleData().size() - 1).getCount();
                 }
-                double temperatureAdjustment = 0.0;
 
                 double co2Adjustment = 0.0;
                 if (numPeople > 0) {
@@ -147,9 +144,9 @@ public class RoomService {
                 co2SensorData.setcO2value(newCo2Value);
                 co2SensorData.setTimestamp(timestamp);
 
-                List<TemperatureData> roomsTempData = room.getTemperaturData();
+                List<TemperatureData> roomsTempData = room.getTemperatureData();
                 roomsTempData.add(newTemperaturData);
-                room.setTemperaturData(roomsTempData);
+                room.setTemperatureData(roomsTempData);
 
                 List<Co2SensorData> roomsC02Data = room.getCo2SensorData();
                 roomsC02Data.add(co2SensorData);
@@ -167,6 +164,20 @@ public class RoomService {
         return Math.min(Math.max(temperatureChange, -1), 1);
     }
 
+
+    /**
+     *
+     * @param numOpenWindows
+     * @param numPeople
+     * @param avgBodyHeat in WATT
+     * @param outsideTemperature in Celsius
+     * @param roomSize in m2
+     * @return
+     */
+    public static double calculateTemperatureChange(int numOpenWindows, int numPeople, double avgBodyHeat, double outsideTemperature, double roomSize) {
+        double temperatureChange = (numOpenWindows > 0 ? numOpenWindows : 0.1 * numPeople * avgBodyHeat * outsideTemperature) / (100 * roomSize);
+        return Math.min(Math.max(temperatureChange, -1), 1);
+    }
 
     /**
      * Returns a list of all rooms
