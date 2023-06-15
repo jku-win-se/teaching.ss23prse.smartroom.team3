@@ -15,9 +15,6 @@ public class SmartDevice {
         this.on = on;
     }
 
-    protected boolean isOn() {
-        return on;
-    }
 
     public void setOn(boolean on) {
         this.on = on;

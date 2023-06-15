@@ -18,6 +18,17 @@ public class EnvironmentDataService {
     @Autowired
     private EnvironmentDataRepository repository;
 
+    @Value("${environment.temp}")
+    public double temp;
+    @Value("${environment.minTemp}")
+    public double minTemp;
+    @Value("${environment.maxTemp}")
+    public double maxTemp;
+    @Value("${environment.time.intervals}")
+    public int intervals;
+    @Value("${environment.time}")
+    public String time;
+
     public EnvironmentData saveEnvironment(EnvironmentData environmentData) {
         return repository.save(environmentData);
     }
@@ -58,7 +69,7 @@ public class EnvironmentDataService {
         }
 
         LocalTime newTimeOfTheDay = LocalTime.parse(environment.getTimeOfTheDay());
-        newTimeOfTheDay = newTimeOfTheDay.plusMinutes(30);
+        newTimeOfTheDay = newTimeOfTheDay.plusMinutes(this.intervals);
         environment.setTimeOfTheDay(newTimeOfTheDay.toString());
 
         int hour = newTimeOfTheDay.getHour();

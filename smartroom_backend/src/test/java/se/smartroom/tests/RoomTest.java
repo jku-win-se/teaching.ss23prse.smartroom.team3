@@ -102,23 +102,23 @@ public class RoomTest {
     }
 
     @Test
-    public void testTemperaturDataMethods() {
+    public void testTemperatureDataMethods() {
         // Create an instance of DataContainer
         Room dataContainer = new Room(RoomRepository.class);
 
-        // Create sample lists of TemperaturData objects
-        List<TemperatureData> expectedTemperaturData = new ArrayList<>();
-        expectedTemperaturData.add(new TemperatureData(12.34));
-        expectedTemperaturData.add(new TemperatureData(56.78));
+        // Create sample lists of TemperatureData objects
+        List<TemperatureData> expectedTemperatureData = new ArrayList<>();
+        expectedTemperatureData.add(new TemperatureData(12.34));
+        expectedTemperatureData.add(new TemperatureData(56.78));
 
-        // Set the sample lists using setTemperaturData()
-        dataContainer.setTemperatureData(expectedTemperaturData);
+        // Set the sample lists using setTemperatureData()
+        dataContainer.setTemperatureData(expectedTemperatureData);
 
-        // Retrieve the lists using getTemperaturData()
-        List<TemperatureData> actualTemperaturData = dataContainer.getTemperatureData();
+        // Retrieve the lists using getTemperatureData()
+        List<TemperatureData> actualTemperatureData = dataContainer.getTemperatureData();
 
         // Assert that the retrieved lists match the expected lists
-        assertEquals(expectedTemperaturData, actualTemperaturData);
+        assertEquals(expectedTemperatureData, actualTemperatureData);
     }
 
     @Test
@@ -142,9 +142,9 @@ public class RoomTest {
         co2SensorData.add(new Co2SensorData(1.23));
         co2SensorData.add(new Co2SensorData(4.56));
 
-        List<TemperatureData> temperaturData = new ArrayList<>();
-        temperaturData.add(new TemperatureData(12.34));
-        temperaturData.add(new TemperatureData(56.78));
+        List<TemperatureData> temperatureData = new ArrayList<>();
+        temperatureData.add(new TemperatureData(12.34));
+        temperatureData.add(new TemperatureData(56.78));
 
         List<PeopleData> peopleData = new ArrayList<>();
 
@@ -153,7 +153,7 @@ public class RoomTest {
         room.setFans(fans);
         room.setLights(lights);
         room.setCo2SensorData(co2SensorData);
-        room.setTemperatureData(temperaturData);
+        room.setTemperatureData(temperatureData);
         room.setPeopleData(peopleData);
 
         // Invoke the toString() method
@@ -169,7 +169,7 @@ public class RoomTest {
                 "lights=" + lights.toString()+", " +
                 "fans=" + fans.toString()+", " +
                 "co2SensorData=" + co2SensorData.toString() + ", " +
-                "temperaturData=" + temperaturData.toString() + ", " +
+                "temperatureData=" + temperatureData.toString() + ", " +
                 "peopleData=" + "[]" +
                 "}";
 

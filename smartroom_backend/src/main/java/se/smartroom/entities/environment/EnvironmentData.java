@@ -62,7 +62,7 @@ public class EnvironmentData {
         return seasonstatus;
     }
 
-    public void setSeasonstatus(SEASONSTATUS seasonstatus) {
+    public void setSeasonStatus(SEASONSTATUS seasonstatus) {
         this.seasonstatus = seasonstatus;
     }
 
