@@ -11,7 +11,6 @@ public class PhysicalDevice {
     public PhysicalDevice(boolean open) {
         this.open = open;
     }
-
     public boolean isOpen() {
         return open;
     }

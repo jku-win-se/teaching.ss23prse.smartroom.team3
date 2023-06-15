@@ -4,20 +4,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+//this is the only class in German due to the incompatibility with MARIADB
+//in MariaDB Window is a keyword and therefore cannot be used as a class name
 @Entity
-public class Window extends PhysicalDevice {
+public class Fenster extends PhysicalDevice {
     @Id
     @GeneratedValue
     private int id;
 
-    public Window() {
+    public Fenster() {
     }
 
-    public Window(boolean open) {
+    public Fenster(boolean open) {
         super(open);
     }
 
-    public Window(int id, boolean open) {
+    public Fenster(int id, boolean open) {
         super(open);
         this.id = id;
     }

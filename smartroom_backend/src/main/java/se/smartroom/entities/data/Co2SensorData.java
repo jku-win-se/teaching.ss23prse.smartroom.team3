@@ -67,7 +67,7 @@ public class Co2SensorData extends DataInterface {
 
     @Override
     public String toString() {
-        return "TemperaturData{" +
+        return "TemperatureData{" +
                 "id=" + id +
                 ", cO2value=" + cO2value +
                 '}';

@@ -11,18 +11,17 @@ public class Door extends PhysicalDevice {
     @GeneratedValue
     private int id;
 
-    private boolean open;
 
     public Door() {
     }
 
     public Door(boolean open) {
-        this.open = open;
+        super(open);
     }
 
     public Door(int id, boolean open) {
+        super(open);
         this.id = id;
-        this.open = open;
     }
 
     public int getId() {
@@ -33,19 +32,12 @@ public class Door extends PhysicalDevice {
         this.id = id;
     }
 
-    public boolean isOpen() {
-        return open;
-    }
-
-    public void setOpen(boolean open) {
-        this.open = open;
-    }
 
     @Override
     public String toString() {
         return "Door{" +
                 "id=" + id +
-                ", open=" + open +
+                ", open=" + super.isOpen() +
                 '}';
     }
 }

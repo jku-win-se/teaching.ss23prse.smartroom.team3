@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class EntitySmartDeviceTest {
-
+//Arrange = Creation of instances
     // Testing SmartDevice class
 
     @Test
@@ -28,7 +28,7 @@ public class EntitySmartDeviceTest {
 
     @Test
     public void testSmartDeviceEqualsAndHashCode() {
-        // Create two instances of SmartDevice with the same on state
+        //two instances of SmartDevice with the same on state
         SmartDevice device1 = new SmartDevice(true);
         SmartDevice device2 = new SmartDevice(true);
 
@@ -38,7 +38,7 @@ public class EntitySmartDeviceTest {
         // Assert that the hash codes are equal
         assertEquals(device1.hashCode(), device2.hashCode());
 
-        // Create an instance with a different on state
+        // instance with a different on state
         SmartDevice device3 = new SmartDevice(false);
 
         // Assert that the instances are not equal
@@ -50,7 +50,7 @@ public class EntitySmartDeviceTest {
 
     @Test
     public void testSmartDeviceToString() {
-        // Create an instance of SmartDevice
+        // instance of SmartDevice
         SmartDevice smartDevice = new SmartDevice(true);
 
         // Assert that the toString method returns the expected string representation
@@ -75,7 +75,7 @@ public class EntitySmartDeviceTest {
 
     @Test
     public void testLightToString() {
-        // Create an instance of Light
+        // instance of Light
         Light light = new Light(1, true);
 
         // Assert that the toString method returns the expected string representation
@@ -84,7 +84,7 @@ public class EntitySmartDeviceTest {
 
     @Test
     public void testLightGetIdAndSetId() {
-        // Create an instance of Light
+        // instance of Light
         Light light = new Light(1, true);
 
         // Set a value for the ID using the setId() method
@@ -116,7 +116,7 @@ public class EntitySmartDeviceTest {
 
     @Test
     public void testFanToString() {
-        // Create an instance of Fan
+        //instance of Fan
         Fan fan = new Fan(1, false);
 
         // Assert that the toString method returns the expected string representation
@@ -125,7 +125,7 @@ public class EntitySmartDeviceTest {
 
     @Test
     public void testFanGetIdAndSetId() {
-        // Create an instance of Fan
+        //instance of Fan
         Fan fan = new Fan(1, false);
 
         // Set a value for the ID using the setId() method

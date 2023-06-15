@@ -9,7 +9,6 @@ import se.smartroom.entities.environment.SEASONSTATUS;
 import se.smartroom.repositories.EnvironmentDataRepository;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -28,6 +27,10 @@ public class EnvironmentDataService {
     public int intervals;
     @Value("${environment.time}")
     public String time;
+
+    public EnvironmentDataService(EnvironmentDataRepository mockDataRepository) {
+        repository = mockDataRepository;
+    }
 
     public EnvironmentData saveEnvironment(EnvironmentData environmentData) {
         return repository.save(environmentData);

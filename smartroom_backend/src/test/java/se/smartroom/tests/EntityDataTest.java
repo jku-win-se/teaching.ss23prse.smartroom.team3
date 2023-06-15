@@ -6,8 +6,12 @@ import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.DataInterface;
 import se.smartroom.entities.data.TemperatureData;
 import org.junit.jupiter.api.Test;
+import se.smartroom.entities.environment.EnvironmentData;
+import se.smartroom.entities.environment.SEASONSTATUS;
+
 import java.sql.Date;
 
+import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -17,10 +21,10 @@ public class EntityDataTest {
     //Interface Tests
     @Test
     public void testConstructorAndGetters1() {
-        // Create a Date object to use in the test
+        //Date object
         Date timestamp = new Date(System.currentTimeMillis());
 
-        // Create an instance of DataInterface using the constructor
+        // DataInterface using the constructor
         DataInterface dataInterface = new DataInterface(timestamp);
 
         // Assert that the timestamp is set correctly
@@ -29,7 +33,7 @@ public class EntityDataTest {
 
     @Test
     public void testSetters1() {
-        // Create an instance of DataInterface using the default constructor
+        // DataInterface using the default constructor
         DataInterface dataInterface = new DataInterface();
 
         // Create a Date object to use in the test
@@ -53,12 +57,12 @@ public class EntityDataTest {
 
     @Test
     public void testEqualsAndHashCode1() {
-        // Create two instances of DataInterface with the same timestamp
+        //two instances of DataInterface with the same timestamp
         Date timestamp = new Date(System.currentTimeMillis());
         DataInterface dataInterface1 = new DataInterface(timestamp);
         DataInterface dataInterface2 = new DataInterface(timestamp);
 
-        // Assert that the objects are considered equal and have the same hash code
+        // Assertion that the objects are considered equal and have the same hash code
         assertEquals(dataInterface1, dataInterface2);
         assertEquals(dataInterface1.hashCode(), dataInterface2.hashCode());
     }
@@ -66,7 +70,7 @@ public class EntityDataTest {
     //Test C02SensorData
     @Test
     public void testConstructorAndGetters2() {
-        // Create a Date object to use in the test
+        //Date object to use in the test
         Date timestamp = new Date(System.currentTimeMillis());
         int id = 1;
         Double Co2Value = 45.0;
@@ -100,10 +104,10 @@ public class EntityDataTest {
 
     @Test
     public void testSetters2() {
-        // Create an instance of Co2SensorData using the default constructor
+        // instance of Co2SensorData using the default constructor
         Co2SensorData co2SensorData = new Co2SensorData();
 
-        // Create a Date object to use in the test
+        // Date object to use in the test
         Date timestamp = new Date(System.currentTimeMillis());
         Double cO2value = 42.0;
 
@@ -142,7 +146,7 @@ public class EntityDataTest {
         assertEquals(co2SensorData1.hashCode(), co2SensorData2.hashCode());
     }
 
-    //Test TemperaturData
+    //Test TemperatureData
     @Test
     public void testConstructorAndGetters3() {
         // Create a Date object to use in the test
@@ -168,57 +172,76 @@ public class EntityDataTest {
         assertEquals(temperatureValue, temperatureData1.getTemperatureValue());
 
         //Constructor with three parameters
-        TemperatureData temperaturData2 = new TemperatureData(id, timestamp, temperatureValue);
+        TemperatureData temperatureData2 = new TemperatureData(id, timestamp, temperatureValue);
         // Assert that the superclass constructor is called
-        assertNotNull(temperaturData2.getTimestamp());
+        assertNotNull(temperatureData2.getTimestamp());
 
         // Assert that the specific fields are set correctly
-        assertEquals(id, temperaturData2.getId());
-        assertEquals(temperatureValue, temperaturData2.getTemperatureValue());
+        assertEquals(id, temperatureData2.getId());
+        assertEquals(temperatureValue, temperatureData2.getTemperatureValue());
     }
 
     @Test
     public void testSetters3() {
-        // Create an instance of TemperaturData using the default constructor
-        TemperatureData temperaturData = new TemperatureData();
+        // instance of TemperatureData using the default constructor
+        TemperatureData temperatureData = new TemperatureData();
 
-        // Create a Date object to use in the test
+        // Date object to use in the test
         Date timestamp = new Date(System.currentTimeMillis());
-        Double temperaturValue = 25.0;
+        Double temperatureValue = 25.0;
 
         // Set the inherited field using the setter method from DataInterface
-        temperaturData.setTimestamp(timestamp);
+        temperatureData.setTimestamp(timestamp);
 
-        // Set the specific field using the setter method from TemperaturData
-        temperaturData.setTemperatureValue(temperaturValue);
+        // Set the specific field using the setter method from TemperatureData
+        temperatureData.setTemperatureValue(temperatureValue);
 
         // Assert that the inherited field is set correctly
-        assertEquals(timestamp, temperaturData.getTimestamp());
+        assertEquals(timestamp, temperatureData.getTimestamp());
 
         // Assert that the specific field is set correctly
-        assertEquals(temperaturValue, temperaturData.getTemperatureValue());
+        assertEquals(temperatureValue, temperatureData.getTemperatureValue());
     }
 
     @Test
     public void testToString3() {
-        // Create an instance of TemperaturData using the default constructor
-        TemperatureData temperaturData = new TemperatureData();
+        // instance of TemperatureData using the default constructor
+        TemperatureData temperatureData = new TemperatureData();
 
         // Assert that the toString method doesn't return null
-        assertNotNull(temperaturData.toString());
+        assertNotNull(temperatureData.toString());
     }
 
     @Test
     public void testEqualsAndHashCode3() {
-        // Create two instances of TemperaturData with the same values
+        // two instances of TemperatureData with the same values
         Date timestamp = new Date(System.currentTimeMillis());
-        Double temperaturValue = 25.0;
-        TemperatureData temperaturData1 = new TemperatureData(timestamp, temperaturValue);
-        TemperatureData temperaturData2 = new TemperatureData(timestamp, temperaturValue);
+        Double temperatureValue = 25.0;
+        TemperatureData temperatureData1 = new TemperatureData(timestamp, temperatureValue);
+        TemperatureData temperatureData2 = new TemperatureData(timestamp, temperatureValue);
 
         // Assert that the objects are considered equal and have the same hash code
-        assertEquals(temperaturData1, temperaturData2);
-        assertEquals(temperaturData1.hashCode(), temperaturData2.hashCode());
+        assertEquals(temperatureData1, temperatureData2);
+        assertEquals(temperatureData1.hashCode(), temperatureData2.hashCode());
+    }
+
+    //Environment Data
+    @Test
+    public void testEqualsAndHashCode() {
+        // two instances with the same attribute values
+        EnvironmentData environment1 = new EnvironmentData(1, 25.0, "noon", SEASONSTATUS.SUMMER);
+        EnvironmentData environment2 = new EnvironmentData(1, 25.0, "noon", SEASONSTATUS.SUMMER);
+
+        //another instance with different attribute values
+        EnvironmentData differentEnvironment = new EnvironmentData(2, 30.0, "evening", SEASONSTATUS.WINTER);
+
+        // Test equals()
+        assertTrue(environment1.equals(environment2)); // Expecting true
+        assertFalse(environment1.equals(differentEnvironment)); // Expecting false
+
+        // Test hashCode()
+        assertEquals(environment1.hashCode(), environment2.hashCode()); // Expecting equal hash codes
+        assertNotEquals(environment1.hashCode(), differentEnvironment.hashCode()); // Expecting different hash codes
     }
 
 }

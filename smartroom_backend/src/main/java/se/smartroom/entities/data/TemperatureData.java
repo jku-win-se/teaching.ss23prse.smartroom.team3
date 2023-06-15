@@ -39,8 +39,8 @@ public class TemperatureData extends DataInterface {
         return temperatureValue;
     }
 
-    public void setTemperatureValue(Double temperaturValue) {
-        this.temperatureValue = temperaturValue;
+    public void setTemperatureValue(Double temperatureValue) {
+        this.temperatureValue = temperatureValue;
     }
 
     public int getId() {

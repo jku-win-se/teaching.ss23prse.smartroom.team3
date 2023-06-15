@@ -8,7 +8,7 @@ import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.TemperatureData;
 import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Door;
-import se.smartroom.entities.physicalDevice.Window;
+import se.smartroom.entities.physicalDevice.Fenster;
 import se.smartroom.entities.smartDevice.Fan;
 import se.smartroom.entities.smartDevice.Light;
 import se.smartroom.repositories.RoomRepository;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class RoomTest {
-
+//Arrange = Creation of instances
 
     @Test
     public void testConstructorWithParameters() {
@@ -31,7 +31,7 @@ public class RoomTest {
         String expectedName = "Room 1";
         int expectedSize = 100;
         Door door = new Door();
-        Window window = new Window();
+        Fenster fenster = new Fenster();
         Light light = new Light();
         Fan fan = new Fan();
         Co2SensorData co2SensorData = new Co2SensorData();
@@ -41,7 +41,7 @@ public class RoomTest {
         // Act
         Room room = new Room(expectedName, expectedSize,
                 Collections.singletonList(door),
-                Collections.singletonList(window),
+                Collections.singletonList(fenster),
                 Collections.singletonList(light),
                 Collections.singletonList(fan),
                 Collections.singletonList(co2SensorData),
@@ -53,7 +53,7 @@ public class RoomTest {
         assertEquals(expectedName, room.getName());
         assertEquals(expectedSize, room.getSize());
         assertEquals(Collections.singletonList(door), room.getDoors());
-        assertEquals(Collections.singletonList(window), room.getRoomWindows());
+        assertEquals(Collections.singletonList(fenster), room.getRoomWindows());
         assertEquals(Collections.singletonList(light), room.getLights());
         assertEquals(Collections.singletonList(fan), room.getFans());
         assertEquals(Collections.singletonList(co2SensorData), room.getCo2SensorData());
@@ -83,10 +83,10 @@ public class RoomTest {
     }
     @Test
     public void testCo2SensorDataMethods() {
-        // Create an instance of DataContainer
+        // instance of DataContainer
         Room dataContainer = new Room(RoomRepository.class);
 
-        // Create sample lists of Co2SensorData objects
+        // sample lists of Co2SensorData objects
         List<Co2SensorData> expectedCo2SensorData = new ArrayList<>();
         expectedCo2SensorData.add(new Co2SensorData(1.23));
         expectedCo2SensorData.add(new Co2SensorData(4.56));
@@ -103,10 +103,10 @@ public class RoomTest {
 
     @Test
     public void testTemperatureDataMethods() {
-        // Create an instance of DataContainer
+        // instance of DataContainer
         Room dataContainer = new Room(RoomRepository.class);
 
-        // Create sample lists of TemperatureData objects
+        // sample lists of TemperatureData objects
         List<TemperatureData> expectedTemperatureData = new ArrayList<>();
         expectedTemperatureData.add(new TemperatureData(12.34));
         expectedTemperatureData.add(new TemperatureData(56.78));
@@ -123,7 +123,7 @@ public class RoomTest {
 
     @Test
     public void testToString() {
-        // Create an instance of Room
+        // instance of Room
         Room room = new Room(RoomRepository.class);
         room.setId(1);
         room.setName("Living Room");
@@ -131,13 +131,12 @@ public class RoomTest {
 
         List<Door> doors = new ArrayList<>();
         doors.add(new Door(true));
-        List<Window> windows = new ArrayList<>();
-        windows.add(new Window(true));
+        List<Fenster> windows = new ArrayList<>();
+        windows.add(new Fenster(true));
         List<Light> lights = new ArrayList<>();
         lights.add(new Light(true));
         List<Fan> fans = new ArrayList<>();
         fans.add(new Fan(true));
-        windows.add(new Window(true));
         List<Co2SensorData> co2SensorData = new ArrayList<>();
         co2SensorData.add(new Co2SensorData(1.23));
         co2SensorData.add(new Co2SensorData(4.56));

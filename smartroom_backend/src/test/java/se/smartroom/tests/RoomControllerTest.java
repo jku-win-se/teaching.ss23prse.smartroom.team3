@@ -33,16 +33,13 @@ import static org.mockito.BDDMockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class RoomControllerTest {
-
+//Arrange = Creation of instances
 
     @Mock
     private RoomService roomService;
 
     @InjectMocks
     private RoomController roomController;
-
-    @Mock
-    private HttpServletResponse response;
 
     private MockMvc mockMvc;
     @BeforeEach
@@ -51,7 +48,7 @@ public class RoomControllerTest {
     }
     @Test
     public void testGetRooms() throws Exception {
-        // Create a list of Room objects for mocking the response
+        // list of Room objects for mocking the response
         List<Room> mockedRooms = new ArrayList<>();
         mockedRooms.add(new Room("Room 1",45));
         mockedRooms.add(new Room("Room 2",23));

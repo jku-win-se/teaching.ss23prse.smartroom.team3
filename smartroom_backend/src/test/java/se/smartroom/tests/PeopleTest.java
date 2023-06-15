@@ -28,8 +28,27 @@ public class PeopleTest {
     }
 
     @Test
+    public void testConstructorAndGetIdSetId() {
+        // instance using the constructor with three variables
+        int initialId = 1;
+        Date timestamp = new Date(System.currentTimeMillis());
+        int count = 5;
+        PeopleData peopleData = new PeopleData(initialId, timestamp, count);
+
+        // Test getId()
+        assertEquals(initialId, peopleData.getId()); // Expecting initialId
+
+        // Use setId() to update the ID
+        int updatedId = 2;
+        peopleData.setId(updatedId);
+
+        // Test getId() after updating the ID
+        assertEquals(updatedId, peopleData.getId()); // Expecting updatedId
+    }
+
+    @Test
     public void testPeopleDataEqualsAndHashCode() {
-        // Create two instances of PeopleData with the same values
+        // instances of PeopleData with the same values
         Date timestamp = new Date(System.currentTimeMillis());
         int count = 10;
 
@@ -54,7 +73,7 @@ public class PeopleTest {
 
     @Test
     public void testPeopleDataToString() {
-        // Create an instance of PeopleData
+        // instance of PeopleData
         Date timestamp = new Date(System.currentTimeMillis());
         int count = 10;
         PeopleData peopleData = new PeopleData(timestamp, count);
@@ -65,7 +84,7 @@ public class PeopleTest {
 
     @Test
     public void testPeopleDataGettersAndSetters() {
-        // Create an instance of PeopleData
+        // instance of PeopleData
         PeopleData peopleData = new PeopleData();
 
         // Set values using the setter methods

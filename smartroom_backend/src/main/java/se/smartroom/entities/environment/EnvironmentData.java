@@ -3,7 +3,6 @@ package se.smartroom.entities.environment;
 import jakarta.persistence.*;
 
 import java.util.Objects;
-import java.util.Date;
 
 @Entity
 public class EnvironmentData {

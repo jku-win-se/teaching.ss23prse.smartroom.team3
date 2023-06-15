@@ -10,13 +10,14 @@ import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.data.TemperatureData;
 import se.smartroom.entities.environment.EnvironmentData;
 import se.smartroom.entities.people.PeopleData;
-import se.smartroom.entities.physicalDevice.Window;
+import se.smartroom.entities.physicalDevice.Fenster;
 import se.smartroom.repositories.EnvironmentDataRepository;
 import se.smartroom.repositories.RoomRepository;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -35,6 +36,15 @@ public class RoomService {
 
     public RoomService(RoomRepository mockRoomRepository) {
         repository = mockRoomRepository;
+    }
+
+    public RoomService(){
+
+    }
+
+    public RoomService(RoomRepository mockRoomRepository, EnvironmentDataRepository MockEnvironmentDataRepository) {
+        repository = mockRoomRepository;
+        environmentDataRepository = MockEnvironmentDataRepository;
     }
 
     /**
@@ -73,7 +83,7 @@ public class RoomService {
     }
 
     public Room addValues(int id) {
-        Room room = repository.findById(id).orElse(null);
+        Room room = repository.findById(id).orElse(new Room());
         System.out.println(room);
 
         Random random = new Random();
@@ -82,9 +92,9 @@ public class RoomService {
 
         Timestamp randomTimestamp = new Timestamp(System.currentTimeMillis());
 
-        room.getCo2SensorData().add(new Co2SensorData(Math.random()));
-        room.getTemperatureData().add(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue));
-        room.getPeopleData().add(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1)));
+        room.setCo2SensorData(Collections.singletonList(new Co2SensorData(Math.random())));
+        room.setTemperatureData(Collections.singletonList(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue)));
+        room.setPeopleData(Collections.singletonList(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1))));
 
         return updateRoom(room);
     }
@@ -103,7 +113,7 @@ public class RoomService {
             List<Room> updatedRooms = rooms.stream().map(room -> {
                 int numOpenWindows = 0;
                 if (!room.getRoomWindows().isEmpty()) {
-                    numOpenWindows = room.getRoomWindows().stream().filter(Window::isOpen).toList().size();
+                    numOpenWindows = room.getRoomWindows().stream().filter(Fenster::isOpen).toList().size();
                 }
                 int numPeople = 1;
                 if (room.getPeopleData().size() > 0) {
