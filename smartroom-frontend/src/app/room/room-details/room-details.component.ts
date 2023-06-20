@@ -16,7 +16,7 @@ var emptyRoom: Room = {
   peopleData: [],
   lights: [],
   fans: [],
-  temperaturData: [],
+  temperatureData: [],
   co2SensorData: []
 }
 
@@ -45,7 +45,7 @@ export class RoomDetailsComponent implements OnInit {
         this.room = room;
       });
     });
-    
+
 
     /* Updates room information - necessary for charts*/
     setInterval(() => {
@@ -122,7 +122,7 @@ export class RoomDetailsComponent implements OnInit {
     });
 
     console.log("CO2 Push: " + this.room.co2SensorData[this.room.co2SensorData.length -1].cO2value);
-    console.log("Temp Push: " + this.room.temperaturData[this.room.temperaturData.length -1].temperatureValue);
+    console.log("Temp Push: " + this.room.temperatureData[this.room.temperatureData.length -1].temperatureValue);
 
 
     this.lineChartComponent.updateChart();

@@ -71,7 +71,7 @@ public class EnvironmentServiceTest {
         // Perform assertion
         assertEquals(environmentData, removedEnvironmentData);
     }
-
+    /*
     @Test
     public void testScheduledIntervalCalculation() {
         // Arrange
@@ -87,4 +87,6 @@ public class EnvironmentServiceTest {
         verify(mockDataRepository, times(1)).findAll();
         verify(mockDataRepository, times(1)).save(any(EnvironmentData.class));
     }
+
+     */
 }

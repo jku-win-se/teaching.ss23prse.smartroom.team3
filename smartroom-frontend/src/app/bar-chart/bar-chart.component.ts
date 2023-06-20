@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, SimpleChange, Output, EventEmitter } from '@angular/core';
 //import Chart from 'chart.js/auto';
 import Chart, { ChartDataset } from 'chart.js/auto';
-import {Room, Fan, Light, Window, Door} from "../entities/entity";
+import {Room, Fan, Light, Fenster, Door} from "../entities/entity";
 import { RoomDetailsComponent } from '../room/room-details/room-details.component';
 
 
@@ -17,8 +17,8 @@ interface DataPoint {
 })
 
 export class BarChartComponent {
-  //@Input() data: 
-  
+  //@Input() data:
+
  /*  data: Room = {
     id: 1,
     name: "test",
@@ -109,15 +109,15 @@ data = this.room_data;
       const currentValue = change.currentValue;
       const previousValue = change.previousValue;
       const isFirstChange = change.firstChange;
-  
+
       //this.processData();
 
       console.log(`'data' property changed. Current value: ${currentValue}, Previous value: ${previousValue}. First change? ${isFirstChange}`);
-  
+
     }
   }*/
   /*createChart(){
-     
+
     const colors = {
       purple: {
         default: "rgba(149, 76, 233, 1)",
@@ -130,16 +130,16 @@ data = this.room_data;
         quarter: "rgba(80, 102, 120, 0.25)"
       }
     };
-  
+
     this.chart = new Chart("MyChart", {
-      type: 'line', 
+      type: 'line',
       data: {
         datasets: [{
             tension: 0.3,
             label: "Temperature",
             borderColor: "white",
             backgroundColor: "white",
-            
+
             fill: false,
             data: [
               { x: '2022-05-10', y: 22 },
@@ -166,10 +166,10 @@ data = this.room_data;
               family: "HelveticaNeueExtended",
               weight: "bold",
               size: 32,
-           
+
             },
             position: "top",
-            align: "start",  
+            align: "start",
             color: 'white',
           },
           legend: {
@@ -238,7 +238,7 @@ data = this.room_data;
               callback: function(value, index, values) {
                 return value + "am";
               }
-            
+
           },
         },
         animation: {
@@ -250,12 +250,12 @@ data = this.room_data;
   }*/
 
   createChart(){
-  
+
     this.chart = new Chart("MyBarChart", {
       type: 'bar', //this denotes tha type of chart
 
       data: {// values on X-Axis
-        labels: [], 
+        labels: [],
 	       datasets: [
           {
             label: "",
@@ -276,10 +276,10 @@ data = this.room_data;
               family: "HelveticaNeueExtended",
               weight: "bold",
               size: 32,
-           
+
             },
             position: "top",
-            align: "start",  
+            align: "start",
             color: 'white',
           },
           legend: {
@@ -293,9 +293,9 @@ data = this.room_data;
               },
             }
           }
-        }, 
+        },
         elements: {
-     
+
         },
         scales: {
           y: {
@@ -330,11 +330,11 @@ data = this.room_data;
               padding: {
                 top: 12,
                 bottom: 12,
-              
+
 
               }
             }
-          }, 
+          },
           x: {
             ticks: {
               count: 5,
@@ -347,7 +347,7 @@ data = this.room_data;
                 size: 12
               }
             }
-          }, 
+          },
         }
       }
     });
@@ -355,7 +355,7 @@ data = this.room_data;
       this.chart.canvas.parentNode.style.width = "800px";
       this.updateChart();
   }
-  
+
 
   fanDataPoints: { label: string, value: boolean }[] = [];
   lightDataPoints: { label: string, value: boolean }[] = [];
@@ -399,7 +399,7 @@ data = this.room_data;
     });
 
 
-    this.room_data.roomWindows.forEach((window: Window) => {
+    this.room_data.roomWindows.forEach((window: Fenster) => {
       const existingDataPointIndex = this.windowDataPoints.findIndex(dataPoint => dataPoint.label === "Window_" + window.id);
 
       if (existingDataPointIndex !== -1) {
@@ -445,13 +445,13 @@ data = this.room_data;
       this.chart.data.datasets[0].data.shift();
       this.chart.data.labels.shift();
     }*/
-  
+
     this.chart.update();
 
   }
 
   /*private getRandomTemperature() {
-  
+
     return Math.floor(Math.random() * 8 + 15);
   }*/
 

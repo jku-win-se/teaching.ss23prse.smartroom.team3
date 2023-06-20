@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import Chart, { ChartDataset } from 'chart.js/auto';
-import { Fan, Light, Window, Door, TemperaturData, Co2SensorData} from "../entities/entity";
+import { Fan, Light, Fenster, Door, TemperatureData, Co2SensorData} from "../entities/entity";
 import { Room } from '../entities/entity';
 interface DataPoint {
   x: string;
@@ -38,16 +38,16 @@ export class Co2LineChartComponent {
         quarter: "rgba(80, 102, 120, 0.25)"
       }
     };
-  
+
     this.chart = new Chart("MyChartCo2", {
-      type: 'line', 
+      type: 'line',
       data: {
         datasets: [{
             tension: 0.3,
             label: "Co2 Data",
             borderColor: "white",
             backgroundColor: "white",
-            
+
             fill: false,
             /*data: [
               { x: '2022-05-10', y: 22 }
@@ -67,10 +67,10 @@ export class Co2LineChartComponent {
               family: "HelveticaNeueExtended",
               weight: "bold",
               size: 32,
-           
+
             },
             position: "top",
-            align: "start",  
+            align: "start",
             color: 'white',
           },
           legend: {
@@ -140,7 +140,7 @@ export class Co2LineChartComponent {
               callback: function(value, index, values) {
                 return value + "am";
               }*/
-            
+
           },
         },
         animation: {
@@ -168,8 +168,8 @@ export class Co2LineChartComponent {
       this.lastCo2Value = this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - i].cO2value;
       this.pushData(this.lastCo2Value, this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - i].timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     }
-  }  
-  
+  }
+
     this.createChart();
   }
 
@@ -179,27 +179,27 @@ export class Co2LineChartComponent {
     const co2Value = this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - 1].cO2value;
     const currentTimestamp = (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })).toString();
     const newDataPoint = { x: currentTimestamp, y: co2Value };
-    
+
     if(this.chart.data.labels.last != this.currentTimestamp && co2Value != this.lastCo2Value/*this.room_data_line_co2.temperaturData[this.room_data_line_co2.temperaturData.length - 1].temperatureValue.toString()*/ )
     {
       this.lastCo2Value = co2Value;
       this.pushData(co2Value, currentTimestamp);
     }
   }
-  
+
   public pushData(newDataPoint: String, currentTimestamp: String){
     this.chart.data.datasets[0].data.push(newDataPoint);
     this.chart.data.labels.push(currentTimestamp);
-  
+
       if (this.chart.data.datasets[0].data.length > 13) {
         this.chart.data.datasets[0].data.shift();
         this.chart.data.labels.shift();
       }
-    
+
       this.chart.data.datasets[0].data = this.temperatureData;
       this.chart.update();
   }
 }
 
-  
+
 

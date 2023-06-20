@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import Chart, { ChartDataset } from 'chart.js/auto';
-import { Fan, Light, Window, Door, TemperaturData, Co2SensorData} from "../entities/entity";
+import { Fan, Light, Fenster, Door, TemperatureData, Co2SensorData} from "../entities/entity";
 import { Room } from '../entities/entity';
 interface DataPoint {
   x: string;
@@ -46,11 +46,11 @@ export class LineChartComponent {
   ];
 
   constructor() {
-   
+
   }
 
   createChart(){
-     
+
     const colors = {
       purple: {
         default: "rgba(149, 76, 233, 1)",
@@ -63,16 +63,16 @@ export class LineChartComponent {
         quarter: "rgba(80, 102, 120, 0.25)"
       }
     };
-  
+
     this.chart = new Chart("MyChart", {
-      type: 'line', 
+      type: 'line',
       data: {
         datasets: [{
             tension: 0.3,
             label: "Temperature",
             borderColor: "white",
             backgroundColor: "white",
-            
+
             fill: false,
             data: this.temperatureData,
             borderWidth: 2,
@@ -89,10 +89,10 @@ export class LineChartComponent {
               family: "HelveticaNeueExtended",
               weight: "bold",
               size: 32,
-           
+
             },
             position: "top",
-            align: "start",  
+            align: "start",
             color: 'white',
           },
           legend: {
@@ -136,7 +136,7 @@ export class LineChartComponent {
                   family: "HelveticaNeueExtended",
                   size: 12
                 }
-              }       
+              }
           },
         },
         animation: {
@@ -159,13 +159,13 @@ export class LineChartComponent {
     for(var i:number = 50; i > 0; i = i - 1){
     this.updateChart();
 
-    if(this.room_data_line.temperaturData[this.room_data_line.temperaturData.length - i].temperatureValue != this.lastTemperatureValue)
+    if(this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - i].temperatureValue != this.lastTemperatureValue)
     {
-      this.lastTemperatureValue = this.room_data_line.temperaturData[this.room_data_line.temperaturData.length - i].temperatureValue;
-      this.pushData(this.lastTemperatureValue, this.lastTemperatureValue = this.room_data_line.temperaturData[this.room_data_line.temperaturData.length - i].timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+      this.lastTemperatureValue = this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - i].temperatureValue;
+      this.pushData(this.lastTemperatureValue, this.lastTemperatureValue = this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - i].timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     }
-  }  
-  
+  }
+
     this.createChart();
   }
 
@@ -173,22 +173,22 @@ export class LineChartComponent {
    public updateChart() {
 
     //console.log("Temp Push: " + this.room_data_line.temperaturData[this.room_data_line.temperaturData.length - 1].temperatureValue);
-    
-    const temperatureValue = this.room_data_line.temperaturData[this.room_data_line.temperaturData.length - 1].temperatureValue;
+
+    const temperatureValue = this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - 1].temperatureValue;
     const currentTimestamp = (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })).toString();
     const newDataPoint = { x: currentTimestamp, y: temperatureValue };
-    
+
     if(this.chart.data.labels.last != this.currentTimestamp && temperatureValue != this.lastTemperatureValue/*this.room_data_line.temperaturData[this.room_data_line.temperaturData.length - 1].temperatureValue.toString()*/ )
     {
       this.lastTemperatureValue = temperatureValue;
       this.pushData(temperatureValue, currentTimestamp);
     }
   }
-  
+
   public pushData(newDataPoint: String, currentTimestamp: String){
     this.chart.data.datasets[0].data.push(newDataPoint);
     this.chart.data.labels.push(currentTimestamp);
-  
+
       if (this.chart.data.datasets[0].data.length > 13) {
         this.chart.data.datasets[0].data.shift();
         this.chart.data.labels.shift();
@@ -199,5 +199,5 @@ export class LineChartComponent {
 
 }
 
-  
+
 

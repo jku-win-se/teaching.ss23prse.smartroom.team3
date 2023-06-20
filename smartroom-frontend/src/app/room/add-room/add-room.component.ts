@@ -9,7 +9,7 @@ import {
   Fan,
   Light,
   Room,
-  Window
+  Fenster
 } from "../../entities/entity";
 import {RoomService} from "../../room.service";
 import {Router} from "@angular/router";
@@ -26,7 +26,7 @@ export class AddRoomComponent {
   public room: Room = emptyRoom;
 
   public door: Door = emptyDoor;
-  public window: Window = emptyWindow;
+  public window: Fenster = emptyWindow;
 
   public light: Light = emptyLight;
   public fan: Fan = emptyFan;
@@ -35,7 +35,7 @@ export class AddRoomComponent {
 
   constructor(private roomService: RoomService, private router: Router) {
   }
-  
+
   @Output() roomAdded: EventEmitter<void> = new EventEmitter<void>();
 
 
@@ -62,7 +62,7 @@ export class AddRoomComponent {
       open: this.window.open
     });
     this.window = emptyWindow;
-    this.newWindow = {}; 
+    this.newWindow = {};
   }
 
   addLight() {

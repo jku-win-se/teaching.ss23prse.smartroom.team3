@@ -9,6 +9,7 @@ import se.smartroom.entities.environment.SEASONSTATUS;
 import se.smartroom.repositories.EnvironmentDataRepository;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -25,8 +26,14 @@ public class EnvironmentDataService {
     public double maxTemp;
     @Value("${environment.time.intervals}")
     public int intervals;
-    @Value("${environment.time}")
+
     public String time;
+
+    @Value("${environment.time}")
+    public void setTime(String time) {
+        this.time = time;
+    }
+
 
     public EnvironmentDataService(EnvironmentDataRepository mockDataRepository) {
         repository = mockDataRepository;
@@ -70,8 +77,9 @@ public class EnvironmentDataService {
         } else {
             environment = environmentDataList.get(0);
         }
-
-        LocalTime newTimeOfTheDay = LocalTime.parse(environment.getTimeOfTheDay());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm"); // Update the format
+        String trimmedTime = environment.getTimeOfTheDay().trim().replace("\"", "");
+        LocalTime newTimeOfTheDay = LocalTime.parse(trimmedTime, formatter);
         newTimeOfTheDay = newTimeOfTheDay.plusMinutes(this.intervals);
         environment.setTimeOfTheDay(newTimeOfTheDay.toString());
 

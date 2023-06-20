@@ -83,19 +83,17 @@ public class RoomService {
     }
 
     public Room addValues(int id) {
-        Room room = repository.findById(id).orElse(new Room());
+        Room room = repository.findById(id).orElse(null);
+        System.out.println("TEST");
         System.out.println(room);
 
         Random random = new Random();
         int minValue = 10;
         int maxValue = 25;
-
         Timestamp randomTimestamp = new Timestamp(System.currentTimeMillis());
-
-        room.setCo2SensorData(Collections.singletonList(new Co2SensorData(Math.random())));
-        room.setTemperatureData(Collections.singletonList(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue)));
-        room.setPeopleData(Collections.singletonList(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1))));
-
+        room.getCo2SensorData().add(new Co2SensorData(Math.random()));
+        room.getTemperatureData().add(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue));
+        room.getPeopleData().add(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1)));
         return updateRoom(room);
     }
 
@@ -110,6 +108,7 @@ public class RoomService {
     public void scheduledIntervalCalculation() {
         List<Room> rooms = repository.findAll();
         EnvironmentData environmentData = environmentDataRepository.findAll().get(0);
+        if (!rooms.isEmpty()) {
             List<Room> updatedRooms = rooms.stream().map(room -> {
                 int numOpenWindows = 0;
                 if (!room.getRoomWindows().isEmpty()) {
@@ -119,6 +118,7 @@ public class RoomService {
                 if (room.getPeopleData().size() > 0) {
                     numPeople = room.getPeopleData().get(room.getPeopleData().size() - 1).getCount();
                 }
+                double temperatureAdjustment = 0.0;
 
                 double co2Adjustment = 0.0;
                 if (numPeople > 0) {
@@ -126,7 +126,6 @@ public class RoomService {
                 } else {
                     co2Adjustment -= 1.0;
                 }
-
                 double latestCo2Value = 0.0;
                 if (room.getCo2SensorData().size() > 0) {
                     latestCo2Value = room.getCo2SensorData().get(room.getCo2SensorData().size() - 1).getcO2value();
@@ -134,6 +133,7 @@ public class RoomService {
                 double newCo2Value = latestCo2Value + co2Adjustment;
 
                 double newTemperatureAdjustment = calculateTemperatureChange(numOpenWindows, numPeople, this.bodyHeat, environmentData.getOutsideTemperature(), room.getSize());
+
                 double newTemperature = environmentData.getOutsideTemperature();
                 if (newTemperatureAdjustment > 0) {
                     newTemperature += newTemperatureAdjustment;
@@ -145,23 +145,19 @@ public class RoomService {
                 TemperatureData newTemperatureData = new TemperatureData();
                 newTemperatureData.setTemperatureValue(newTemperature);
                 newTemperatureData.setTimestamp(timestamp);
-
                 Co2SensorData co2SensorData = new Co2SensorData();
                 co2SensorData.setcO2value(newCo2Value);
                 co2SensorData.setTimestamp(timestamp);
-
                 List<TemperatureData> roomsTempData = room.getTemperatureData();
                 roomsTempData.add(newTemperatureData);
                 room.setTemperatureData(roomsTempData);
-
                 List<Co2SensorData> roomsC02Data = room.getCo2SensorData();
                 roomsC02Data.add(co2SensorData);
                 room.setCo2SensorData(roomsC02Data);
-
                 return room;
             }).collect(Collectors.toList());
-
             repository.saveAll(updatedRooms);
+        }
     }
 
 

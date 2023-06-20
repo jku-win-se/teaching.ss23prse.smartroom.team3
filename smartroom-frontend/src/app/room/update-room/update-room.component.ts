@@ -9,7 +9,7 @@ import {
   Fan,
   Light,
   Room,
-  Window
+  Fenster
 } from "../../entities/entity";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RoomService} from "../../room.service";
@@ -25,7 +25,7 @@ export class UpdateRoomComponent {
   public room: Room = emptyRoom;
 
   public door: Door = emptyDoor;
-  public window: Window = emptyWindow;
+  public window: Fenster = emptyWindow;
 
   public light: Light = emptyLight;
   public fan: Fan = emptyFan;
@@ -52,7 +52,7 @@ export class UpdateRoomComponent {
     });
   }
 
-  
+
   public updateRoom() {
     console.log(this.room);
     this.roomService.updateRoom(this.room).subscribe((data) => {
@@ -99,7 +99,7 @@ export class UpdateRoomComponent {
       const roomWindows: number[] = [];
       const lights: number[] = [];
       const fans: number[] = [];
-      
+
       data.forEach((room) => {
         doors.push(...room.doors.map((door) => door.id));
         roomWindows.push(...room.roomWindows.map((window) => window.id));
@@ -185,7 +185,7 @@ export class UpdateRoomComponent {
       console.log(this.room);
       this.router.navigate(['room-details/'+this.room.id]);
     });
- 
+
 
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import Chart, { ChartDataset } from 'chart.js/auto';
-import {Room, Fan, Light, Window, Door, TemperaturData, Co2SensorData} from "../entities/entity";
+import {Room, Fan, Light, Fenster, Door, TemperatureData, Co2SensorData} from "../entities/entity";
 interface DataPoint {
   x: string;
   y: number;
@@ -45,11 +45,11 @@ export class LineChartComponent {
   ];
 
   constructor() {
-   
+
   }
 
   createChart(){
-     
+
     const colors = {
       purple: {
         default: "rgba(149, 76, 233, 1)",
@@ -62,16 +62,16 @@ export class LineChartComponent {
         quarter: "rgba(80, 102, 120, 0.25)"
       }
     };
-  
+
     this.chart = new Chart("MyChart", {
-      type: 'line', 
+      type: 'line',
       data: {
         datasets: [{
             tension: 0.3,
             label: "Temperature",
             borderColor: "white",
             backgroundColor: "white",
-            
+
             fill: false,
             /*data: [
               { x: '2022-05-10', y: 22 }
@@ -91,10 +91,10 @@ export class LineChartComponent {
               family: "HelveticaNeueExtended",
               weight: "bold",
               size: 32,
-           
+
             },
             position: "top",
-            align: "start",  
+            align: "start",
             color: 'white',
           },
           legend: {
@@ -164,7 +164,7 @@ export class LineChartComponent {
               callback: function(value, index, values) {
                 return value + "am";
               }*/
-            
+
           },
         },
         animation: {
@@ -192,14 +192,14 @@ export class LineChartComponent {
   }
 
    //const currentTimestamp = (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })).toString();
-  
+
 
    private updateChart() {
     const randomTemperature = this.getRandomTemperature();
     const currentTimestamp = (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })).toString();
-    
+
     const newDataPoint = { x: currentTimestamp, y: randomTemperature };
-    
+
   //  this.temperatureData.push(newDataPoint);
 
   try {
@@ -222,16 +222,16 @@ export class LineChartComponent {
   }
 
   }
-  
+
   public pushData(newDataPoint: String, currentTimestamp: String){
     this.chart.data.datasets[0].data.push(newDataPoint);
     this.chart.data.labels.push(currentTimestamp);
-  
+
       if (this.chart.data.datasets[0].data.length > 13) {
         this.chart.data.datasets[0].data.shift();
         this.chart.data.labels.shift();
       }
-    
+
       this.chart.data.datasets[0].data = this.temperatureData;
       this.chart.update();
   }
@@ -243,16 +243,16 @@ export class LineChartComponent {
 
     return Math.floor(Math.random() * 8 + 15).toString();
   }
-    
+
     /*if(this.room_data_line.last instanceof TemperaturData){
       if(this.room_data_line.length > 0 && this.room_data_line.last != this.chart.dataset[0].data.last){
         return this.room_data_line.last;
       }
     }*/
-      
+
 
 
 }
 
-  
+
 
