@@ -71,12 +71,11 @@ public class EnvironmentServiceTest {
         // Perform assertion
         assertEquals(environmentData, removedEnvironmentData);
     }
-    /*
     @Test
     public void testScheduledIntervalCalculation() {
         // Arrange
         List<EnvironmentData> environmentDataList = new ArrayList<>();
-        environmentDataList.add(new EnvironmentData(20.0, "08:55:00", SEASONSTATUS.SUMMER));
+        environmentDataList.add(new EnvironmentData(20.0, "08:55", SEASONSTATUS.SUMMER));
 
         when(mockDataRepository.findAll()).thenReturn(environmentDataList);
 
@@ -88,5 +87,4 @@ public class EnvironmentServiceTest {
         verify(mockDataRepository, times(1)).save(any(EnvironmentData.class));
     }
 
-     */
 }

@@ -83,17 +83,18 @@ public class RoomService {
     }
 
     public Room addValues(int id) {
-        Room room = repository.findById(id).orElse(null);
-        System.out.println("TEST");
+        Room room = repository.findById(id).orElse(new Room());
         System.out.println(room);
 
         Random random = new Random();
         int minValue = 10;
         int maxValue = 25;
+
         Timestamp randomTimestamp = new Timestamp(System.currentTimeMillis());
-        room.getCo2SensorData().add(new Co2SensorData(Math.random()));
-        room.getTemperatureData().add(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue));
-        room.getPeopleData().add(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1)));
+
+        room.setCo2SensorData(Collections.singletonList(new Co2SensorData(Math.random())));
+        room.setTemperatureData(Collections.singletonList(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue)));
+        room.setPeopleData(Collections.singletonList(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1))));
         return updateRoom(room);
     }
 

@@ -248,7 +248,7 @@ public class RoomServicesTest {
         return new EnvironmentData(outsideTemperature,"noon",SUMMER); // Return the environmentData object
     }
 
-    /*
+
     @Test
     void testAddValues() {
         // sample room
@@ -281,6 +281,6 @@ public class RoomServicesTest {
 
     }
 
-*/
+
 
 }
