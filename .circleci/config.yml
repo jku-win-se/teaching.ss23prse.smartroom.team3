@@ -14,7 +14,8 @@ jobs:
           name: Build and test backend
           command: |
             cd smartroom_backend
-            chmod +x ./mvnw clean install
+            chmod +x mvnw
+            ./mvnw clean install
 
       # Frontend (Angular)
       - run:
