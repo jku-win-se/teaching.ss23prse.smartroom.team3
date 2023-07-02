@@ -39,10 +39,15 @@ export class AddRoomComponent {
   @Output() roomAdded: EventEmitter<void> = new EventEmitter<void>();
 
 
+  
+  /**
+   * Add room and navigate to room view
+   * @date 7/3/2023 - 12:24:10 AM
+   */
   saveRoom() {
     console.log(this.room);
     this.roomService.addRoom(this.room).subscribe((room) => {
-      this.roomAdded.emit();
+      //this.roomAdded.emit();
       this.router.navigate(['room-details/' + room.id]);
      // window.location.reload();
     });

@@ -11,8 +11,8 @@ import {
   Room,
   Fenster
 } from "../../entities/entity";
-import {ActivatedRoute, Router} from "@angular/router";
-import {RoomService} from "../../room.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { RoomService } from "../../room.service";
 
 @Component({
   selector: 'app-update-room',
@@ -35,15 +35,10 @@ export class UpdateRoomComponent {
   public nextDoorId: number = 0;
   public nextWindowId: number = 0;
 
-  constructor(private route: ActivatedRoute, private roomService: RoomService, private router: Router) {
-  }
-
-
+  constructor(private route: ActivatedRoute, private roomService: RoomService, private router: Router) {}
 
   ngOnInit() {
-
-    //Load Room by ID
-
+    // Load Room by ID
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.roomService.getRoom(this.id).subscribe((room) => {
@@ -52,15 +47,16 @@ export class UpdateRoomComponent {
     });
   }
 
-
   public updateRoom() {
-    console.log(this.room);
+    // Update the room
+   // console.log(this.room);
     this.roomService.updateRoom(this.room).subscribe((data) => {
       this.router.navigate(['room-details/', this.id]);
     });
   }
 
   addDoor() {
+    // Add a door to the room
     this.room.doors.push({
       id: this.door.id,
       open: this.door.open
@@ -69,6 +65,7 @@ export class UpdateRoomComponent {
   }
 
   addWindow() {
+    // Add a window to the room
     this.room.roomWindows.push({
       id: this.window.id,
       open: this.window.open
@@ -77,6 +74,7 @@ export class UpdateRoomComponent {
   }
 
   addLight() {
+    // Add a light to the room
     this.room.lights.push({
       id: this.light.id,
       on: this.light.on
@@ -85,6 +83,7 @@ export class UpdateRoomComponent {
   }
 
   addFan() {
+    // Add a fan to the room
     this.room.fans.push({
       id: this.fan.id,
       on: this.fan.on
@@ -92,9 +91,9 @@ export class UpdateRoomComponent {
     this.fan = emptyFan;
   }
 
-  public getNextID(){
+  public getNextID() {
+    // Get the next available IDs for doors, windows, lights, and fans
     this.roomService.getRooms().subscribe((data) => {
-
       const doors: number[] = [];
       const roomWindows: number[] = [];
       const lights: number[] = [];
@@ -116,14 +115,23 @@ export class UpdateRoomComponent {
       this.nextWindowId = Math.max(...roomWindows) + 1;
       console.log("Next Window ID: ", this.nextWindowId);
 
-      if(this.nextFanId < 0){this.nextFanId = 0;}
-      if(this.nextLightId < 0){this.nextLightId = 0;}
-      if(this.nextDoorId < 0){this.nextDoorId = 0;}
-      if(this.nextWindowId < 0){this.nextWindowId = 0;}
+      if (this.nextFanId < 0) {
+        this.nextFanId = 0;
+      }
+      if (this.nextLightId < 0) {
+        this.nextLightId = 0;
+      }
+      if (this.nextDoorId < 0) {
+        this.nextDoorId = 0;
+      }
+      if (this.nextWindowId < 0) {
+        this.nextWindowId = 0;
+      }
     });
   }
 
   public addFanButton() {
+    // Add a fan to the room and update the room
     this.getNextID();
     this.room.fans.push({
       id: this.nextFanId,
@@ -131,13 +139,14 @@ export class UpdateRoomComponent {
     });
     this.fan = emptyFan;
     this.roomService.updateRoom(this.room).subscribe((data) => {
-      this.router.navigate(['room-details/'+this.room.id]);
+      this.router.navigate(['room-details/' + this.room.id]);
     });
     this.updateRoom();
     console.log(this.room);
   }
 
   public addDoorButton() {
+    // Add a door to the room and update the room
     this.getNextID();
     this.room.doors.push({
       id: this.nextDoorId,
@@ -145,13 +154,14 @@ export class UpdateRoomComponent {
     });
     this.door = emptyDoor;
     this.roomService.updateRoom(this.room).subscribe((data) => {
-      this.router.navigate(['room-details/'+this.room.id]);
+      this.router.navigate(['room-details/' + this.room.id]);
     });
     console.log(this.room);
     this.updateRoom();
   }
 
   public addWindowButton() {
+    // Add a window to the room and update the room
     this.getNextID();
     this.room.roomWindows.push({
       id: this.nextWindowId,
@@ -159,18 +169,18 @@ export class UpdateRoomComponent {
     });
     this.window = emptyWindow;
     this.roomService.updateRoom(this.room).subscribe((data) => {
-      this.router.navigate(['room-details/'+this.room.id]);
+      this.router.navigate(['room-details/' + this.room.id]);
     });
     console.log(this.room);
     this.updateRoom();
   }
 
   public addLightButton() {
-
+    // Add a light to the room and update the room
     this.updateRoom();
     this.roomService.updateRoom(this.room).subscribe((data) => {
       console.log(this.room);
-      this.router.navigate(['room-details/'+this.room.id]);
+      this.router.navigate(['room-details/' + this.room.id]);
     });
 
     this.getNextID();
@@ -183,10 +193,8 @@ export class UpdateRoomComponent {
     this.updateRoom();
     this.roomService.updateRoom(this.room).subscribe((data) => {
       console.log(this.room);
-      this.router.navigate(['room-details/'+this.room.id]);
+      this.router.navigate(['room-details/' + this.room.id]);
     });
-
-
   }
 
 }

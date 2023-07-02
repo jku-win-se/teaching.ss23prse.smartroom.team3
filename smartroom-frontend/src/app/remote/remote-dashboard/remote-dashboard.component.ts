@@ -17,7 +17,7 @@ export class RemoteDashboardComponent {
   ngOnInit() {
     this.roomService.getRooms().subscribe((rooms) => {
       this.rooms = rooms;
-      console.log(this.rooms);
+      //console.log(this.rooms);
     })
   }
 

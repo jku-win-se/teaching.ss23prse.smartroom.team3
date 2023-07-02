@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChange, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 //import Chart from 'chart.js/auto';
 import Chart, { ChartDataset } from 'chart.js/auto';
 import {Room, Fan, Light, Fenster, Door} from "../entities/entity";
@@ -16,7 +16,7 @@ interface DataPoint {
   styleUrls: ['./bar-chart.component.scss']
 })
 
-export class BarChartComponent {
+export class BarChartComponent implements OnInit{
   //@Input() data:
 
  /*  data: Room = {
@@ -82,19 +82,37 @@ data = this.room_data;
   public readonly yAxisMax = 1;
   public readonly yStep = 1;
 
+
+  
   ngOnInit(): void {
     console.log('OnInit - data- finally!:', this.room_data);
 
     //light/fan/window/door.
     this.createChart();
     this.processData();
+    this.updateChartData();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['room_data'] && changes['room_data'].currentValue) {
+      //console.log('Room data changed:', changes['room_data'].currentValue);
+      //this.updateChartData();
+    }
+  }
+
+
+
+  
+  /**
+   * Delete old Chart and place new iteration
+   * @date 7/2/2023 - 11:52:59 PM
+   *
+   * @public
+   */
   public updateChartData(){
     if(this.chart){
       this.chart.destroy();
     }
-
     this.createChart();
     this.processData();
   }
@@ -116,139 +134,12 @@ data = this.room_data;
 
     }
   }*/
-  /*createChart(){
 
-    const colors = {
-      purple: {
-        default: "rgba(149, 76, 233, 1)",
-        half: "rgba(149, 76, 233, 0.5)",
-        quarter: "rgba(149, 76, 233, 0.25)",
-        zero: "rgba(149, 76, 233, 0)"
-      },
-      indigo: {
-        default: "rgba(80, 102, 120, 1)",
-        quarter: "rgba(80, 102, 120, 0.25)"
-      }
-    };
 
-    this.chart = new Chart("MyChart", {
-      type: 'line',
-      data: {
-        datasets: [{
-            tension: 0.3,
-            label: "Temperature",
-            borderColor: "white",
-            backgroundColor: "white",
-
-            fill: false,
-            data: [
-              { x: '2022-05-10', y: 22 },
-              { x: '2022-05-11', y: 25 },
-              { x: '2022-05-12', y: 24 },
-              { x: '2022-05-13', y: 23 },
-              { x: '2022-05-14', y: 25 },
-              { x: '2022-05-15', y: 27 },
-              { x: '2022-05-16', y: 26 },
-              { x: '2022-05-17', y: 24 },
-            ],
-            data: this.temperatureData,
-            borderWidth: 2,
-            pointRadius: 0,
-          }
-        ]
-      },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: "Room Temperature",
-            font: {
-              family: "HelveticaNeueExtended",
-              weight: "bold",
-              size: 32,
-
-            },
-            position: "top",
-            align: "start",
-            color: 'white',
-          },
-          legend: {
-            labels: {
-              color: 'White',
-              padding: 10,
-              font: {
-                family: "HelveticaNeueExtended",
-                size: 12
-              },
-            }
-          }
-        },
-        scales: {
-          y:{
-            ticks: {
-              //stepSize: 1,
-              maxTicksLimit: 8,
-              color: 'White',
-              padding: 10,
-              font: {
-                family: "HelveticaNeueExtended",
-                size: 12
-              },
-              callback: function(value, index, values) {
-                return value + "°C";
-              }
-            },
-            grid: {
-              color: "rgba(255,255,255,0.15)"
-            }
-          },
-          x: {
-              afterBuildTicks: (a) => (a.ticks = [
-              {
-                value: 2
-              }, {
-                value: 5
-              }, {
-                value: 8
-              }, {
-                value: 11
-              }]),
-              ticks: {
-                count: 5,
-                autoSkip: false,
-                stepSize: 5,
-                color: 'White',
-                padding: 10,
-                font: {
-                  family: "HelveticaNeueExtended",
-                  size: 12
-                }
-              }
-            /*ticks: {
-              autoSkip: false,
-              stepSize: 5,
-              color: 'White',
-              padding: 10,
-              font: {
-                family: "HelveticaNeueExtended",
-                size: 12
-              }
-            }
-              ,
-              callback: function(value, index, values) {
-                return value + "am";
-              }
-
-          },
-        },
-        animation: {
-          duration: 0,
-          easing: 'linear',
-        }
-      }
-    });
-  }*/
-
+  /**
+   * Setup section with chart
+   * @date 7/2/2023 - 11:53:27 PM
+   */
   createChart(){
 
     this.chart = new Chart("MyBarChart", {
@@ -302,13 +193,20 @@ data = this.room_data;
             min: 0,
             max: 1,
             ticks: {
-              stepSize: 0.2,
+              stepSize: 1,
               color: 'White',
               padding: 0,
               font: {
                 family: "HelveticaNeueExtended",
                 size: 12
+              },
+              callback: function(value: string | number) {
+                if (typeof value === 'number') {
+                  return value === 1 ? "On" : "Off";
+                }
+                return value;
               }
+            
             },
             grid: {
               color: "rgba(255,255,255,0.15)"
@@ -353,7 +251,7 @@ data = this.room_data;
     });
     //this.chart.canvas.parentNode.style.height = "500px";
       this.chart.canvas.parentNode.style.width = "800px";
-      this.updateChart();
+      this.chart.update();
   }
 
 
@@ -363,8 +261,23 @@ data = this.room_data;
   doorDataPoints: { label: string, value: boolean }[] = [];
 
 
+
+
+
+  /**
+   * Load Data into graph
+   * @date 7/2/2023 - 11:54:36 PM
+   *
+   * @private
+   */
   private processData() {
+
+   // console.log("PROCESS DATA!");
+   // console.log(this.room_data);
+
+   if(this.room_data){
     // Process fan data points
+    if (this.room_data.fans) {
     this.room_data.fans.forEach((fan: Fan) => {
       const existingDataPointIndex = this.fanDataPoints.findIndex(dataPoint => dataPoint.label === "Fan_" + fan.id);
 
@@ -380,8 +293,9 @@ data = this.room_data;
         this.chart.data.labels.push("Fan_"+fan.id);
       }
     });
-
+    }
     // Process light data points
+    if (this.room_data.lights) {
     this.room_data.lights.forEach((light: Light) => {
       const existingDataPointIndex = this.lightDataPoints.findIndex(dataPoint => dataPoint.label === "Light_" + light.id);
 
@@ -397,8 +311,8 @@ data = this.room_data;
         this.chart.data.labels.push("Light_"+light.id);
       }
     });
-
-
+    }
+    if (this.room_data.roomWindows) {
     this.room_data.roomWindows.forEach((window: Fenster) => {
       const existingDataPointIndex = this.windowDataPoints.findIndex(dataPoint => dataPoint.label === "Window_" + window.id);
 
@@ -414,7 +328,8 @@ data = this.room_data;
         this.chart.data.labels.push("Window_"+window.id);
       }
     });
-
+    }
+    if (this.room_data.doors) {
     this.room_data.doors.forEach((door: Door) => {
       const existingDataPointIndex = this.doorDataPoints.findIndex(dataPoint => dataPoint.label === "Door_" + door.id);
 
@@ -430,24 +345,10 @@ data = this.room_data;
         this.chart.data.labels.push("Door_"+door.id);
       }
     });
-
-
-    // Update the graph with the new data points
-    this.updateChart();
+    }
   }
-
-
-  public updateChart() {
-    console.log('Fan Data Points:', this.fanDataPoints);
-    console.log('Light Data Points:', this.lightDataPoints);
-
-    /*if (this.chart.data.datasets[0].data.length > 13) {
-      this.chart.data.datasets[0].data.shift();
-      this.chart.data.labels.shift();
-    }*/
-
+    // Update the graph with the new data points
     this.chart.update();
-
   }
 
   /*private getRandomTemperature() {

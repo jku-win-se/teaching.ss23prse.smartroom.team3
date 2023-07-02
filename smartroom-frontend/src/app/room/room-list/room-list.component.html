@@ -45,8 +45,8 @@
       <div class="facts"><div class="left">Lights:</div><div class="right">{{room.lights.length}}</div></div>
       <div class="facts"><div class="left">Fans:  </div><div class="right">{{room.fans.length}}</div></div>
       
+      <div class="button" (click)="deleteRoom(room); forceLoadRooms();">Delete Room</div>
       <div class="button" (click)="goToMainTab('mainTab')">Close Details</div>
-      <div class="button" (click)="deleteRoom(room)">Delete Room</div>
   
   </div>
   <div class="mainTab" [style.display]="mainTabVisible ? 'block' : 'none !important'">

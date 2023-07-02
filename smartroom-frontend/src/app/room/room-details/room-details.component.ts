@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {RoomService} from "../../room.service";
-import {Fan, Room} from "../../entities/entity";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RoomService } from '../../room.service';
+import { Fan, Room } from '../../entities/entity';
 import { BarChartComponent } from 'src/app/bar-chart/bar-chart.component';
 import { LineChartComponent } from 'src/app/line-chart/line-chart.component';
 import { Co2LineChartComponent } from 'src/app/line-chart-co2/line-chart-co2.component';
-
+import { RoomListComponent } from '../room-list/room-list.component';
 
 var emptyRoom: Room = {
   id: 100000,
@@ -18,16 +18,14 @@ var emptyRoom: Room = {
   fans: [],
   temperatureData: [],
   co2SensorData: []
-}
+};
 
 @Component({
   selector: 'app-room-details',
   templateUrl: './room-details.component.html',
   styleUrls: ['./room-details.component.scss']
 })
-
 export class RoomDetailsComponent implements OnInit {
-
   @ViewChild(BarChartComponent) barChartComponent!: BarChartComponent;
   @ViewChild(LineChartComponent) lineChartComponent!: LineChartComponent;
   @ViewChild(Co2LineChartComponent) co2lineChartComponent!: Co2LineChartComponent;
@@ -35,10 +33,14 @@ export class RoomDetailsComponent implements OnInit {
   public id: number = 0;
   public room!: Room;
 
-  constructor(private route: ActivatedRoute, private roomService: RoomService, private router: Router) {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private roomService: RoomService,
+    private router: Router
+  ) {}
 
-  ngOnInit() : void {
+  ngOnInit(): void {
+    // Fetch room details from the server
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.roomService.getRoom(this.id).subscribe((room) => {
@@ -46,26 +48,36 @@ export class RoomDetailsComponent implements OnInit {
       });
     });
 
-
-    /* Updates room information - necessary for charts*/
+    /* Updates room information - necessary for charts */
     setInterval(() => {
       this.updateRoomLoop();
     }, 1000);
   }
 
   public deleteRoom() {
-    this.roomService.removeRoom(this.id).subscribe((data) => {
+    console.log("Log ID: ");
+    console.log(this.id);
+
+    // Create an instance of RoomListComponent to access its methods
+    const roomList = new RoomListComponent(this.roomService, this.router);
+    roomList.deleteRoom(this.room);
+    roomList.deleteRoom(this.room);
+    roomList.loadRooms();
+
+    /* this.roomService.removeRoom(this.id).subscribe((data) => {
       this.router.navigate(['room-list']);
-    });
+    }); */
   }
 
   public update() {
-      this.router.navigate(['update-room/', this.id]);
+    // Navigate to the update room page
+    this.router.navigate(['update-room/', this.id]);
   }
 
   public addValues() {
+    // Add values to the room
     this.roomService.addValues(this.id).subscribe((room) => {
-      this.router.navigate(['dashboard'])
+      this.router.navigate(['dashboard']);
     });
   }
 
@@ -76,7 +88,6 @@ export class RoomDetailsComponent implements OnInit {
 
   updateFanState(fan: any) {
     console.log('Fan state changed:', fan.on);
-
     this.updateRoom();
   }
 
@@ -93,6 +104,7 @@ export class RoomDetailsComponent implements OnInit {
   public removeFanFromRoom(device: Fan) {
     const index = this.room.fans.findIndex(d => d.id === device.id);
     if (index !== -1) {
+      // Remove the fan from the room's fan list
       this.room.fans.splice(index, 1);
       this.roomService.updateRoom(this.room).subscribe((data) => {
         this.router.navigate(['room-details/' + this.room.id]);
@@ -102,32 +114,26 @@ export class RoomDetailsComponent implements OnInit {
     }
   }
 
-
   public updateRoom() {
-    // Get current room dqta
+    // Update the room data on the server
     this.roomService.updateRoom(this.room).subscribe((data) => {
       this.room = data;
     });
 
-
-    //Shoot updates for each chart
+    // Update the charts
     this.barChartComponent.updateChartData();
     this.lineChartComponent.updateChart();
     this.co2lineChartComponent.updateChart();
   }
 
   public updateRoomLoop() {
+    // Continuously update the room data on the server
     this.roomService.updateRoom(this.room).subscribe((data) => {
       this.room = data;
     });
 
-    console.log("CO2 Push: " + this.room.co2SensorData[this.room.co2SensorData.length -1].cO2value);
-    console.log("Temp Push: " + this.room.temperatureData[this.room.temperatureData.length -1].temperatureValue);
-
-
+    // Update the charts
     this.lineChartComponent.updateChart();
     this.co2lineChartComponent.updateChart();
   }
-
-
 }

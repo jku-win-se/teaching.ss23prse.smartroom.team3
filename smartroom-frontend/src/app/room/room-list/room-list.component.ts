@@ -1,28 +1,29 @@
-import { Component, OnChanges } from '@angular/core';
-import {Room} from "../../entities/entity";
-import {RoomService} from "../../room.service";
-import { RoomsComponent } from '../rooms/rooms.component';
-import { RoomDetailsComponent } from '../room-details/room-details.component';
+import { Component, OnInit } from '@angular/core';
+import { Room } from '../../entities/entity';
+import { RoomService } from '../../room.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-list',
   templateUrl: './room-list.component.html',
   styleUrls: ['./room-list.component.scss']
 })
-export class RoomListComponent{
+export class RoomListComponent implements OnInit {
 
   public rooms: Room[] = [];
 
-  constructor(private roomService: RoomService) {
-  }
+  constructor(private roomService: RoomService, private router: Router) {}
 
   ngOnInit() {
+    // Load rooms on component initialization
     this.loadRooms();
   }
 
-  private loadRooms() {
+  public loadRooms() {
+    // Get rooms from the service
     this.roomService.getRooms().subscribe((rooms) => {
       if (this.areRoomsDifferent(this.rooms, rooms)) {
+        // Update rooms if there are differences
         this.rooms = rooms;
         // Perform additional actions here
         console.log('Rooms have been updated:', this.rooms);
@@ -30,31 +31,57 @@ export class RoomListComponent{
     });
   }
 
-  public updateRoomNameSize(room: Room, newName: string, newSize: number){
+  public forceLoadRooms() {
+    console.log("FORCE!");
+
+    // Forcefully load rooms from the service
+    this.roomService.getRooms().subscribe((rooms) => {
+      this.rooms = rooms;
+      // Perform additional actions here
+      console.log('Rooms have been updated:', this.rooms);
+    });
+  }
+
+  public updateRoomNameSize(room: Room, newName: string, newSize: number) {
+    // Update the name and size of the room
     room.name = newName;
     room.size = newSize;
-    
+
+    // Send the updated room to the service
     this.roomService.updateRoom(room).subscribe((data) => {});
     console.log(room);
   }
 
-
-
-  public deleteAllRoom(Room: Room){
+  public deleteAllRoom(Room: Room) {
+    // Delete all rooms
     this.roomService.getRooms().subscribe((rooms) => {
       if (this.areRoomsDifferent(this.rooms, rooms)) {
         this.rooms = rooms;
       }
     });
     this.rooms.forEach(element => {
-      this.roomService.removeRoom(element.id).subscribe((data) => {});});
+      this.roomService.removeRoom(element.id).subscribe((data) => {});
+    });
   }
 
-  public deleteRoom(Room: Room){
-    this.roomService.removeRoom(Room.id).subscribe((data) => {});
+  public deleteRoom(Room: Room) {
+    console.log("Log ID: ");
+    console.log(Room.id);
+
+    // Delete a specific room
+    this.roomService.removeRoom(Room.id).subscribe((data) => {
+      this.loadRooms();
+      this.forceLoadRooms(); // Move the forceLoadRooms call here
+      this.router.navigate(['room-list']);
+    });
+ /* }
+    this.roomService.removeRoom(Room.id).subscribe((data) => {
+      this.router.navigate(['room-list']);
+    });
     this.loadRooms();
+    */
   }
-  
+
   private areRoomsDifferent(oldRooms: Room[], newRooms: Room[]): boolean {
     // Compare the length of the arrays
     if (oldRooms.length !== newRooms.length) {
@@ -75,26 +102,23 @@ export class RoomListComponent{
   public detailsTabVisible: boolean = false;
   public mainTabVisible: boolean = true;
 
-
-  //Navigate the room tab
+  // Navigate the room tab
   public goToMainTab(Site: String) {
-    if(Site == "editRoom"){
+    if (Site == 'editRoom') {
       this.editRoomVisible = true;
       this.detailsTabVisible = false;
       this.mainTabVisible = false;
     }
-    if(Site == "detailsTab"){
+    if (Site == 'detailsTab') {
       this.editRoomVisible = false;
       this.detailsTabVisible = true;
       this.mainTabVisible = false;
     }
-    if(Site == "mainTab"){
+    if (Site == 'mainTab') {
       this.editRoomVisible = false;
       this.detailsTabVisible = false;
       this.mainTabVisible = true;
     }
-
-    
   }
 
 }

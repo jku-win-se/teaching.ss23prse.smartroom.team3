@@ -68,7 +68,7 @@
 -->
 
 
-  <ng-container  *ngIf="room.roomWindows.length > 0" class="flex-row flex-gap">
+  <ng-container  *ngIf="room?.roomWindows && room.roomWindows.length > 0" class="flex-row flex-gap">
     <ng-container *ngFor="let roomWindow of room.roomWindows; let i = index">
       <div class="controlButton">
         <div class="upperRow">
@@ -101,7 +101,7 @@
     </ng-container>
   </ng-container>
 
-  <ng-container  *ngIf="room.doors.length > 0" class="flex-row flex-gap">
+  <ng-container  *ngIf="room?.roomWindows && room.doors.length > 0" class="flex-row flex-gap">
     <ng-container *ngFor="let door of room.doors; let i = index">
       <div class="controlButton">
         <div class="upperRow">
@@ -134,7 +134,7 @@
     </ng-container>
   </ng-container>
 
-  <ng-container  *ngIf="room.fans.length > 0" class="flex-row flex-gap">
+  <ng-container  *ngIf="room?.roomWindows && room.fans.length > 0" class="flex-row flex-gap">
     <ng-container *ngFor="let fan of room.fans; let i = index">
       <div class="controlButton">
         <div class="upperRow">
@@ -167,7 +167,7 @@
     </ng-container>
   </ng-container>
 
-  <ng-container  *ngIf="room.lights.length > 0" class="flex-row flex-gap">
+  <ng-container  *ngIf="room?.roomWindows && room.lights.length > 0" class="flex-row flex-gap">
     <ng-container *ngFor="let light of room.lights; let i = index">
       <div class="controlButton">
         <div class="upperRow">
@@ -210,7 +210,7 @@
       </div>
     </div>
     <div class="middleRow">
-        <div class="number">{{room.peopleData.length}}</div>
+        <div class="number">{{room?.peopleData?.length || 0}}</div>
     </div>
       <div class="bottomRow">
           <label class="description">
@@ -226,7 +226,7 @@
         </div>
       </div>
       <div class="middleRow">
-          <div class="number">{{room.fans.length + room.lights.length + room.roomWindows.length + room.doors.length}}</div>
+          <div class="number">{{(room?.fans?.length || 0) + (room?.lights?.length || 0) + (room?.roomWindows?.length || 0) + (room?.doors?.length || 0)}}</div>
       </div>
         <div class="bottomRow">
             <label class="description">
@@ -240,12 +240,16 @@
         <div class="upperRow">
         </div>
         <div class="middleRow">
-            <div class="button" type="button" (click)="deleteRoom()">Delete Room</div>
+            <div class="button" type="button" (click)="deleteRoom();">Delete Room</div>
             <div class="button" type="button" (click)="update()">Edit Room</div>
-            <div class="button" type="button" (click)="addValues()">Add Values</div>
+            <!--<div class="button" type="button" (click)="addValues()">Add Values</div>-->
           </div>
-        </div>
       </div>
+      
+      <app-update-room></app-update-room>
+
+    
+    </div>
 
 
 <!-- Buttons to Add Devices-->
@@ -325,6 +329,5 @@
   </div>
 -->
 
-<app-update-room></app-update-room>
 
 </div>

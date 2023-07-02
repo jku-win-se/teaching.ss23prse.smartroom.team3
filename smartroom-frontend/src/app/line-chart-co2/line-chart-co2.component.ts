@@ -97,7 +97,7 @@ export class Co2LineChartComponent {
                 size: 12
               },
               callback: function(value, index, values, ) {
-                return Number(value).toFixed(2) + "ppm";
+                return Number(value).toFixed(2).slice(0,-1) + "ppm";
               }
             },
             grid: {
@@ -163,18 +163,26 @@ export class Co2LineChartComponent {
     for(var i:number = 50; i > 0; i = i - 1){
     this.updateChart();
 
-    if(this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - i].cO2value != this.lastCo2Value)
+   /* if(this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - i].cO2value != this.lastCo2Value)
     {
       this.lastCo2Value = this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - i].cO2value;
       this.pushData(this.lastCo2Value, this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - i].timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-    }
+    }*/
   }
 
     this.createChart();
   }
 
+
+   /**
+    * Check for data update
+    * @date 7/3/2023 - 12:08:44 AM
+    *
+    * @public
+    */
    public updateChart() {
 
+    if(this.room_data_line_co2){
     //console.log("push Data!" + this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - 1].cO2value);
     const co2Value = this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - 1].cO2value;
     const currentTimestamp = (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })).toString();
@@ -186,7 +194,14 @@ export class Co2LineChartComponent {
       this.pushData(co2Value, currentTimestamp);
     }
   }
+  }
 
+   /**
+    * Add new Datapoint
+    * @date 7/3/2023 - 12:08:44 AM
+    *
+    * @public
+    */
   public pushData(newDataPoint: String, currentTimestamp: String){
     this.chart.data.datasets[0].data.push(newDataPoint);
     this.chart.data.labels.push(currentTimestamp);

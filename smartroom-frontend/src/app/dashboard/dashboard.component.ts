@@ -19,6 +19,11 @@ export class DashboardComponent {
   public roomArr: Room[] = [];
 
 
+  
+  /**
+   * Load device number and get room data
+   * @date 7/2/2023 - 11:57:12 PM
+   */
   ngOnInit() {
     this.roomService.getRooms().subscribe((rooms) => {
       this.roomArr = rooms;
@@ -37,9 +42,7 @@ export class DashboardComponent {
 
   
   public deleteAllRoom(Room: Room){
-
   }
-
 
 }
 
