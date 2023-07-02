@@ -12,9 +12,9 @@ jobs:
       # Backend (Spring Boot)
       - run:
           name: Build and test backend
-          command: |
+          command: sudo |
             cd smartroom_backend
-            sudo ./mvnw clean install
+            ./mvnw clean install
 
       # Frontend (Angular)
       - run:
