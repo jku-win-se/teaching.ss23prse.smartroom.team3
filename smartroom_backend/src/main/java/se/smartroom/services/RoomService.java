@@ -93,7 +93,7 @@ public class RoomService {
         Timestamp randomTimestamp = new Timestamp(System.currentTimeMillis());
 
         room.setCo2SensorData(Collections.singletonList(new Co2SensorData(Math.random())));
-        room.setTemperatureData(Collections.singletonList(new TemperatureData(random.nextDouble(maxValue - minValue + 1.0) + minValue)));
+        room.setTemperatureData(Collections.singletonList(new TemperatureData(random.nextDouble() * (maxValue - minValue + 1.0) + minValue)));
         room.setPeopleData(Collections.singletonList(new PeopleData(Date.valueOf(LocalDate.now()), random.nextInt(30 + 1))));
         return updateRoom(room);
     }
