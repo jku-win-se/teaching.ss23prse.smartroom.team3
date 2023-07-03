@@ -13,7 +13,7 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 
 ## Projekdokumentation 
 
-[Project_Documentation_Team03.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11929656/Project_Documentation_Team03.docx)
+[Project_Documentation_Team03_.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11941285/Project_Documentation_Team03_.docx)
 
 
 ## Prototyp
