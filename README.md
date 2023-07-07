@@ -1,4 +1,4 @@
-# PR Software Engineering SS 23 Team 3
+[Project_Documentation_Team03_.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11984894/Project_Documentation_Team03_.docx)# PR Software Engineering SS 23 Team 3
 ## Thema: Digital Twin of a Smart Room 
 #### App-Name: smartHome
 Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, dessen Raumausstattung wie Türen, Fenster, Beleuchtung und Ventilatoren aus der Ferne gesteuert werden können.
@@ -12,8 +12,7 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 | K12043518  | Manuel | Wiltz  | manuelwiltz@gmail.com | manuelwiltz |
 
 ## Projekdokumentation 
-
-[Project_Documentation_Team03_.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11941285/Project_Documentation_Team03_.docx)
+[Project_Documentation_Team03_.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11984899/Project_Documentation_Team03_.docx)
 
 
 ## Prototyp
