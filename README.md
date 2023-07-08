@@ -14,6 +14,22 @@ Die Anwendung "SmartHome" soll als digitaler Zwilling eines Raumes dienen, desse
 ## Projekdokumentation 
 [Project_Documentation_Team03_.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11984899/Project_Documentation_Team03_.docx)
 
+## Use Cases (Wie in der Projektdokumentation aufgelistet)
+[UC01.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988831/UC01.docx)
+[UC01b.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988834/UC01b.docx)
+[UC03.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988835/UC03.docx)
+[UC04.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988836/UC04.docx)
+[UC05.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988837/UC05.docx)
+[UC06.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988838/UC06.docx)
+[UC07.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988839/UC07.docx)
+[UC08.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988841/UC08.docx)
+[UC09.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988842/UC09.docx)
+[UC12.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988844/UC12.docx)
+[UC13.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988845/UC13.docx)
+[UC14.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988846/UC14.docx)
+[UC15.docx](https://github.com/jku-win-se/teaching.ss23prse.smartroom.team3/files/11988847/UC15.docx)
+
+
 
 ## Prototyp
 [SmartHome Prototyp](https://www.figma.com/proto/4ABS1OvW4rhJv6nCqljPL8/PR-SE---SmartHome?node-id=1-7&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A7)
