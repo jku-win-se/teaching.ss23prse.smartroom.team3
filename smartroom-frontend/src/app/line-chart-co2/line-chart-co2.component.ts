@@ -159,18 +159,15 @@ export class Co2LineChartComponent {
 
   ngOnInit(): void {
 
-    this.createChart();
-    for(var i:number = 50; i > 0; i = i - 1){
-    this.updateChart();
 
    /* if(this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - i].cO2value != this.lastCo2Value)
     {
       this.lastCo2Value = this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - i].cO2value;
       this.pushData(this.lastCo2Value, this.room_data_line_co2.co2SensorData[this.room_data_line_co2.co2SensorData.length - i].timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     }*/
-  }
+  
 
-    this.createChart();
+    this?.createChart();
   }
 
 
@@ -188,7 +185,7 @@ export class Co2LineChartComponent {
     const currentTimestamp = (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })).toString();
     const newDataPoint = { x: currentTimestamp, y: co2Value };
 
-    if(this.chart.data.labels.last != this.currentTimestamp && co2Value != this.lastCo2Value/*this.room_data_line_co2.temperaturData[this.room_data_line_co2.temperaturData.length - 1].temperatureValue.toString()*/ )
+    if(this.chart.data.labels.last != this.currentTimestamp || co2Value != this.lastCo2Value/*this.room_data_line_co2.temperaturData[this.room_data_line_co2.temperaturData.length - 1].temperatureValue.toString()*/ )
     {
       this.lastCo2Value = co2Value;
       this.pushData(co2Value, currentTimestamp);

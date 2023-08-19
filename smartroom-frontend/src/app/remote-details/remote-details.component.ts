@@ -28,8 +28,8 @@ export class RemoteDetailsComponent {
   }
 
   public updateRoom() {
-    console.log(this.room.doors);
     this.roomService.updateRoom(this.room).subscribe((data) => {
+      console.log("TEST?");
       this.room = data;
     });
   }

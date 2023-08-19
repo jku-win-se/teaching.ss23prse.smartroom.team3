@@ -46,11 +46,11 @@ export class LineChartComponent {
   ];
 
   constructor() {
-
+   
   }
 
   createChart(){
-
+     
     const colors = {
       purple: {
         default: "rgba(149, 76, 233, 1)",
@@ -63,16 +63,16 @@ export class LineChartComponent {
         quarter: "rgba(80, 102, 120, 0.25)"
       }
     };
-
+  
     this.chart = new Chart("MyChart", {
-      type: 'line',
+      type: 'line', 
       data: {
         datasets: [{
             tension: 0.3,
             label: "Temperature",
             borderColor: "white",
             backgroundColor: "white",
-
+            
             fill: false,
             data: this.temperatureData,
             borderWidth: 2,
@@ -89,10 +89,10 @@ export class LineChartComponent {
               family: "HelveticaNeueExtended",
               weight: "bold",
               size: 32,
-
+           
             },
             position: "top",
-            align: "start",
+            align: "start",  
             color: 'white',
           },
           legend: {
@@ -118,7 +118,7 @@ export class LineChartComponent {
                 size: 12
               },
               callback: function(value, index, values, ) {
-                return value + "°C";
+                return Number(value).toFixed(2).slice(0,-1) + "°C";
               }
             },
             grid: {
@@ -136,7 +136,7 @@ export class LineChartComponent {
                   family: "HelveticaNeueExtended",
                   size: 12
                 }
-              }
+              }       
           },
         },
         animation: {
@@ -156,63 +156,44 @@ export class LineChartComponent {
   ngOnInit(): void {
 
     this.createChart();
-    //for(var i:number = 50; i > 0; i = i - 1){
-    //this.updateChart();
-
-    /*if(this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - i].temperatureValue != this.lastTemperatureValue)
-    {
-      this.lastTemperatureValue = this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - i].temperatureValue;
-      this.pushData(this.lastTemperatureValue, this.lastTemperatureValue = this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - i].timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-    }*/
-  //}
-
-    //this.createChart();
   }
-  
 
-  
-   /**
-    * Check for data update
-    * @date 7/3/2023 - 12:08:44 AM
-    *
-    * @public
-    */
+
    public updateChart() {
+    //const temperatureValue = this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - 1].temperatureValue;
+    
+    //console.log("Temp Push: " + this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - 1].temperatureValue);
+    //console.log("Temp Element: ")
+    //console.log(this.room_data_line.temperatureData);
+    //console.log(this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - 1].temperatureValue);
 
-    //console.log("Temp Push: " + this.room_data_line.temperaturData[this.room_data_line.temperaturData.length - 1].temperatureValue);
-
-    if(this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - 1].temperatureValue){
-      const temperatureValue = this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - 1].temperatureValue;
-      const currentTimestamp = (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })).toString();
-      const newDataPoint = { x: currentTimestamp, y: temperatureValue };
-
-    if(this.chart.data.labels.last != this.currentTimestamp || temperatureValue != this.lastTemperatureValue/*this.room_data_line.temperaturData[this.room_data_line.temperaturData.length - 1].temperatureValue.toString()*/ )
+    try{
+    const temperatureValue = this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - 1].temperatureValue;
+    const currentTimestamp = (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })).toString();
+    const newDataPoint = { x: currentTimestamp, y: temperatureValue };
+    
+    if(this.chart.data.labels.last != this.currentTimestamp || temperatureValue != this.lastTemperatureValue/*this.room_data_line.temperatureData[this.room_data_line.temperatureData.length - 1].temperatureValue.toString()*/ )
     {
       this.lastTemperatureValue = temperatureValue;
       this.pushData(temperatureValue, currentTimestamp);
     }
+    }
+    catch{}
   }
-  }
-
-     /**
-    * Add new Datapoint
-    * @date 7/3/2023 - 12:08:44 AM
-    *
-    * @public
-    */
+  
   public pushData(newDataPoint: String, currentTimestamp: String){
     this.chart.data.datasets[0].data.push(newDataPoint);
     this.chart.data.labels.push(currentTimestamp);
-
+  
       if (this.chart.data.datasets[0].data.length > 13) {
         this.chart.data.datasets[0].data.shift();
         this.chart.data.labels.shift();
       }
-      //this.chart.data.datasets[0].data = this.temperatureData;
+      this.chart.data.datasets[0].data = this.temperatureData;
       this.chart.update();
   }
 
 }
 
-
+  
 

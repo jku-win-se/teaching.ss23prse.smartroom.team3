@@ -38,13 +38,23 @@ export class DashboardComponent {
           room.doors.length;
       });
     });
-  }
 
-  
-  public deleteAllRoom(Room: Room){
-  }
-
+    setInterval(() => {
+      this.roomService.getRooms().subscribe((rooms) => {
+        this.roomArr = rooms;
+    
+        this.deviceNumber = 0; // Reset the device number
+    
+        this.roomArr.forEach((room) => {
+          this.deviceNumber +=
+            room.roomWindows.length +
+            room.lights.length +
+            room.fans.length +
+            room.doors.length;
+        });
+      });
+  }, 1000);
 }
 
-
+}
 

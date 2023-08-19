@@ -18,8 +18,8 @@ import se.smartroom.repositories.RoomRepository;
 import se.smartroom.services.RoomService;
 import se.smartroom.entities.physicalDevice.Door;
 import se.smartroom.entities.physicalDevice.Fenster;
-import se.smartroom.entities.smartDevice.Fan;
-import se.smartroom.entities.smartDevice.Light;
+import se.smartroom.entities.physicalDevice.Fan;
+import se.smartroom.entities.physicalDevice.Light;
 
 
 import java.lang.reflect.Field;

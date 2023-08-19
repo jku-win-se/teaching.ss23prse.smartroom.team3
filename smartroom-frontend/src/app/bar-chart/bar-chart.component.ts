@@ -75,18 +75,31 @@ export class BarChartComponent implements OnInit{
  //@Input()  data_test!: any;
  @Input() room_data!: Room;
 
+
+
 data = this.room_data;
 
   public chart: any;
   public readonly yAxisMin = 0;
   public readonly yAxisMax = 1;
   public readonly yStep = 1;
-
-
   
   ngOnInit(): void {
+
+    setTimeout(() => {
+      if(this.chart){
+        this.chart.destroy();
+      }
+      this.createChart();
+      this.processData();
+    }, 1000);
+
     console.log('OnInit - data- finally!:', this.room_data);
 
+    try{
+    this.chart.destroy();
+    }
+    catch(Error){}
     //light/fan/window/door.
     this.createChart();
     this.processData();
@@ -110,12 +123,67 @@ data = this.room_data;
    * @public
    */
   public updateChartData(){
+    if(!this.chart){
+      this.createChart();
+    }
+    if(this.chart){
+      this.chart.update();
+      this.processData();
+    }
+   
+
+  }
+
+
+  public optionalUpdate(newData: Room): void {
+      this.updateChartData();
+/*
     if(this.chart){
       this.chart.destroy();
     }
     this.createChart();
     this.processData();
+*/
+    //console.log("UpateChart Data!");
+   // console.log(this.chart.data.datasets[0].data);
+
+
+    //if(this.chart.datasets[0].data !== undefined){}
+
+      //console.log("prev is not undefined");
+
+    /*  if(JSON.stringify(newData.doors) != JSON.stringify(this.previous_data?.doors)){
+        console.log("WORKS!!!!!");
+      }*/
+
+     /* if(false){
+
+      }
+
+      else{
+        if(!this.chart){
+          //this.chart.destroy();
+          this.createChart();
+        }else{
+          this.chart.destroy();
+        }
+        this.chart?.update();
+        this.processData();
+      }*/
+  
+
+    
+
+   /* if(newData.doors != this.previous_data.co2SensorData){
+      console.log("A Door opened!");
+    }*/
+
+
+  
+    //this.chart.update();
   }
+  
+
 
   constructor(){
   }
@@ -276,20 +344,38 @@ data = this.room_data;
    // console.log(this.room_data);
 
    if(this.room_data){
+
+    /*console.log("Log");
+    console.log(this.chart.data.datasets[0].data);
+    console.log(this.chart.data.labels);*/
+    /*console.log(this.room_data.doors);
+    console.log(this.room_data.fans);
+    console.log(this.room_data.lights);
+    console.log(this.room_data.roomWindows);*/
+
+
+    /*this.chart.data.datasets[0] = null;
+*/
     // Process fan data points
     if (this.room_data.fans) {
     this.room_data.fans.forEach((fan: Fan) => {
       const existingDataPointIndex = this.fanDataPoints.findIndex(dataPoint => dataPoint.label === "Fan_" + fan.id);
 
-      if (existingDataPointIndex !== -1) {
-        this.fanDataPoints[existingDataPointIndex].value = fan.on;
+      const labelToFind = "Fan_" + fan.id;
+      var match = undefined;
 
-        const dataset = this.chart.data.datasets[0];
-        const labelIndex = this.chart.dataset.labels.indexOf("Fan_"+fan.id);
-        this.chart.dataset.data[labelIndex] = [fan.on ? 1:0];
+      this.chart.data.labels.forEach((label: string, index: any) => {
+        if (label === labelToFind) {
+          match = index;
+         /* console.log(label + " " + index);
+          console.log(this.chart.data.datasets[0].data);*/
+        }
+      });
+
+      if ( match !== undefined) {
+        this.chart.data.datasets[0].data[match] = fan.open; 
       } else {
-       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.on });
-        this.chart.data.datasets[0].data.push([fan.on ? 1:0]);
+        this.chart.data.datasets[0].data.push([fan.open ? 1:0]);
         this.chart.data.labels.push("Fan_"+fan.id);
       }
     });
@@ -299,31 +385,35 @@ data = this.room_data;
     this.room_data.lights.forEach((light: Light) => {
       const existingDataPointIndex = this.lightDataPoints.findIndex(dataPoint => dataPoint.label === "Light_" + light.id);
 
-      if (existingDataPointIndex !== -1) {
-        this.lightDataPoints[existingDataPointIndex].value = light.on;
+      const labelToFind = "Light_" + light.id;
+      var match = undefined;
 
-        const dataset = this.chart.data.datasets[0];
-        const labelIndex = this.chart.dataset.labels.indexOf("Light_"+light.id);
-        this.chart.dataset.data[labelIndex] = [light.on ? 1:0];
+      this.chart.data.labels.forEach((label: string, index: any) => {
+        if (label === labelToFind) { match = index; }
+      });
+
+      if ( match !== undefined) {
+        this.chart.data.datasets[0].data[match] = light.open; 
       } else {
-       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.on });
-        this.chart.data.datasets[0].data.push([light.on ? 1:0]);
+        this.chart.data.datasets[0].data.push([light.open ? 1:0]);
         this.chart.data.labels.push("Light_"+light.id);
       }
     });
     }
     if (this.room_data.roomWindows) {
     this.room_data.roomWindows.forEach((window: Fenster) => {
-      const existingDataPointIndex = this.windowDataPoints.findIndex(dataPoint => dataPoint.label === "Window_" + window.id);
+      const existingDataPointIndex = this.doorDataPoints.findIndex(dataPoint => dataPoint.label === "Window_" + window.id);
 
-      if (existingDataPointIndex !== -1) {
-        this.windowDataPoints[existingDataPointIndex].value = window.open;
+      const labelToFind = "Window_" + window.id;
+      var match = undefined;
 
-        const dataset = this.chart.data.datasets[0];
-        const labelIndex = this.chart.dataset.labels.indexOf("Window_"+window.id);
-        this.chart.dataset.data[labelIndex] = [window.open ? 1:0];
+      this.chart.data.labels.forEach((label: string, index: any) => {
+        if (label === labelToFind) { match = index; }
+      });
+
+      if ( match !== undefined) {
+        this.chart.data.datasets[0].data[match] = window.open; 
       } else {
-       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.on });
         this.chart.data.datasets[0].data.push([window.open ? 1:0]);
         this.chart.data.labels.push("Window_"+window.id);
       }
@@ -333,14 +423,20 @@ data = this.room_data;
     this.room_data.doors.forEach((door: Door) => {
       const existingDataPointIndex = this.doorDataPoints.findIndex(dataPoint => dataPoint.label === "Door_" + door.id);
 
-      if (existingDataPointIndex !== -1) {
-        this.doorDataPoints[existingDataPointIndex].value = door.open;
+      const labelToFind = "Door_" + door.id;
+      var match = undefined;
 
-        const dataset = this.chart.data.datasets[0];
-        const labelIndex = this.chart.dataset.labels.indexOf("Door_"+door.id);
-        this.chart.dataset.data[labelIndex] = [door.open ? 1:0];
+      this.chart.data.labels.forEach((label: string, index: any) => {
+        if (label === labelToFind) {
+          match = index;
+         /* console.log(label + " " + index);
+          console.log(this.chart.data.datasets[0].data);*/
+        }
+      });
+
+      if ( match !== undefined) {
+        this.chart.data.datasets[0].data[match] = door.open; 
       } else {
-       // this.fanDataPoints.push({ label: "Fan_"+fan.id, value: fan.on });
         this.chart.data.datasets[0].data.push([door.open ? 1:0]);
         this.chart.data.labels.push("Door_"+door.id);
       }

@@ -1,23 +1,32 @@
-package se.smartroom.entities.smartDevice;
+ package se.smartroom.entities.smartDevice;
 
+import jakarta.persistence.MappedSuperclass;
+
+import javax.security.sasl.SaslServer;
 import java.util.Objects;
 
-public class SmartDevice {
-    public boolean on;
 
-    public boolean isOn() {
-        return on;
-    }
+/// CANNOT BE USED - MyISAM MAPPING MYSQL5DIALECT
+
+
+public class SmartDevice {
+    private boolean on;
+
     public SmartDevice() {
     }
 
     public SmartDevice(boolean on) {
         this.on = on;
+        System.out.println(this + " On ->" + this.on);
     }
 
+    public boolean isOn() {
+        return on;
+    }
 
     public void setOn(boolean on) {
         this.on = on;
+        //System.out.println(this + " Open ->" + this.on);
     }
 
     @Override
@@ -40,3 +49,4 @@ public class SmartDevice {
                 '}';
     }
 }
+

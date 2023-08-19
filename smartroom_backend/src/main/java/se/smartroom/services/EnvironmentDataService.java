@@ -77,7 +77,7 @@ public class EnvironmentDataService {
         } else {
             environment = environmentDataList.get(0);
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss"); // Update the format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm"); // Update the format
         String trimmedTime = environment.getTimeOfTheDay().trim().replace("\"", "");
         LocalTime newTimeOfTheDay = LocalTime.parse(trimmedTime, formatter);
         newTimeOfTheDay = newTimeOfTheDay.plusMinutes(this.intervals);
@@ -94,8 +94,8 @@ public class EnvironmentDataService {
 
         repository.save(environment);
 
-        System.out.println("Environment Data updated");
-        System.out.println(environment.toString());
+       // System.out.println("Environment Data updated");
+       // System.out.println(environment.toString());
     }
 
 }

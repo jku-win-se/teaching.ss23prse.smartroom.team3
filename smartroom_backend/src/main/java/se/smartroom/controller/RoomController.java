@@ -35,6 +35,10 @@ public class RoomController {
 
     @PutMapping("/room")
     public Room updateRoom(@RequestBody Room room) {
+
+        //System.out.println("Test: ");
+        //System.out.println(room);
+
         return roomService.updateRoom(room);
     }
 

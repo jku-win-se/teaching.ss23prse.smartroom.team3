@@ -9,8 +9,8 @@ import se.smartroom.entities.data.TemperatureData;
 import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Door;
 import se.smartroom.entities.physicalDevice.Fenster;
-import se.smartroom.entities.smartDevice.Fan;
-import se.smartroom.entities.smartDevice.Light;
+import se.smartroom.entities.physicalDevice.Fan;
+import se.smartroom.entities.physicalDevice.Light;
 import se.smartroom.repositories.RoomRepository;
 
 import java.util.ArrayList;

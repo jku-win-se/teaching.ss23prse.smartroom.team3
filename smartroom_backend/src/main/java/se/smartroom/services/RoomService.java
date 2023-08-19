@@ -11,6 +11,7 @@ import se.smartroom.entities.data.TemperatureData;
 import se.smartroom.entities.environment.EnvironmentData;
 import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Fenster;
+
 import se.smartroom.repositories.EnvironmentDataRepository;
 import se.smartroom.repositories.RoomRepository;
 
@@ -19,6 +20,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -58,6 +60,31 @@ public class RoomService {
     }
 
     public Room removeRoom(int id) {
+
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+        System.out.println("REMOVED ROOOM!!!");
+
+
+
         Room room = repository.findById(id).orElse(null);
 
         if (room != null) {
@@ -70,21 +97,77 @@ public class RoomService {
     public Room updateRoom(Room room) {
         int id = room.getId();
 
-        Room existingRoom = repository.findById(id).orElse(room);
+        System.out.println(room);
+
+        Optional<Room> existingRoomOptional = repository.findById(id);
+
+        if (existingRoomOptional.isPresent()) {
+        Room existingRoom = existingRoomOptional.get();
 
         existingRoom.setName(room.getName());
         existingRoom.setSize(room.getSize());
-        existingRoom.setDoors(room.getDoors());
-        existingRoom.setRoomWindows(room.getRoomWindows());
-        existingRoom.setLights(room.getLights());
-        existingRoom.setFans(room.getFans());
+
+
+
+        if(existingRoom.getDoors().size() <= room.getDoors().size()){
+            existingRoom.setDoors(room.getDoors());
+        }
+
+        if(existingRoom.getRoomWindows().size() <= room.getRoomWindows().size()){
+            existingRoom.setRoomWindows(room.getRoomWindows());
+        }
+
+        if(existingRoom.getLights().size() <= room.getLights().size()){
+            existingRoom.setLights(room.getLights());
+        }
+
+        if(existingRoom.getFans().size() <= room.getFans().size()){
+            existingRoom.setFans(room.getFans());
+        }
+            //System.out.println("Still active? " + room.getDoors());
+
+        //existingRoom.setPeopleData(room.getPeopleData());
+
+            //System.out.println("New" + room.peopleData.get(room.peopleData.size() - 1).getCount());
+            //System.out.println("Existing" + existingRoom.peopleData.get(room.peopleData.size() - 1).getCount());
+
+           /* if( room.peopleData.size() <= 0) {
+                System.out.println("Set new Random People Data");
+                room.getPeopleData().add(new PeopleData(Date.valueOf(LocalDate.now()), new Random().nextInt(5 + 1)));
+                existingRoom.setPeopleData(room.getPeopleData());
+
+            }else{
+                if (room.peopleData.get(room.peopleData.size() - 1).getCount() + 2 > existingRoom.peopleData.get(room.peopleData.size() - 1).getCount() && room.peopleData.get(room.peopleData.size() - 1).getCount() - 2 < existingRoom.peopleData.get(room.peopleData.size() - 1).getCount()) {
+                    var count = room.peopleData.get(room.peopleData.size() - 1).getCount();
+
+                    int value = new Random().nextInt(100) + 1;
+
+                    if (value > 92 || count <= 1) {
+                        System.out.println("Set new People Data");
+                        room.peopleData.get(room.peopleData.size() - 1).setCount(count + 1);
+                    } else if (value < 8) {
+                        System.out.println("Reduce People Data");
+                        room.peopleData.get(room.peopleData.size() - 1).setCount(count - 1);
+                    }
+
+                    existingRoom.setPeopleData(room.getPeopleData());
+                }else{
+                }
+            }*/
+
+            //existingRoom.setPeopleData(room.getPeopleData());
 
         return repository.save(existingRoom);
+
+    } else {
+        //throw new RuntimeException("Room with ID " + id + " not found");
+            return null;
+    }
     }
 
     public Room addValues(int id) {
         Room room = repository.findById(id).orElse(new Room());
-        System.out.println(room);
+        //System.out.println(room);
 
         Random random = new Random();
         int minValue = 10;
@@ -141,6 +224,26 @@ public class RoomService {
                 } else {
                     newTemperature -= newTemperatureAdjustment;
                 }
+
+
+                if( room.peopleData.size() <= 0) {
+                    room.peopleData.add(new PeopleData(Date.valueOf(LocalDate.now()), new Random().nextInt(5 + 1)));
+                }else{
+                        var count = room.peopleData.get(room.peopleData.size() - 1).getCount();
+
+                        int value = new Random().nextInt(100) + 1;
+
+                        if (value > 90 || count <= 1) {
+                            room.peopleData.get(room.peopleData.size() - 1).setCount(count + 1);
+                        } else if (value < 10) {
+                            room.peopleData.get(room.peopleData.size() - 1).setCount(count - 1);
+                        }
+
+                        room.setPeopleData(room.getPeopleData());
+                }
+
+
+
 
                 Date timestamp = new Date(System.currentTimeMillis());
                 TemperatureData newTemperatureData = new TemperatureData();

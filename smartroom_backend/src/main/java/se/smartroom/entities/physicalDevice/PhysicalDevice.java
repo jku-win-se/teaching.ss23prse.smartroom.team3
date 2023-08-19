@@ -1,7 +1,11 @@
 package se.smartroom.entities.physicalDevice;
 
+import jakarta.persistence.MappedSuperclass;
+
+import javax.security.sasl.SaslServer;
 import java.util.Objects;
 
+@MappedSuperclass
 public class PhysicalDevice {
     private boolean open;
 
@@ -10,13 +14,16 @@ public class PhysicalDevice {
 
     public PhysicalDevice(boolean open) {
         this.open = open;
+        //System.out.println(this + " Open ->" + this.open);
     }
+
     public boolean isOpen() {
         return open;
     }
 
     public void setOpen(boolean open) {
         this.open = open;
+       // System.out.println(this + " Open ->" + this.open);
     }
 
     @Override

@@ -7,13 +7,16 @@ import se.smartroom.entities.data.Co2SensorData;
 import se.smartroom.entities.people.PeopleData;
 import se.smartroom.entities.physicalDevice.Door;
 import se.smartroom.entities.physicalDevice.Fenster;
-import se.smartroom.entities.smartDevice.Fan;
-import se.smartroom.entities.smartDevice.Light;
+import se.smartroom.entities.physicalDevice.Fan;
+import se.smartroom.entities.physicalDevice.Light;
 import se.smartroom.repositories.RoomRepository;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @Entity
 public class Room {
@@ -43,7 +46,7 @@ public class Room {
     private List<TemperatureData> temperatureData;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<PeopleData> peopleData;
+    public List<PeopleData> peopleData;
 
     //For testing - DO NOT DELETE
     public Room(Class<RoomRepository> roomRepositoryClass) {
@@ -61,6 +64,12 @@ public class Room {
                 List<Fan> fans, List<Co2SensorData> co2SensorData, List<TemperatureData> temperatureData,
                 List<PeopleData> peopleData
     ) {
+
+
+        while (temperatureData.size() >= 200) {
+            temperatureData.remove(0); // Remove the oldest value if the list size exceeds 200
+        }
+
         this.name = name;
         this.size = size;
         this.doors = doors;
@@ -108,9 +117,7 @@ public class Room {
     }
 
     @Transactional
-    public List<Fenster> getRoomWindows() {
-        return roomWindows;
-    }
+    public List<Fenster> getRoomWindows() {return roomWindows;}
 
     public void setRoomWindows(List<Fenster> windows) {
         this.roomWindows = windows;
@@ -121,6 +128,8 @@ public class Room {
     }
 
     public void setLights(List<Light> lights) {
+        //Correct Value arrives
+        //System.out.println(lights);
         this.lights = lights;
     }
 
@@ -137,6 +146,9 @@ public class Room {
     }
 
     public void setCo2SensorData(List<Co2SensorData> co2SensorData) {
+        while (co2SensorData.size() >= 201) {
+            co2SensorData.remove(0); // Remove the oldest value if the list size exceeds 200
+        }
         this.co2SensorData = co2SensorData;
     }
 
@@ -145,6 +157,12 @@ public class Room {
     }
 
     public void setTemperatureData(List<TemperatureData> temperatureData) {
+        while (temperatureData.size() >= 201) {
+            temperatureData.remove(0); // Remove the oldest value if the list size exceeds 200
+        }
+
+        //System.out.println(temperatureData);
+
         this.temperatureData = temperatureData;
     }
 

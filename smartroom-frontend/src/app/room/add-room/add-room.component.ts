@@ -67,13 +67,13 @@ export class AddRoomComponent {
       open: this.window.open
     });
     this.window = emptyWindow;
-    this.newWindow = {};
+    //this.newWindow = {};
   }
 
   addLight() {
     this.room.lights.push({
       id: this.light.id,
-      on: this.light.on
+      open: this.light.open
     });
     this.light = emptyLight;
   }
@@ -81,7 +81,7 @@ export class AddRoomComponent {
   addFan() {
     this.room.fans.push({
       id: this.fan.id,
-      on: this.fan.on
+      open: this.fan.open
     });
     this.fan = emptyFan;
   }

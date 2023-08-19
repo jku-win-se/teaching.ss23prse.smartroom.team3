@@ -48,8 +48,27 @@ export class RoomListComponent implements OnInit {
     room.size = newSize;
 
     // Send the updated room to the service
-    this.roomService.updateRoom(room).subscribe((data) => {});
-    console.log(room);
+
+    //this.roomService.updateRoom(room).subscribe((data) => {});
+
+
+    //console.log(room);
+
+
+    const interval = setInterval(() => {
+      this.roomService.getRoom(room.id).subscribe((loadedRoom) => {
+        if (loadedRoom.name === newName && loadedRoom.size === newSize) {
+          clearInterval(interval); 
+        } else {
+          loadedRoom.name = newName;
+          loadedRoom.size = newSize;
+          this.roomService.updateRoom(loadedRoom).subscribe((data) => {
+            console.log('Room updated:', data);
+          });
+        }
+      });
+    }, 1000);
+
   }
 
   public deleteAllRoom(Room: Room) {

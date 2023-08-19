@@ -67,7 +67,7 @@
   </div>
 -->
 
-
+<ng-container *ngIf="room">
   <ng-container  *ngIf="room?.roomWindows && room.roomWindows.length > 0" class="flex-row flex-gap">
     <ng-container *ngFor="let roomWindow of room.roomWindows; let i = index">
       <div class="controlButton">
@@ -100,7 +100,9 @@
 
     </ng-container>
   </ng-container>
+</ng-container>
 
+<ng-container *ngIf="room">
   <ng-container  *ngIf="room?.roomWindows && room.doors.length > 0" class="flex-row flex-gap">
     <ng-container *ngFor="let door of room.doors; let i = index">
       <div class="controlButton">
@@ -133,7 +135,9 @@
 
     </ng-container>
   </ng-container>
+</ng-container>
 
+<ng-container *ngIf="room">
   <ng-container  *ngIf="room?.roomWindows && room.fans.length > 0" class="flex-row flex-gap">
     <ng-container *ngFor="let fan of room.fans; let i = index">
       <div class="controlButton">
@@ -151,11 +155,11 @@
           </div>
         </div>
         <div class="bottomRow">
-            <div class="state"> {{ fan.on ? 'On' : 'Off' }}</div>
+            <div class="state"> {{ fan.open ? 'on' : 'off' }}</div>
             <div class="switch">
             <label class="">
            
-              <input type="checkbox" class="toggle" [(ngModel)]="fan.on" (change)="updateFanState(fan)">
+              <input type="checkbox" class="toggle" [(ngModel)]="fan.open" (change)="updateFanState(fan)">
               <div class="slider" >
                 <div class="bubble"></div>
               </div>
@@ -166,7 +170,9 @@
 
     </ng-container>
   </ng-container>
+</ng-container>
 
+<ng-container *ngIf="room">
   <ng-container  *ngIf="room?.roomWindows && room.lights.length > 0" class="flex-row flex-gap">
     <ng-container *ngFor="let light of room.lights; let i = index">
       <div class="controlButton">
@@ -184,11 +190,11 @@
           </div>
         </div>
         <div class="bottomRow">
-            <div class="state"> {{ light.on ? 'On' : 'Off' }}</div>
+            <div class="state"> {{ light.open ? 'on' : 'off' }}</div>
             <div class="switch">
             <label class="">
            
-              <input type="checkbox" class="toggle" [(ngModel)]="light.on" (change)="updateLightState(light)">
+              <input type="checkbox" class="toggle" [(ngModel)]="light.open" (change)="updateLightState(light)">
               <div class="slider" >
                 <div class="bubble"></div>
               </div>
@@ -199,7 +205,7 @@
 
     </ng-container>
   </ng-container>
-
+</ng-container>
 
 
   
@@ -210,7 +216,7 @@
       </div>
     </div>
     <div class="middleRow">
-        <div class="number">{{room?.peopleData?.length || 0}}</div>
+        <div class="number" id="PeopleNumber">...</div>
     </div>
       <div class="bottomRow">
           <label class="description">
@@ -241,12 +247,12 @@
         </div>
         <div class="middleRow">
             <div class="button" type="button" (click)="deleteRoom();">Delete Room</div>
-            <div class="button" type="button" (click)="update()">Edit Room</div>
+            <div class="button" type="button" (click)="update()">Add Devices</div>
             <!--<div class="button" type="button" (click)="addValues()">Add Values</div>-->
           </div>
       </div>
       
-      <app-update-room></app-update-room>
+     <!--<app-update-room></app-update-room>-->
 
     
     </div>

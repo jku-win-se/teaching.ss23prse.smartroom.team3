@@ -9,8 +9,8 @@ interface DataPoint {
 
 @Component({
   selector: 'app-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.scss']
+  templateUrl: '../line-chart/line-chart.component.html',
+  styleUrls: ['../line-chart/line-chart.component.scss']
 })
 
 export class LineChartComponent {
@@ -122,7 +122,7 @@ export class LineChartComponent {
                 size: 12
               },
               callback: function(value, index, values, ) {
-                return value + "°C";
+                return Number(value).toFixed(2).slice(0,-1) + "°C";
               }
             },
             grid: {
